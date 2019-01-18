@@ -80,10 +80,22 @@ public class RandGuessGame
 	public String getResult()
 	{
 		String result = new String("");
-		
 		if (answer == 'Y' && sum > 250)
-			result = "You guessed correctly!";
-		
+		{
+			result = new String("You guess correctly! The sum was " + sum);
+		}
+		else
+		{
+			result = new String("Still debugging this one.");
+		}
+	
 		return result;
 	}
+	
+	public void toggleHidden()
+		{
+			
+			String full = new String("" + arr[0] + arr[1] + arr[2] + arr[3] + arr[4]);
+			
+		}
 }
