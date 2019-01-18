@@ -33,6 +33,7 @@ public class RandGuessGame
 		{
 			arr[k] = rand.nextInt(MAX_VALUE);
 		}
+		
 	}
 	
 	//Write member methods
@@ -59,7 +60,9 @@ public class RandGuessGame
 			arraySum += arr[j];
 		}
 		sum = arraySum;
+		System.out.println(sum);
 		return arraySum;
+		
 	}
 	
 	public int populateArray()
@@ -79,10 +82,13 @@ public class RandGuessGame
 	
 	public String getResult()
 	{
+		sum = getArraySum();
+		
 		String result = new String("");
+		
 		if (answer == 'Y' && sum > 250)
 		{
-			result = new String("You guess correctly! The sum was " + sum);
+			result = new String("You guessed correctly! The sum was " + sum + "!");
 		}
 		else
 		{
@@ -92,10 +98,13 @@ public class RandGuessGame
 		return result;
 	}
 	
-	public void toggleHidden()
-		{
-			
-			String full = new String("" + arr[0] + arr[1] + arr[2] + arr[3] + arr[4]);
-			
-		}
+	public String toggleHidden()
+	{
+			return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
+	}
+	
+	public String toString()
+	{
+		return String.format("%d X X X %d", arr[0], arr[4]);
+	}
 }
