@@ -1,0 +1,32 @@
+EXAMPLE OUTPUT
+
+Run 1: Player guesses correctly
+54 X X X 83 
+Is the sum of the numbers greater than 250?
+(Y or N): Y
+You guessed correctly! The sum was 314!
+54 3 77 97 83
+
+
+Run 2: Player guesses incorrectly
+78 X X X 37 
+Is the sum of the numbers greater than 250?
+(Y or N): N
+You guessed wrong! The sum was 305!
+78 100 49 41 37 
+
+
+Run 3: Player provides incorrect input multiple times
+97 X X X 92 
+Is the sum of the numbers greater than 250?
+(Y or N): y
+Is the sum of the numbers greater than 250?
+(Y or N): n
+Is the sum of the numbers greater than 250?
+(Y or N): x
+Is the sum of the numbers greater than 250?
+(Y or N): #
+Is the sum of the numbers greater than 250?
+(Y or N): N
+You guessed wrong! The sum was 339!
+97 10 86 54 92 
