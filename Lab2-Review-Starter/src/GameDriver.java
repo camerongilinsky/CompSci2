@@ -2,13 +2,13 @@
 // TERM: Spring 2019
 //
 // NAME: Cameron Gilinsky
-// RESOURCES:
+// RESOURCES: Piazza discussion board posts by the students and instructors for this class,
+//            found at https://piazza.com/class/jqiqv19pp2w4sw?cid=5
 
 import java.util.Random;
 import java.util.Scanner;
 
 /**
- * 
  * Runs the RandGuessGame. Creates an instance of RandGuessGame and calls upon its methods to conduct the game.
  * <br><strong>RandGuessGame methods called in order:</strong><br>
  * populateArray<br>
@@ -16,7 +16,7 @@ import java.util.Scanner;
  * playerGuess<br>
  * getResult<br>
  * outputArray (passing false to show all values)<br>
- *
+ * @author CSCI1620 instructors
  */
 public class GameDriver
 {
