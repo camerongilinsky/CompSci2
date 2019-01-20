@@ -21,6 +21,7 @@ public class RandGuessGame
 	public int[] arr = new int[5];
 	public char answer;
 	public int sum;
+	public boolean tog = false;
 	
 	Random rand = new Random();
 	
@@ -98,13 +99,21 @@ public class RandGuessGame
 		return result;
 	}
 	
-	public String toggleHidden()
+	public void toggleHidden()
 	{
-			return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
+		tog = true;
+		//return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
 	}
 	
 	public String toString()
 	{
-		return String.format("%d X X X %d", arr[0], arr[4]);
+		if (tog == true)
+		{
+			return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
+		}
+		else
+		{
+			return String.format("%d X X X %d", arr[0], arr[4]);
+		}
 	}
 }
