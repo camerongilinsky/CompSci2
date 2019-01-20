@@ -18,6 +18,7 @@ public class RandGuessGame
 	//Declare data members
 	private final int MAX_VALUE = 100;
 	private final int ARRAY_LENGTH = 5;
+	private final int SUM_MAX = 250;
 	public int[] arr = new int[5];
 	public char answer;
 	public int sum;
@@ -61,16 +62,14 @@ public class RandGuessGame
 			arraySum += arr[j];
 		}
 		sum = arraySum;
-		System.out.println(sum);
 		return arraySum;
-		
 	}
 	
 	public int populateArray()
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			arr[i] = rand.nextInt(100);
+			arr[i] = rand.nextInt(MAX_VALUE);
 		}
 		return 0;
 	}
@@ -78,7 +77,7 @@ public class RandGuessGame
 	public boolean validatePlayerGuess(char yesOrNo)
 	{
 		answer = yesOrNo;
-		return (yesOrNo == 'Y' || yesOrNo == 'N');
+		return yesOrNo == 'Y' || yesOrNo == 'N';
 	}
 	
 	public String getResult()
@@ -87,13 +86,17 @@ public class RandGuessGame
 		
 		String result = new String("");
 		
-		if (answer == 'Y' && sum > 250)
+		if (answer == 'Y' && sum > SUM_MAX)
+		{
+			result = new String("You guessed correctly! The sum was " + sum + "!");
+		}
+		else if (answer == 'N' && sum <= SUM_MAX)
 		{
 			result = new String("You guessed correctly! The sum was " + sum + "!");
 		}
 		else
 		{
-			result = new String("Still debugging this one.");
+			result = new String("You guessed wrong! The sum was " + sum + "!");
 		}
 	
 		return result;
@@ -102,12 +105,11 @@ public class RandGuessGame
 	public void toggleHidden()
 	{
 		tog = true;
-		//return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
 	}
 	
 	public String toString()
 	{
-		if (tog == true)
+		if (tog)
 		{
 			return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
 		}
