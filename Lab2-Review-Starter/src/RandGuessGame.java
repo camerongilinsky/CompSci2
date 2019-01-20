@@ -16,25 +16,26 @@ public class RandGuessGame
 {
 
 	//Declare data members
-	private final int MAX_VALUE = 100;
-	private final int ARRAY_LENGTH = 5;
-	private final int SUM_MAX = 250;
-	public int[] arr = new int[5];
-	public char answer;
-	public int sum;
-	public boolean tog = false;
-	
-	Random rand = new Random();
+	private static int ARRAY_SIZE = 5;
+	private int arraySum;
+	private char guess;
+	private int guessTarget;
+	private boolean hideMiddleVals = true;
+	private static int MAX_VALUE = 100;
+	private int[] numbers;
+	private Random rand;
 	
 	//Create Constructor
 	public RandGuessGame(Random inner) 
 	{
+		arraySum = 0;
+		guessTarget = ((MAX_VALUE * ARRAY_SIZE) / 2);
 		rand = inner;
-		
-		for (int k = 0; k < ARRAY_LENGTH; k++)
+		numbers = new int[ARRAY_SIZE];
+		/*for (int k = 0; k < ARRAY_SIZE; k++)
 		{
-			arr[k] = rand.nextInt(MAX_VALUE);
-		}
+			numbers[k] = rand.nextInt(MAX_VALUE);
+		}*/
 		
 	}
 	
@@ -46,7 +47,6 @@ public class RandGuessGame
 	 */
 	public int[] getNumbers()
 	{
-		
 		return numbers;
 	}
 	
@@ -56,47 +56,57 @@ public class RandGuessGame
 	 */
 	public int getArraySum()
 	{
-		int arraySum = 0;
-		for (int j = 0; j < 5; j++)
-		{
-			arraySum += arr[j];
-		}
-		sum = arraySum;
 		return arraySum;
 	}
 	
-	public int populateArray()
+	public void populateArray()
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < numbers.length; i++)
 		{
-			arr[i] = rand.nextInt(MAX_VALUE);
+			numbers[i] = rand.nextInt(MAX_VALUE) + 1;
+			arraySum += numbers[i];
 		}
-		return 0;
+		//return 0;
 	}
+	
+	public String outputArray(boolean gle)
+	{
+		if (gle)
+		{
+			
+			return String.format("%d X X X %d ", numbers[0], numbers[4]);
+			
+		}
+		else
+		{
+			return String.format("%d %d %d %d %d ", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
+		}
+	}
+	
+	/*public void playerGuess()
+	{
+		
+	}*/
 	
 	public boolean validatePlayerGuess(char yesOrNo)
 	{
-		answer = yesOrNo;
+
+
+		guess = yesOrNo;
 		return yesOrNo == 'Y' || yesOrNo == 'N';
 	}
 	
 	public String getResult()
-	{
-		sum = getArraySum();
-		
+	{	
 		String result = new String("");
 		
-		if (answer == 'Y' && sum > SUM_MAX)
+		if ((guess == 'Y' && arraySum > guessTarget) || (guess == 'N' && arraySum <= guessTarget))
 		{
-			result = new String("You guessed correctly! The sum was " + sum + "!");
-		}
-		else if (answer == 'N' && sum <= SUM_MAX)
-		{
-			result = new String("You guessed correctly! The sum was " + sum + "!");
+			result = new String("You guessed correctly! The sum was " + arraySum + "! ");
 		}
 		else
 		{
-			result = new String("You guessed wrong! The sum was " + sum + "!");
+			result = new String("You guessed wrong! The sum was " + arraySum + "! ");
 		}
 	
 		return result;
@@ -104,18 +114,20 @@ public class RandGuessGame
 	
 	public void toggleHidden()
 	{
-		tog = true;
+		hideMiddleVals = hideMiddleVals ^ true;
 	}
 	
 	public String toString()
 	{
-		if (tog)
+		return outputArray(hideMiddleVals);
+		/*if (tog)
 		{
-			return String.format("%d %d %d %d %d", arr[0], arr[1], arr[2], arr[3], arr[4]);
+			return String.format("%d X X X %d ", numbers[0], numbers[4]); 
+			
 		}
 		else
 		{
-			return String.format("%d X X X %d", arr[0], arr[4]);
-		}
+			return String.format("%d %d %d %d %d ", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]); 
+		}*/
 	}
 }
