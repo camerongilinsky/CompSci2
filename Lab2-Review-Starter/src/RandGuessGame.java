@@ -22,7 +22,6 @@ public class RandGuessGame
 	 */
 	private static final int ARRAY_SIZE = 5;
 	
-	
 	/**
 	 * Maximum value of randomly generated values.
 	 */
