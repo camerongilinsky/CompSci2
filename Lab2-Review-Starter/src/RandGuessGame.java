@@ -69,7 +69,7 @@ public class RandGuessGame
 		//return 0;
 	}
 	
-	public String outputArray(boolean gle)
+	/*public String outputArray(boolean gle)
 	{
 		if (gle)
 		{
@@ -81,7 +81,7 @@ public class RandGuessGame
 		{
 			return String.format("%d %d %d %d %d ", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]);
 		}
-	}
+	}*/
 	
 	/*public void playerGuess()
 	{
@@ -102,11 +102,11 @@ public class RandGuessGame
 		
 		if ((guess == 'Y' && arraySum > guessTarget) || (guess == 'N' && arraySum <= guessTarget))
 		{
-			result = new String("You guessed correctly! The sum was " + arraySum + "! ");
+			result = new String("You guessed correctly! The sum was " + arraySum + "!");
 		}
 		else
 		{
-			result = new String("You guessed wrong! The sum was " + arraySum + "! ");
+			result = new String("You guessed wrong! The sum was " + arraySum + "!");
 		}
 	
 		return result;
@@ -119,8 +119,8 @@ public class RandGuessGame
 	
 	public String toString()
 	{
-		return outputArray(hideMiddleVals);
-		/*if (tog)
+		//return outputArray(hideMiddleVals);
+		if (hideMiddleVals)
 		{
 			return String.format("%d X X X %d ", numbers[0], numbers[4]); 
 			
@@ -128,6 +128,6 @@ public class RandGuessGame
 		else
 		{
 			return String.format("%d %d %d %d %d ", numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]); 
-		}*/
+		}
 	}
 }
