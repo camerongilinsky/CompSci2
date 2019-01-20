@@ -15,7 +15,6 @@ import java.util.Random;
  */
 public class RandGuessGame
 {
-	//Declare data members
 	
 	/**
 	 * Number of randomly generated numbers.
@@ -57,8 +56,6 @@ public class RandGuessGame
 	 */
 	private Random rand;
 	
-	//Create Constructor
-	
 	/**
 	 * Constructor for the RandGuessGame.
 	 * @param inner is the random number generator passed from GameDriver.
@@ -70,8 +67,6 @@ public class RandGuessGame
 		rand = inner;
 		numbers = new int[ARRAY_SIZE];
 	}
-	
-	//Write member methods
 	
 	/**
 	 * Retrieves the numbers array. Used for testing, do not change.
@@ -122,7 +117,7 @@ public class RandGuessGame
 	 */
 	public String getResult()
 	{	
-		String result = new String("");
+		String result = "";
 		
 		if ((guess == 'Y' && arraySum > guessTarget) || (guess == 'N' && arraySum <= guessTarget))
 		{
@@ -152,6 +147,7 @@ public class RandGuessGame
 	 */
 	public String toString()
 	{
+		
 		if (hideMiddleVals)
 		{
 			return String.format("%d X X X %d ", numbers[0], numbers[4]); 
@@ -163,4 +159,5 @@ public class RandGuessGame
 					numbers[0], numbers[1], numbers[2], numbers[3], numbers[4]); 
 		}
 	}
+	
 }
