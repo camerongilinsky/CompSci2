@@ -1,0 +1,75 @@
+EXAMPLE 1 WITH VALID ACCOUNT NUMBER
+
+Enter user name: pcavanaugh
+Enter account number: 1234
+Enter email address: pcavanaugh.uno@gmail.com
+Enter password: abc123
+
+***LOCKED ACCOUNT***
+User Name: pcavanaugh
+Account Number: ****
+Email Address: p***********************
+No notification
+
+ADDING A NOTIFICATION
+
+***LOCKED ACCOUNT***
+User Name: pcavanaugh
+Account Number: ****
+Email Address: p***********************
+You have a notification
+
+Enter password: ABC123
+Enter password: 123abc
+Enter password: abc123
+
+***UNLOCKED ACCOUNT***
+User Name: pcavanaugh
+Account Number: 1234
+Email Address: pcavanaugh.uno@gmail.com
+You have a meeting scheduled for today at 1:00
+
+LOCKING ACCOUNT
+
+***LOCKED ACCOUNT***
+User Name: pcavanaugh
+Account Number: ****
+Email Address: p***********************
+No notification
+
+EXAMPLE 2 WITH INVALID ACCOUNT NUMBER
+
+Enter user name: bdorn
+Enter account number: 987
+Enter email address: bdorn@unomaha.edu
+Enter password: supersecretpassword
+
+***LOCKED ACCOUNT***
+User Name: bdorn
+Account Number: Invalid account number, please contact customer support
+Email Address: b****************
+No notification
+
+ADDING A NOTIFICATION
+
+***LOCKED ACCOUNT***
+User Name: bdorn
+Account Number: Invalid account number, please contact customer support
+Email Address: b****************
+You have a notification
+
+Enter password: supersecretpassword
+
+***UNLOCKED ACCOUNT***
+User Name: bdorn
+Account Number: Invalid account number, please contact customer support
+Email Address: bdorn@unomaha.edu
+You have a meeting scheduled for today at 1:00
+
+LOCKING ACCOUNT
+
+***LOCKED ACCOUNT***
+User Name: bdorn
+Account Number: Invalid account number, please contact customer support
+Email Address: b****************
+No notification
