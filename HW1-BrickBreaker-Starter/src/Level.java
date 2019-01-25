@@ -79,11 +79,28 @@ public class Level
 	
 	public GameState getGameStatus()
 	{
+		boolean won = false;
+		
+		
+			for (int j = 0; j < 7; j++)
+			{
+				if (theBricks[0][j].getStrength() != 0)
+				{
+					won = false;
+					break;
+				}
+				else
+				{
+					won = true;
+				}
+				
+			}
+		
 		if (theBall.getY() > thePaddle.getTop() + thePaddle.getHeight())
 		{
 			return GameState.LOST;
 		}
-		else if (theBricks[x][y].getColor() == Color.WHITE)
+		else if (won  /*theBricks[x][y].getColor() == Color.WHITE*/)
 		{
 			return GameState.WON;
 		}
@@ -104,33 +121,49 @@ public class Level
 
 		
 		
-		/*for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 7; j++)
 			{
 				if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP 
 						|| theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
 				{
-					touchingTopOrBottom = true;
-					break;
+					
+					if (theBricks[i][j].hit() == false)
+					{
+						touchingTopOrBottom = true;
+						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].getColor();
+						
+						break;
+					}
 				}
 				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
 						|| theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
 				{
-					touchingLeftOrRight = true;
-					break;
+					if (theBricks[i][j].hit() == false)
+					{
+						touchingLeftOrRight = true;
+						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].getColor();
+						
+						break;
+					}
+					
+					
 				}
 			}
-		}*/
+		}
 		if (theBall.getX() + theBall.getRadius() == width - 1 || theBall.getX() - theBall.getRadius() == 1)
 		{
 			theBall.bounceHorizontal();
 			theBall.moveOnce();
 		}
-	/*	else if (theBall.getY() == height - 75)
+		else if (theBall.getY() - theBall.getRadius() == 12)
 		{
 			theBall.bounceVertical();
-		}*/
+			theBall.moveOnce();
+		}
 		else if (touchingTopOrBottom)
 		{
 			theBall.bounceVertical();
