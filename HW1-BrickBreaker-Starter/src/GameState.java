@@ -21,12 +21,12 @@
 public enum GameState
 {
 	/**
-	 * Represents when the user has lost the game by allow the ball to go off-screen.
+	 * Represents when the user has lost the game by allowing the ball to go off-screen.
 	 */
 	LOST,
 	
 	/**
-	 * Represents when the user has one the game by breaking all possible bricks. 
+	 * Represents when the user has won the game by breaking all possible bricks. 
 	 */
 	WON,
 	

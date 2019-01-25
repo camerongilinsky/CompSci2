@@ -45,21 +45,21 @@ public class Paddle
 	
 	public TouchPosition isTouching(Ball theBall)
 	{
-		if (theBall.getY() + theBall.getRadius() == top
-				&& theBall.getX() >= left
-				&& theBall.getX() <= left + WIDTH)
+		if (theBall.getY() + theBall.getRadius() >= getTop()
+				&& theBall.getX() >= getLeft()
+				&& theBall.getX() <= getLeft() + WIDTH)
 		{
 			return TouchPosition.TOP;
 		}
-		else if (theBall.getX() - theBall.getRadius() == left + WIDTH
-				&& theBall.getY() >= top
-				&& theBall.getY() <= top + HEIGHT)
+		else if (theBall.getX() - theBall.getRadius() == getLeft() + WIDTH
+				&& theBall.getY() >= getTop()
+				&& theBall.getY() <= getTop() + HEIGHT)
 		{
 			return TouchPosition.RIGHT;
 		}
-		else if (theBall.getX() + theBall.getRadius() == left
-				&& theBall.getY() >= top
-				&& theBall.getY() <= top + HEIGHT)
+		else if (theBall.getX() + theBall.getRadius() == getLeft()
+				&& theBall.getY() >= getTop()
+				&& theBall.getY() <= getTop() + HEIGHT)
 		{
 			return TouchPosition.LEFT;
 		}

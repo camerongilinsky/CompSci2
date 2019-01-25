@@ -7,9 +7,10 @@ public class Ball
 {
 	private int x, y; //position variables
 	private int dx, dy; //trajectory constants?
-	private static final int DX = 3;
+	private static final int DX = -3;
 	private static final int DY = 3;
 	private static final int POSITION = 100;
+	private static final int RADIUS = 10;
 	
 	//constructor
 	public Ball()
@@ -44,7 +45,7 @@ public class Ball
 	
 	public int getRadius()
 	{
-		int radius = x / 2;
+		int radius = RADIUS;
 		return radius;
 	}
 	
