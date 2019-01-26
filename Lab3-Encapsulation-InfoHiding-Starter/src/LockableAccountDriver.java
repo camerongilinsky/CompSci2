@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class LockableAccountDriver
 {
 	/**
-	 * Scanner for retreiving input.
+	 * Scanner for retrieving input.
 	 */
 	private static Scanner input = new Scanner(System.in);
 	
