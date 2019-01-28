@@ -113,9 +113,10 @@ public class Level
 	
 	public void updateOneStep()
 	{
-		boolean touchingTopOrBottom = false;
-		boolean touchingLeftOrRight = false;
-		
+		boolean touchingTop = false;
+		boolean touchingBottom = false;
+		boolean touchingRight = false;
+		boolean touchingLeft = false;
 		//theBall.moveOnce();
 		
 
@@ -125,29 +126,53 @@ public class Level
 		{
 			for (int j = 0; j < 7; j++)
 			{
-				if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP 
-						|| theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
+				if (theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
 				{
 					
-					if (theBricks[i][j].hit() == false)
+					if (theBricks[i][j].getStrength() > 0)
 					{
-						touchingTopOrBottom = true;
+						touchingBottom = true;
 						theBricks[i][j].gotHit(theBricks[i][j]);
 						theBricks[i][j].getColor();
 						
-						break;
+						//break;
+					}
+				}
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP)
+				{
+					if (theBricks[i][j].getStrength() > 0)
+					{
+						touchingTop = true;
+						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].getColor();
+						
+						//break;
 					}
 				}
 				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
 						|| theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
 				{
-					if (theBricks[i][j].hit() == false)
+					if (theBricks[i][j].getStrength() > 0)
 					{
-						touchingLeftOrRight = true;
+						touchingRight = true;
 						theBricks[i][j].gotHit(theBricks[i][j]);
 						theBricks[i][j].getColor();
 						
-						break;
+						//break;
+					}
+					
+					
+				}
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
+						|| theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
+				{
+					if (theBricks[i][j].getStrength() > 0)
+					{
+						touchingLeft = true;
+						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].getColor();
+						
+						//break;
 					}
 					
 					
@@ -164,12 +189,23 @@ public class Level
 			theBall.bounceVertical();
 			theBall.moveOnce();
 		}
-		else if (touchingTopOrBottom)
+		else if (touchingBottom)
 		{
 			theBall.bounceVertical();
 			theBall.moveOnce();
 		}
-		else if (touchingLeftOrRight)
+		else if (touchingTop)
+		{
+			theBall.bounceVertical();
+			theBall.moveOnce();
+		}
+		else if (touchingRight)
+		{
+			theBall.bounceHorizontal();
+			theBall.moveOnce();
+		
+		}
+		else if (touchingLeft)
 		{
 			theBall.bounceHorizontal();
 			theBall.moveOnce();

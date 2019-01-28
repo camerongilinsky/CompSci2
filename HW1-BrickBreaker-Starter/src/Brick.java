@@ -54,7 +54,7 @@ public class Brick
 	
 	public int getWidth()
 	{
-		return BRICK_WIDTH;	
+		return BRICK_WIDTH;
 	}
 	
 	public int getHeight() 
@@ -67,28 +67,28 @@ public class Brick
 		
 		if (brickStrength == 3)
 		{
-			return Color.GREEN;
+			brickColor = Color.GREEN;
 		}
-		if (brickStrength == 2)
+		else if (brickStrength == 2)
 		{
-			return Color.YELLOW;
+			brickColor = Color.YELLOW;
 		}
-		if (brickStrength == 1)
+		else if (brickStrength == 1)
 		{
-			return Color.RED;
+			brickColor = Color.RED;
 		}
-		if (brickStrength == 0)
+		else if (brickStrength == 0)
 		{
-			return Color.WHITE;
+			brickColor = Color.WHITE;
 		}
-		/*if (brickStrength <= -1 || brickStrength > 3)
+		else if (brickStrength == -1)
+		{
+			brickColor = Color.BLACK;
+		}
+		/*else
 		{
 			brickColor = Color.BLACK;
 		}*/
-		else
-		{
-			brickColor = Color.BLACK;
-		}
 		return brickColor;
 	}
 	
@@ -111,29 +111,35 @@ public class Brick
 	
 	public TouchPosition isTouching (Ball theBall)
 	{
-		if ((theBall.getY() + theBall.getRadius()) - 1 == getTop()// - 1
-				&& (theBall.getX() + theBall.getRadius()) >= getLeft() - 1
-				&& (theBall.getX() + theBall.getRadius()) <= (getLeft() + BRICK_WIDTH - 1)
+		if ((theBall.getY() + theBall.getRadius()) - 1 >= getTop()
+				&& (theBall.getY() + theBall.getRadius()) - 1 <= getTop() + 3
+				&& (theBall.getX()) >= getLeft()
+				&& (theBall.getX()) <= (getLeft() + BRICK_WIDTH - 1)
 				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.TOP;
 		} 
-		else if ((theBall.getY() - theBall.getRadius()) + 1 == (getTop() + BRICK_HEIGHT) 
-				&& (theBall.getX() + theBall.getRadius()) >= getLeft() - 1
-				&& (theBall.getX() + theBall.getRadius()) <= (getLeft() + BRICK_WIDTH - 1)
+		else if ((theBall.getY() - theBall.getRadius()) + 1 <= (getTop() + BRICK_HEIGHT - 1)
+				&& (theBall.getY() - theBall.getRadius()) + 1 >= (getTop() + BRICK_HEIGHT - 4)
+				&& (theBall.getX()) >= getLeft()
+				&& (theBall.getX()) <= (getLeft() + BRICK_WIDTH - 1)
 				&& brickColor != Color.WHITE)
 		{	
 			return TouchPosition.BOTTOM;
 		} 
-		else if ((theBall.getX() + theBall.getRadius()) + 1 == getLeft() - 1
-				&& (theBall.getY() + theBall.getRadius()) >= getTop() - 1
-				&& (theBall.getY() + theBall.getRadius()) <= (getTop() + BRICK_HEIGHT + 1))
+		else if ((theBall.getX() + theBall.getRadius()) - 1 >= getLeft()
+				&& (theBall.getX() + theBall.getRadius()) - 1 <= getLeft() + 3
+				&& (theBall.getY()) >= getTop()
+				&& (theBall.getY()) <= (getTop() + BRICK_HEIGHT - 1)
+				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.LEFT;
 		} 
-		else if ((theBall.getX() + theBall.getRadius()) + 1 == (getLeft() + BRICK_WIDTH - 1) 
-				&& (theBall.getY() + theBall.getRadius()) >= getTop() - 1
-				&& (theBall.getY() + theBall.getRadius()) <= (getTop() + BRICK_HEIGHT + 1))
+		else if ((theBall.getX() - theBall.getRadius()) + 1 <= (getLeft() + BRICK_WIDTH - 1)
+				&& (theBall.getX() - theBall.getRadius()) + 1 >= (getLeft() + BRICK_WIDTH - 4)
+				&& (theBall.getY()) >= getTop()
+				&& (theBall.getY()) <= (getTop() + BRICK_HEIGHT - 1)
+				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.RIGHT;
 		} 
