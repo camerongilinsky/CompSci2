@@ -1,3 +1,11 @@
+// COURSE: CSCI1620
+// TERM: Spring 2019
+//
+// NAME: Cameron Gilinsky
+// RESOURCES: Piazza discussion board posts by the students and instructors for this class,
+//            found at https://piazza.com/class/jqiqv19pp2w4sw?cid=5
+//            and Oracle's online Java documentation for the String.valueOf() method.
+
 import java.util.Scanner;
 
 /**
