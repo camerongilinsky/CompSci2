@@ -33,9 +33,34 @@ public class Level
 		thePaddle = new Paddle(0, heightIn - 20);
 		for (int i = 0; i < 5; i++)
 		{
+			char[] brickConfigChar = brickConfig[i].toCharArray();
+			
 			for (int j = 0; j < 7; j++)
 			{
-				theBricks[i][j] = new Brick(40 + i*25, 10 + j*55, Integer.parseInt(brickConfig[j].substring(i)));
+				int hitStart;
+				//int value = Integer.parseInt(brickConfig[j].substring(j, j + 1));
+				if (brickConfigChar[j] == '3')
+				{
+					hitStart = 3;
+				}
+				else if (brickConfigChar[j] == '2')
+				{
+					hitStart = 2;
+				}
+				else if (brickConfigChar[j] == '1')
+				{
+					hitStart = 1;
+				}
+				else if (brickConfigChar[j] == '0')
+				{
+					hitStart = 0;
+				}
+				else
+				{
+					hitStart = -1;
+				}
+				
+				theBricks[i][j] = new Brick(40 + i*25, 10 + j*55, hitStart);
 																//brickConfig[j].substring(i, i+1);
 				theBricks[i][j].getColor();
 				
@@ -132,7 +157,7 @@ public class Level
 					if (theBricks[i][j].getStrength() > 0)
 					{
 						touchingBottom = true;
-						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].hit();
 						theBricks[i][j].getColor();
 						
 						//break;
@@ -143,19 +168,18 @@ public class Level
 					if (theBricks[i][j].getStrength() > 0)
 					{
 						touchingTop = true;
-						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].hit();
 						theBricks[i][j].getColor();
 						
 						//break;
 					}
 				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
-						|| theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT)
 				{
 					if (theBricks[i][j].getStrength() > 0)
 					{
 						touchingRight = true;
-						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].hit();
 						theBricks[i][j].getColor();
 						
 						//break;
@@ -163,13 +187,12 @@ public class Level
 					
 					
 				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
-						|| theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
 				{
 					if (theBricks[i][j].getStrength() > 0)
 					{
 						touchingLeft = true;
-						theBricks[i][j].gotHit(theBricks[i][j]);
+						theBricks[i][j].hit();
 						theBricks[i][j].getColor();
 						
 						//break;
