@@ -1,3 +1,9 @@
+// COURSE: CSCI1620
+// TERM: Spring 2019
+//
+// NAME: Cameron Gilinsky and Carter Kennell
+// RESOURCES: Piazza discussion board posts by the students and instructors for this class,
+//            found at https://piazza.com/class/jqiqv19pp2w4sw?cid=5
 
 public class Paddle
 {
@@ -45,21 +51,26 @@ public class Paddle
 	
 	public TouchPosition isTouching(Ball theBall)
 	{
-		if (theBall.getY() + theBall.getRadius() >= getTop()
-				&& theBall.getX() >= getLeft()
-				&& theBall.getX() <= getLeft() + WIDTH)
+		if (theBall.getY() + theBall.getRadius() - 1 >= getTop() - 1
+				&& theBall.getY() + theBall.getRadius() - 1 <= getTop() + 4
+				&& theBall.getX() >= getLeft() - 5
+				&& theBall.getX() <= getLeft() + getWidth() + 4)
 		{
 			return TouchPosition.TOP;
 		}
-		else if (theBall.getX() - theBall.getRadius() == getLeft() + WIDTH
-				&& theBall.getY() >= getTop()
-				&& theBall.getY() <= getTop() + HEIGHT)
+		else if (theBall.getX() - theBall.getRadius() + 1 <= getLeft() + getWidth() + 1
+				&& theBall.getX() - theBall.getRadius() + 1 >= getLeft() + getWidth() - 4
+				&& theBall.getY()/* + theBall.getRadius() - 1*/ >= getTop() - 2
+				&& theBall.getY()/* + theBall.getRadius() - 1*/ <= getTop() + getHeight() + 1)
+				//	<= getTop() + getHeight() - 2 + (2 * theBall.getRadius()))
 		{
 			return TouchPosition.RIGHT;
 		}
-		else if (theBall.getX() + theBall.getRadius() == getLeft()
-				&& theBall.getY() >= getTop()
-				&& theBall.getY() <= getTop() + HEIGHT)
+		else if (theBall.getX() + theBall.getRadius() - 1 >= getLeft() - 1
+				&& theBall.getX() + theBall.getRadius() - 1 <= getLeft() + 4
+				&& theBall.getY()/* + theBall.getRadius() - 1 */ >= getTop() - 2
+				&& theBall.getY()/* + theBall.getRadius() - 1 */ <= getTop() + getHeight() + 1)
+				//	<= getTop() + getHeight() - 2 + (2 * theBall.getRadius()))
 		{
 			return TouchPosition.LEFT;
 		}

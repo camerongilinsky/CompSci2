@@ -1,8 +1,9 @@
 // COURSE: CSCI1620
 // TERM: Spring 2019
 //
-// NAME: Carter Kennell
-// RESOURCES: Partner Programming with Cameron Gilinsky
+// NAME: Cameron Gilinsky and Carter Kennell
+// RESOURCES: Piazza discussion board posts by the students and instructors for this class,
+//            found at https://piazza.com/class/jqiqv19pp2w4sw?cid=5
 
 
 import javafx.scene.paint.Color;
@@ -16,7 +17,6 @@ public class Brick
 	private int brickLeft;
 	private int brickTop;
 	private Color brickColor;
-	private boolean hit;
 	private int brickStrength;
 	
 	
@@ -57,7 +57,7 @@ public class Brick
 		return BRICK_WIDTH;
 	}
 	
-	public int getHeight() 
+	public int getHeight()
 	{
 		return BRICK_HEIGHT;
 	}
@@ -99,19 +99,15 @@ public class Brick
 	
 	public boolean hit()
 	{
-		hit = false;
+		boolean hit = false;
 		
-		if (brickStrength > 0)
+		if (brickStrength == 0)
 		{
-			brickStrength--;
-		}
-		else if (brickStrength == -1)
-		{
-			hit = false;
+			hit = true;
 		}
 		else
 		{
-			hit = true;
+			brickStrength--;
 		}
 		
 		return hit;
@@ -119,34 +115,34 @@ public class Brick
 	
 	public TouchPosition isTouching (Ball theBall)
 	{
-		if ((theBall.getY() + theBall.getRadius()) - 1 >= getTop()
-				&& (theBall.getY() + theBall.getRadius()) - 1 <= getTop() + 3
-				&& (theBall.getX()) >= getLeft() - 3
-				&& (theBall.getX()) <= (getLeft() + BRICK_WIDTH + 2)
+		if ((theBall.getY() + theBall.getRadius()) - 1 >= getTop() - 1
+				&& (theBall.getY() + theBall.getRadius()) - 1 <= getTop() + 4
+				&& (theBall.getX()) >= getLeft() - 4
+				&& (theBall.getX()) <= (getLeft() + getWidth() + 3)
 				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.TOP;
 		} 
-		else if ((theBall.getY() - theBall.getRadius()) + 1 <= (getTop() + BRICK_HEIGHT - 1)
-				&& (theBall.getY() - theBall.getRadius()) + 1 >= (getTop() + BRICK_HEIGHT - 4)
+		else if ((theBall.getY() - theBall.getRadius()) + 1 <= (getTop() + getHeight() - 1)
+				&& (theBall.getY() - theBall.getRadius()) + 1 >= (getTop() + getHeight() - 4)
 				&& (theBall.getX()) >= getLeft() - 3
-				&& (theBall.getX()) <= (getLeft() + BRICK_WIDTH + 2)
+				&& (theBall.getX()) <= (getLeft() + getWidth() + 3)
 				&& brickColor != Color.WHITE)
 		{	
 			return TouchPosition.BOTTOM;
 		} 
-		else if ((theBall.getX() + theBall.getRadius()) - 1 >= getLeft()
-				&& (theBall.getX() + theBall.getRadius()) - 1 <= getLeft() + 3
-				&& (theBall.getY()) >= getTop() - 1
-				&& (theBall.getY()) <= (getTop() + BRICK_HEIGHT)
+		else if ((theBall.getX() + theBall.getRadius()) - 1 >= getLeft() - 1
+				&& (theBall.getX() + theBall.getRadius()) - 1 <= getLeft() + 4
+				&& (theBall.getY()) >= getTop() - 2
+				&& (theBall.getY()) <= (getTop() + getHeight() + 1)
 				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.LEFT;
 		} 
-		else if ((theBall.getX() - theBall.getRadius()) + 1 <= (getLeft() + BRICK_WIDTH - 1)
-				&& (theBall.getX() - theBall.getRadius()) + 1 >= (getLeft() + BRICK_WIDTH - 4)
-				&& (theBall.getY()) >= getTop() - 1
-				&& (theBall.getY()) <= (getTop() + BRICK_HEIGHT)
+		else if ((theBall.getX() - theBall.getRadius()) + 1 <= (getLeft() + getWidth() + 1)
+				&& (theBall.getX() - theBall.getRadius()) + 1 >= (getLeft() + getWidth() - 4)
+				&& (theBall.getY()) >= getTop() - 2
+				&& (theBall.getY()) <= (getTop() + getHeight() + 1)
 				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.RIGHT;

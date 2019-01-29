@@ -1,9 +1,17 @@
-import javafx.scene.paint.Color;
+// COURSE: CSCI1620
+// TERM: Spring 2019
+//
+// NAME: Cameron Gilinsky and Carter Kennell
+// RESOURCES: Piazza discussion board posts by the students and instructors for this class,
+//            found at https://piazza.com/class/jqiqv19pp2w4sw?cid=5
+
+//import javafx.scene.paint.Color;
+
+
 
 public class Level
 {
 	private int width, height;
-	private int x, y;
 	private Ball theBall;
 	private Paddle thePaddle;
 	private Brick[][] theBricks = new Brick[5][7];
@@ -13,8 +21,8 @@ public class Level
 	{
 		width = widthIn;
 		height = heightIn;
-		theBall = new Ball(widthIn / 2, heightIn/2);
-		thePaddle = new Paddle(0, heightIn - 20);
+		theBall = new Ball(width / 2, height/2);
+		thePaddle = new Paddle(0, height - 20);
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 7; j++)
@@ -29,8 +37,8 @@ public class Level
 	{
 		width = widthIn;
 		height = heightIn;
-		theBall = new Ball(widthIn / 2, heightIn/2);
-		thePaddle = new Paddle(0, heightIn - 20);
+		theBall = new Ball(width / 2, height / 2);
+		thePaddle = new Paddle(0, height - 20);
 		for (int i = 0; i < 5; i++)
 		{
 			char[] brickConfigChar = brickConfig[i].toCharArray();
@@ -63,30 +71,10 @@ public class Level
 				theBricks[i][j] = new Brick(40 + i*25, 10 + j*55, hitStart);
 																//brickConfig[j].substring(i, i+1);
 				theBricks[i][j].getColor();
-				
-				
-				//bricks are 20Hx50W and start at 40 from top and 10 from left
-				//5 pixels of sep in each direction
-				//  40,10 40,65 40,120 40,175 40,230 40,285 40,340
-				//  65,10
-				//  90,10
-				// 115,10
-				// 140,10
-				
-				/*	[32*02]
-				    [1232*]
-				    [32132]
-				    4
-				    4
-				    4
-				    4
-				*/
 			}
 		}
 		
 	}
-	
-	//method
 	
 	public Ball getBall()
 	{
@@ -107,19 +95,19 @@ public class Level
 		boolean won = false;
 		
 		
-			for (int j = 0; j < 7; j++)
+		for (int j = 0; j < 7; j++)
+		{
+			if (theBricks[0][j].getStrength() != 0)
 			{
-				if (theBricks[0][j].getStrength() != 0)
-				{
-					won = false;
-					break;
-				}
-				else
-				{
-					won = true;
-				}
-				
+				won = false;
+				break;
 			}
+			else
+			{
+				won = true;
+			}
+				
+		}
 		
 		if (theBall.getY() > thePaddle.getTop() + thePaddle.getHeight())
 		{
@@ -142,122 +130,66 @@ public class Level
 		boolean touchingBottom = false;
 		boolean touchingRight = false;
 		boolean touchingLeft = false;
-		//theBall.moveOnce();
-		
 
-		
-		
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 7; j++)
 			{
-				if (theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
+				if (theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM
+					&& theBricks[i][j].getStrength() != 0)
 				{
-					
-					if (theBricks[i][j].getStrength() > 0)
-					{
-						touchingBottom = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						
-						//break;
-					}
+					touchingBottom = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
 				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP)
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP
+					&& theBricks[i][j].getStrength() != 0)
 				{
-					if (theBricks[i][j].getStrength() > 0)
-					{
-						touchingTop = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						
-						//break;
-					}
+					touchingTop = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
 				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT)
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
+					&& theBricks[i][j].getStrength() != 0)
 				{
-					if (theBricks[i][j].getStrength() > 0)
-					{
-						touchingRight = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						
-						//break;
-					}
-					
-					
+					touchingRight = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
 				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
+				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT
+					&& theBricks[i][j].getStrength() != 0)
 				{
-					if (theBricks[i][j].getStrength() > 0)
-					{
-						touchingLeft = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						
-						//break;
-					}
-					
-					
+					touchingLeft = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
 				}
 			}
 		}
-		if (theBall.getX() + theBall.getRadius() == width - 1 || theBall.getX() - theBall.getRadius() == 1)
-		{
-			theBall.bounceHorizontal();
-			theBall.moveOnce();
-		}
-		else if (theBall.getY() - theBall.getRadius() == 12)
-		{
-			theBall.bounceVertical();
-			theBall.moveOnce();
-		}
-		else if (touchingBottom)
-		{
-			theBall.bounceVertical();
-			theBall.moveOnce();
-		}
-		else if (touchingTop)
-		{
-			theBall.bounceVertical();
-			theBall.moveOnce();
-		}
-		else if (touchingRight)
-		{
-			theBall.bounceHorizontal();
-			theBall.moveOnce();
 		
-		}
-		else if (touchingLeft)
-		{
-			theBall.bounceHorizontal();
-			theBall.moveOnce();
-		}
-		else if (theBall.getY() == 0)
-		{
-			theBall.bounceVertical();
-			theBall.moveOnce();
-		}
-		else if (theBall.getX() == 0 || theBall.getX() == width - 1)
-		{
-			theBall.bounceHorizontal();
-			theBall.moveOnce();
-		}
-		else if (thePaddle.isTouching(theBall) == TouchPosition.TOP)
-		{
-			theBall.bounceVertical();
-			theBall.moveOnce();
-		}
-		else if (thePaddle.isTouching(theBall) == TouchPosition.LEFT
+		if (theBall.getX() + theBall.getRadius() == width - 1
+				|| theBall.getX() - theBall.getRadius() == 1
+				|| touchingRight
+				|| touchingLeft
+				|| theBall.getX() == 0
+				|| theBall.getX() == width - 1
+				|| thePaddle.isTouching(theBall) == TouchPosition.LEFT
 				|| thePaddle.isTouching(theBall) == TouchPosition.RIGHT)
 		{
 			theBall.bounceHorizontal();
+			theBall.moveOnce();
+		}
+		else if (theBall.getY() - theBall.getRadius() + 1 <= 7
+				|| touchingBottom
+				|| touchingTop
+				|| theBall.getY() == 0
+				|| thePaddle.isTouching(theBall) == TouchPosition.TOP)
+		{
+			theBall.bounceVertical();
 			theBall.moveOnce();
 		}
 		else
 		{
 			theBall.moveOnce();
 		}
-		
 	}
 }

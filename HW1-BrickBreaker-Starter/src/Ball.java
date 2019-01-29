@@ -2,7 +2,9 @@
 // TERM: Spring 2019
 //
 // NAME: Cameron Gilinsky and Carter Kennell
-// RESOURCES: 
+// RESOURCES: Piazza discussion board posts by the students and instructors for this class,
+//            found at https://piazza.com/class/jqiqv19pp2w4sw?cid=5
+
 public class Ball
 {
 	private int x, y; //position variables
@@ -67,6 +69,6 @@ public class Ball
 	
 	public String toString()
 	{
-		return String.format("Ball at (%d,%d) moving (%d,%d)", x, y, dx, dy);
+		return String.format("Ball at (%d, %d) moving (%d, %d)", x, y, dx, dy);
 	}
 }
