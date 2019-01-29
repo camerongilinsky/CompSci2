@@ -195,11 +195,6 @@ public class Level
 				{
 					won = false;
 				}
-				//else if (theBricks[i][j] )
-				//{
-				//	won = true;
-				//}
-				//break;
 			}
 		}
 		
@@ -207,7 +202,7 @@ public class Level
 		{
 			gS = GameState.LOST;
 		}
-		else if (won/*theBricks[x][y].getColor() == Color.WHITE*/)
+		else if (won)
 		{
 			gS = GameState.WON;
 		}
@@ -233,63 +228,18 @@ public class Level
 	 */
 	public void updateOneStep()
 	{
-		boolean touchingTop = false;
-		boolean touchingBottom = false;
-		boolean touchingRight = false;
-		boolean touchingLeft = false;
-
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j < 7; j++)
-			{
-				if (theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM
-					&& theBricks[i][j].getStrength() != 0)
-				{
-					touchingBottom = true;
-					theBricks[i][j].hit();
-					theBricks[i][j].getColor();
-				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP
-					&& theBricks[i][j].getStrength() != 0)
-				{
-					touchingTop = true;
-					theBricks[i][j].hit();
-					theBricks[i][j].getColor();
-				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT
-					&& theBricks[i][j].getStrength() != 0)
-				{
-					touchingRight = true;
-					theBricks[i][j].hit();
-					theBricks[i][j].getColor();
-				}
-				else if (theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT
-					&& theBricks[i][j].getStrength() != 0)
-				{
-					touchingLeft = true;
-					theBricks[i][j].hit();
-					theBricks[i][j].getColor();
-				}
-			}
-		}
 		
-		if (theBall.getX() + theBall.getRadius() == width - 1
-				|| theBall.getX() - theBall.getRadius() == 1
-				|| touchingRight
-				|| touchingLeft
-				|| theBall.getX() == 0
-				|| theBall.getX() == width - 1
-				|| thePaddle.isTouching(theBall) == TouchPosition.LEFT
-				|| thePaddle.isTouching(theBall) == TouchPosition.RIGHT)
+		
+		if (horizontalBounce()
+				|| touchingRight()
+				|| touchingLeft())
 		{
 			theBall.bounceHorizontal();
 			theBall.moveOnce();
 		}
-		else if (theBall.getY() - theBall.getRadius() + 1 <= 7
-				|| touchingBottom
-				|| touchingTop
-				|| theBall.getY() == 0
-				|| thePaddle.isTouching(theBall) == TouchPosition.TOP)
+		else if (verticalBounce()
+				|| touchingBottom()
+				|| touchingTop())
 		{
 			theBall.bounceVertical();
 			theBall.moveOnce();
@@ -298,5 +248,152 @@ public class Level
 		{
 			theBall.moveOnce();
 		}
+		
+
+	}
+	
+	/**
+	 * Determines if the Ball touching the bottom of a Brick.
+	 * @return whether or not the Ball is touching the bottom of a Brick.
+	 */
+	public boolean touchingBottom()
+	{
+		boolean touchingBottom = false;
+		
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (theBricks[i][j].getStrength() != 0)
+				{
+					
+					if (theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
+					{
+						touchingBottom = true;
+						theBricks[i][j].hit();
+						theBricks[i][j].getColor();
+						break;
+					}
+					
+				}
+			}
+		}
+		
+		return touchingBottom;
+	}
+	
+	/**
+	 * Determines if the Ball touching the top of a Brick.
+	 * @return whether or not the Ball is touching the top of a Brick.
+	 */
+	public boolean touchingTop()
+	{
+		boolean touchingTop = false;
+		
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (theBricks[i][j].getStrength() != 0)
+				{
+					
+					if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP)
+					{
+						touchingTop = true;
+						theBricks[i][j].hit();
+						theBricks[i][j].getColor();
+						break;
+					}
+					
+				}
+			}
+		}
+		
+		return touchingTop;
+	}
+	
+	/**
+	 * Determines if the Ball touching the left side of a Brick.
+	 * @return whether or not the Ball is touching the left side of a Brick.
+	 */
+	public boolean touchingLeft()
+	{
+		boolean touchingLeft = false;
+		
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (theBricks[i][j].getStrength() != 0)
+				{
+					
+					if (theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
+					{
+						touchingLeft = true;
+						theBricks[i][j].hit();
+						theBricks[i][j].getColor();
+						break;
+					}
+					
+				}
+			}
+		}
+		
+		return touchingLeft;
+	}
+	
+	/**
+	 * Determines if the Ball touching the right side of a Brick.
+	 * @return whether or not the Ball is touching the right side of a Brick.
+	 */
+	public boolean touchingRight()
+	{
+		boolean touchingRight = false;
+		
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j < 7; j++)
+			{
+				if (theBricks[i][j].getStrength() != 0)
+				{
+					
+					if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT)
+					{
+						touchingRight = true;
+						theBricks[i][j].hit();
+						theBricks[i][j].getColor();
+						break;
+					}
+					
+				}
+			}
+		}
+		
+		return touchingRight;
+	}
+	
+	/**
+	 * Determines if the ball needs to bounce horizontally.
+	 * @return whether or not the Ball will bounce horizontally.
+	 */
+	public boolean horizontalBounce()
+	{
+		return theBall.getX() + theBall.getRadius() == width - 1
+				|| theBall.getX() - theBall.getRadius() == 1
+				|| theBall.getX() == 0
+				|| theBall.getX() == width - 1
+				|| thePaddle.isTouching(theBall) == TouchPosition.LEFT
+				|| thePaddle.isTouching(theBall) == TouchPosition.RIGHT;
+	}
+	
+	/**
+	 * Determines if the ball needs to bounce vertically.
+	 * @return whether or not the Ball will bounce vertically.
+	 */
+	public boolean verticalBounce()
+	{
+		return theBall.getY() - theBall.getRadius() + 1 <= 7
+				|| theBall.getY() == 0
+				|| thePaddle.isTouching(theBall) == TouchPosition.TOP;
 	}
 }
