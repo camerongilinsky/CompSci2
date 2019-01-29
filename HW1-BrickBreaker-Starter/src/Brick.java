@@ -105,7 +105,7 @@ public class Brick
 		{
 			hit = true;
 		}
-		else
+		else if (brickStrength > 0)
 		{
 			brickStrength--;
 		}
@@ -117,16 +117,16 @@ public class Brick
 	{
 		if ((theBall.getY() + theBall.getRadius()) - 1 >= getTop() - 1
 				&& (theBall.getY() + theBall.getRadius()) - 1 <= getTop() + 4
-				&& (theBall.getX()) >= getLeft() - 4
-				&& (theBall.getX()) <= (getLeft() + getWidth() + 3)
+				&& (theBall.getX()) >= getLeft() - 6
+				&& (theBall.getX()) <= (getLeft() + getWidth() + 5)
 				&& brickColor != Color.WHITE)
 		{
 			return TouchPosition.TOP;
 		} 
-		else if ((theBall.getY() - theBall.getRadius()) + 1 <= (getTop() + getHeight() - 1)
-				&& (theBall.getY() - theBall.getRadius()) + 1 >= (getTop() + getHeight() - 4)
-				&& (theBall.getX()) >= getLeft() - 3
-				&& (theBall.getX()) <= (getLeft() + getWidth() + 3)
+		else if ((theBall.getY() - theBall.getRadius()) + 1 <= (getTop() + getHeight())
+				&& (theBall.getY() - theBall.getRadius()) + 1 >= (getTop() + getHeight() - 5)
+				&& (theBall.getX()) >= getLeft() - 6
+				&& (theBall.getX()) <= (getLeft() + getWidth() + 5)
 				&& brickColor != Color.WHITE)
 		{	
 			return TouchPosition.BOTTOM;
@@ -155,10 +155,12 @@ public class Brick
 	
 	public String toString()
 	{
-		String result;
-		result = "Brick at " + getLeft() + " " + getTop() + " " 
-				+ (getLeft() + BRICK_WIDTH - 1) + " " + (getTop() + BRICK_HEIGHT - 1);
+		//String result;
+		//result = "Brick at " + getLeft() + " " + getTop() + " " 
+		//		+ (getLeft() + BRICK_WIDTH - 1) + " " + (getTop() + BRICK_HEIGHT - 1);
 		
-		return result;
+		//return result;
+				
+		return String.format("Brick at (%d, %d, %d, %d)", brickLeft, brickTop, brickLeft + BRICK_WIDTH - 1, brickTop + BRICK_HEIGHT - 1 );
 	}
 }

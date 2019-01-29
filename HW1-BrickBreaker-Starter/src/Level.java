@@ -92,28 +92,29 @@ public class Level
 	
 	public GameState getGameStatus()
 	{
-		boolean won = false;
+		boolean won = true;
 		
-		
-		for (int j = 0; j < 7; j++)
+		for (int i = 0; i < 5; i++)
 		{
-			if (theBricks[0][j].getStrength() != 0)
+			for (int j = 0; j < 7; j++)
 			{
-				won = false;
-				break;
+				if (theBricks[i][j].getStrength() > 0)
+				{
+					won = false;
+				}
+				//else if (theBricks[i][j] )
+				//{
+				//	won = true;
+				//}
+				//break;
 			}
-			else
-			{
-				won = true;
-			}
-				
 		}
 		
 		if (theBall.getY() > thePaddle.getTop() + thePaddle.getHeight())
 		{
 			return GameState.LOST;
 		}
-		else if (won  /*theBricks[x][y].getColor() == Color.WHITE*/)
+		else if (won/*theBricks[x][y].getColor() == Color.WHITE*/)
 		{
 			return GameState.WON;
 		}
