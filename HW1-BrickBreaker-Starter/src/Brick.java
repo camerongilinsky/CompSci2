@@ -164,14 +164,15 @@ public class Brick
 	{
 		boolean hit = false;
 		
-		if (brickStrength > 0)
+		if (brickStrength > 1)
 		{
 			brickStrength--;
 			getColor();
 		}
-		
-		if (brickStrength == 0)
+		else if (brickStrength == 1)
 		{
+			brickStrength--;
+			getColor();
 			hit = true;
 		}
 		
