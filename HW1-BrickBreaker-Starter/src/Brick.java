@@ -251,7 +251,7 @@ public class Brick
 		
 		if (brickStrength == 0)
 		{
-			tP = TouchPosition.TOP;
+			tP = TouchPosition.NONE;
 		}
 		else if (touchingTop(theBall))
 		{
