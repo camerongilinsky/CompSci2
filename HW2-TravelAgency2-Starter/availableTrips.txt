@@ -1,0 +1,62 @@
+ROADTRIP 7 Mt. Rushmore and the Badlands
+Chimney Rock, Carnenge, Mt. Rushmore, The Corn Palace
+1.95 1183 4 2
+--
+ROADTRIP 12 Skiing in Aspen
+North Platte, Denver, Aspen
+2.50 1450 2 5 
+--
+CRUISE 8 Rhine Getaway
+Viking Buri
+Basel, Switzerland
+10 00 03 12 2019
+17 30 03 19 2019
+1999.00
+Suite
+EXCURSION 0.00 Cologne Walking Tour 
+EXCURSION 99.50 Dutch Cheese Adventure
+FLIGHT DL 923  OMA 06 25 03 11 2019 MSP 07 14 03 11 2019 45.00
+FLIGHT DL 1923 MSP 19 05 03 11 2019 AMS 05 19 03 12 2019 725.12
+FLIGHT KL 23   AMS 06 10 03 12 2019 BSL 07 00 03 12 2019 38.16
+FLIGHT KL 623  BSL 19 00 03 19 2019 AMS 19 45 03 19 2019 39.20
+FLIGHT KL 1356 AMS 20 50 03 19 2019 MSP 23 30 03 19 2019 650.25
+FLIGHT DL 1    MSP 01 15 03 20 2019 OMA 02 00 03 20 2019 32.50
+--
+RESORT 4 Relax Your Cares Away in the DR
+Zoetry Punta Cana
+2 425.00
+Aromatherapy, Sauna, Massage, Laundry, Gourmet Restaurant, Private Butler
+--
+RESORT 3 Spring Break on the Gulf
+Palm Beach Grand Resort
+3 299.99
+Private Beach, Dance Club, Zipline Course, Fishing Expeditions
+FLIGHT AA 43   OMA 10 14 03 20 2019 TPA 13 45 03 20 2019 289.45
+FLIGHT AA 834  TPA 20 48 03 22 2019 OMA 23 00 03 22 3029 250.16
+--
+CRUISE 1 Sailing the Mighty Missouri
+River City Star
+Omaha, NE
+11 00 02 09 2019
+12 30 02 09 2019
+20.00
+Interior
+--
+CRUISE 4 Bermuda Triangle and Back...Maybe
+Floating Germ Palace
+Miami, FL
+10 00 04 01 2019
+14 00 04 04 2019
+199.50
+Balcony
+EXCURSION 0.00 Seance on the Water
+--
+ROADTRIP 7 Northern California in a Week
+Denver, Reno, Sacramento, San Francisco
+2.15 3500 6 3
+--
+RESORT 2 Nebraska Weekend Staycation
+Lied Lodge
+2 175.00
+Meals at Timber, Murder Mystery Evening at Arbor Lodge Mansion, Mud Therapy Session
+--

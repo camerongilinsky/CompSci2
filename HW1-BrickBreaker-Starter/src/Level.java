@@ -264,17 +264,13 @@ public class Level
 		{
 			for (int j = 0; j < 7; j++)
 			{
-				if (theBricks[i][j].getStrength() != 0)
+				if (theBricks[i][j].getStrength() != 0
+						&& theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
 				{
-					
-					if (theBricks[i][j].isTouching(theBall) == TouchPosition.BOTTOM)
-					{
-						touchingBottom = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						break;
-					}
-					
+					touchingBottom = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
+					break;
 				}
 			}
 		}
@@ -294,17 +290,13 @@ public class Level
 		{
 			for (int j = 0; j < 7; j++)
 			{
-				if (theBricks[i][j].getStrength() != 0)
+				if (theBricks[i][j].getStrength() != 0
+						&& theBricks[i][j].isTouching(theBall) == TouchPosition.TOP)
 				{
-					
-					if (theBricks[i][j].isTouching(theBall) == TouchPosition.TOP)
-					{
-						touchingTop = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						break;
-					}
-					
+					touchingTop = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
+					break;
 				}
 			}
 		}
@@ -324,17 +316,13 @@ public class Level
 		{
 			for (int j = 0; j < 7; j++)
 			{
-				if (theBricks[i][j].getStrength() != 0)
+				if (theBricks[i][j].getStrength() != 0
+						&& theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
 				{
-					
-					if (theBricks[i][j].isTouching(theBall) == TouchPosition.LEFT)
-					{
-						touchingLeft = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						break;
-					}
-					
+					touchingLeft = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
+					break;
 				}
 			}
 		}
@@ -354,17 +342,13 @@ public class Level
 		{
 			for (int j = 0; j < 7; j++)
 			{
-				if (theBricks[i][j].getStrength() != 0)
+				if (theBricks[i][j].getStrength() != 0
+						&& theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT)
 				{
-					
-					if (theBricks[i][j].isTouching(theBall) == TouchPosition.RIGHT)
-					{
-						touchingRight = true;
-						theBricks[i][j].hit();
-						theBricks[i][j].getColor();
-						break;
-					}
-					
+					touchingRight = true;
+					theBricks[i][j].hit();
+					theBricks[i][j].getColor();
+					break;
 				}
 			}
 		}
