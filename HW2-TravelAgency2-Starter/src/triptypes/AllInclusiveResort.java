@@ -16,6 +16,11 @@ package triptypes;
  */
 public class AllInclusiveResort extends FlightOptionalPackage
 {
+	private String resortOut;
+	private int guestsPerRoomOut;
+	private double pricePerNightOut;
+	private String[] amenitiesListOut;
+	
 	/**
 	 * Creates a new AllInclusiveResort package.
 	 * @param name The promotional name for this package.
@@ -33,6 +38,10 @@ public class AllInclusiveResort extends FlightOptionalPackage
 			String[] amenitiesList)
 	{
 		super(name, numDays);
+		resortOut = resort;
+		guestsPerRoomOut = guestsPerRoom;
+		pricePerNightOut = pricePerNight;
+		amenitiesListOut = amenitiesList;
 	}
 	
 	/**
@@ -43,7 +52,15 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public String getAmenities()
 	{
-		return "";
+		String s1 = "";
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < amenitiesListOut.length; i++)
+		{
+			s.append(amenitiesListOut[i] + ", ");
+		}
+		
+		s1 = s.toString();
+		return s1;
 	}
 	
 	/**
@@ -52,7 +69,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public int getGuestsPerRoom()
 	{
-		return 0;
+		return guestsPerRoomOut;
 	}
 	
 	/**
@@ -61,7 +78,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getPrice()
 	{
-		return 0.0;
+		return getFlightCosts() + (numDays * pricePerNightOut);
 	}
 	
 	/**

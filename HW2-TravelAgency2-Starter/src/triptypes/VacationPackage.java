@@ -13,6 +13,11 @@ package triptypes;
  */
 public abstract class VacationPackage 
 {
+	
+	private String nameOut;
+	
+	protected int numDaysOut;
+	
 	/**
 	 * Initializes a VacationPackage with provided values.
 	 * @param name The promotional marketing name for this package.
@@ -20,7 +25,8 @@ public abstract class VacationPackage
 	 */
 	public VacationPackage(String name, int numDays)
 	{
-		
+		nameOut = name;
+		numDaysOut = numDays;
 	}
 	
 	/**

@@ -6,6 +6,8 @@
 
 package triptypes;
 
+import java.util.Calendar;
+
 /**
  * This class represents a cruise package within the travel agency.
  * It stores required information about the cruise ship, including
@@ -15,6 +17,22 @@ package triptypes;
  */
 public class Cruise extends FlightOptionalPackage
 {
+
+	private static final int MAX_EXCURSIONS = 10;
+	
+	private String vesselNameOut;
+	private String portCityOut;
+	private Calendar departsOut;
+	private Calendar returnsOut;
+	private double basePriceOut;
+	
+	private String[] excursions = new String[MAX_EXCURSIONS];
+	private String excursionName;
+	private double excursionCost;
+	private double totalExcursionCost = 0;
+	
+	private CabinType cabinType;
+	
 	/**
 	 * Creates a new Cruise trip with specified values for all data
 	 * except optional excursions.
@@ -31,11 +49,16 @@ public class Cruise extends FlightOptionalPackage
 			int numDays,
 			String vesselName,
 			String portCity,
-			java.util.Calendar departs,
-			java.util.Calendar returns,
+			Calendar departs,
+			Calendar returns,
 			double basePrice)
 	{
 		super(name, numDays);
+		vesselNameOut = vesselName;
+		portCityOut = portCity;
+		departsOut = departs;
+		returnsOut = returns;
+		basePriceOut = basePrice;
 	}
 	
 	/**
@@ -49,7 +72,31 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public void addExcursion(String excursion, double price)
 	{
+		if (!excursion.equals(""))
+		{
+			excursionName = excursion;
+		}
 		
+		if (price > 0)
+		{
+			excursionCost = price;
+		}
+		else
+		{
+			excursionCost = 0.0;
+		}
+		
+		totalExcursionCost += excursionCost;
+		
+		for (int i = 0; i < MAX_EXCURSIONS; i++)
+		{
+			if (excursions[i] == null)
+			{
+				excursions[i] = excursionName;
+				break;
+			}
+		}
+
 	}
 	
 	/**
@@ -59,8 +106,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public String[] getExcursions()
 	{
-		String[] temp = null;
-		return temp;
+		return excursions;
 	}
 	
 	/**
@@ -71,7 +117,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public void setCabinType(CabinType cabin)
 	{
-		
+		cabinType = cabin;
 	}
 	
 	/**
@@ -80,8 +126,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public CabinType getCabinType()
 	{
-		CabinType temp = null;
-		return temp;
+		return cabinType;
 	}
 	
 	/**
@@ -90,7 +135,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public String getHomePort()
 	{
-		return "";
+		return portCityOut;
 	}
 	
 	/**
@@ -99,8 +144,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public java.util.Calendar getDepartureDate()
 	{
-		java.util.Calendar temp = null;
-		return temp;
+		return departsOut;
 	}
 	
 	/**
@@ -109,8 +153,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public java.util.Calendar getReturnDate()
 	{
-		java.util.Calendar temp = null;
-		return temp;
+		return returnsOut;
 	}
 	
 	/**
@@ -119,7 +162,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public String getVesselName()
 	{
-		return "";
+		return vesselNameOut;
 	}
 	
 	/**
@@ -128,7 +171,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public double getExcursionCosts()
 	{
-		return 0.0;
+		return totalExcursionCost;
 	}
 	
 	/**
@@ -137,7 +180,16 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public int getNumExcursions()
 	{
-		return 0;
+		int count = 0;
+		
+		for (int i = 0; i < excursions.length; i++)
+		{
+			if (excursions[i] != null)
+			{
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	/**
