@@ -200,7 +200,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public double getPrice()
 	{
-		return 0.0;
+		return getExcursionCosts() + getLodgingCost() + getFlightCosts();
 	}
 	
 	/**
@@ -213,7 +213,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public double getDepositAmount()
 	{
-		return 0.0;
+		return (0.5 * getLodgingCost()) + getFlightCosts();
 	}
 	
 	/**
@@ -229,7 +229,22 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public double getLodgingCost()
 	{
-		return 0.0;
+		double lodgingCost = basePriceOut;
+		
+		if (cabinType == CabinType.OCEAN_VIEW)
+		{
+			lodgingCost *= 1.5;
+		}
+		else if (cabinType == CabinType.BALCONY)
+		{
+			lodgingCost *= 3;
+		}
+		else if (cabinType == CabinType.SUITE)
+		{
+			lodgingCost *= 5;
+		}
+		
+		return lodgingCost;
 	}
 	
 	/**
@@ -250,6 +265,6 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public String toString()
 	{
-		return "";
+		return String.format("$%9.2f %s (Flight Not Included)\n           Cruising from %s on %s (includes %d excursions) ", getPrice(), getName(), portCityOut, vesselNameOut, getNumExcursions());
 	}
 }

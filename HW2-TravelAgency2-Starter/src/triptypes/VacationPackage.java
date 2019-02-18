@@ -126,7 +126,7 @@ public abstract class VacationPackage
 	public String toString()
 	{
 		String result;
-		result = String.format("$%8.2f  %s", getPrice(), getName());
+		result = String.format("$%9.2f  %s", getPrice(), getName());
 		return result;
 	}
 	

@@ -114,11 +114,37 @@ public class VacationPackageCollection
 		
 		int count = 0;
 		
-		for (int i = 0; i < vpc.length; i++)
+		if (selection == 1)
 		{
-			if (vpc[i] instanceof triptypes.RoadTrip)
+			for (int i = 0; i < vpc.length; i++)
 			{
-				temp[count] = vpc[i];
+				if (vpc[i] instanceof triptypes.RoadTrip)
+				{
+					temp[count] = vpc[i];
+					count++;
+				}
+			}
+		}
+		else if (selection == 2)
+		{
+			for (int i = 0; i < vpc.length; i++)
+			{
+				if (vpc[i] instanceof triptypes.Cruise)
+				{
+					temp[count] = vpc[i];
+					count++;
+				}
+			}
+		}
+		else if (selection == 3)
+		{
+			for (int i = 0; i < vpc.length; i++)
+			{
+				if (vpc[i] instanceof triptypes.AllInclusiveResort)
+				{
+					temp[count] = vpc[i];
+					count++;
+				}
 			}
 		}
 		
@@ -168,8 +194,7 @@ public class VacationPackageCollection
 	 */
 	public triptypes.VacationPackage getItemAt(int index)
 	{
-		triptypes.VacationPackage temp = null;
-		return temp;
+		return vpc[index];
 	}
 	
 	/**

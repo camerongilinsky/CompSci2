@@ -314,7 +314,7 @@ public class RoadTrip extends VacationPackage
 	public String toString()
 	{
 		String result = "";
-		result += String.format("$9.2%f %s\n", getPrice(), getName());
+		result += String.format("$%9.2f %s\n", getPrice(), getName());
 		result += String.format("           ");
 		result += getStops();
 		

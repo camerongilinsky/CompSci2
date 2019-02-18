@@ -140,7 +140,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public String toString()
 	{
-		return String.format("$  %.2f  %s! (Flight Included)\n           An all-inclusive stay at %s for 2 people!", getPrice(), getName(), resortOut);
+		return String.format("$%9.2f %s! (Flight Included)\n           An all-inclusive stay at %s for 2 people!", getPrice(), getName(), resortOut);
 	}
 
 }
