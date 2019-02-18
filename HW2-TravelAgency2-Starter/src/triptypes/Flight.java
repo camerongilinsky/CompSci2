@@ -65,7 +65,7 @@ public class Flight
 	 * 
 	 * @return The formatted string summary for the flight.
 	 */
-	public String toString()
+	public String toString() //
 	{
 		return String.format("%s %d Departs: %s at %s; Arrives %s at %s", airlineOut, flightNumOut, fromOut, leavesAtOut, toOut, arrivesOut);
 	}

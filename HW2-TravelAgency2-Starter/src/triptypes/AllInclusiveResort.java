@@ -98,7 +98,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 * by specific package types.
 	 * @return The lodging subtotal in US dollars.
 	 */
-	public double getLodgingCost()
+	public double getLodgingCost() //
 	{
 		return (numDaysOut * pricePerNightOut);
 	}

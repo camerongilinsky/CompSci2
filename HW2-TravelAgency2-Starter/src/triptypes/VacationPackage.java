@@ -122,7 +122,7 @@ public abstract class VacationPackage
 	 */
 	public String toString()
 	{
-		return "";
+		return ""; //
 	}
 	
 	/**

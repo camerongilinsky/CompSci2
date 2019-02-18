@@ -30,7 +30,7 @@ public class VacationPackageCollection
 
 	private int numTrips;
 	
-	private VacationPackage[] vpc;
+	private VacationPackage[] vpc; //
 
 	//private List<VacationPackage> vacationPackageCollection;
 	
