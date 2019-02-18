@@ -10,6 +10,7 @@ package triptypes;
  * This class represents a RoadTrip vacation that includes a rental care,
  * overnight lodging, and fuel cost estimation.
  * @author ckgilinsky and ckennell
+ *
  */
 public class RoadTrip extends VacationPackage
 {
@@ -313,7 +314,7 @@ public class RoadTrip extends VacationPackage
 	public String toString()
 	{
 		String result = "";
-		result += String.format("$9.2%f %s\n");
+		result += String.format("$9.2%f %s\n", getPrice(), getName());
 		result += String.format("           ");
 		result += getStops();
 		

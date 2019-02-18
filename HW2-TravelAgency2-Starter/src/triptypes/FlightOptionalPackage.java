@@ -43,7 +43,7 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	{
 		for (int i = 0; i < flights.length; i++)
 		{
-			if (flights[i] != null)
+			if (flights[i] == null)
 			{
 				flights[i] = details;
 				break;
@@ -88,7 +88,10 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 		double total = 0.0;
 		for (int i = 0; i < flights.length; i++)
 		{
-			total += flights[i].getPrice();
+			if (flights[i] != null)
+			{
+				total += flights[i].getPrice();
+			}
 		}
 		
 		return total;

@@ -84,7 +84,7 @@ public class VacationPackageCollection
 	{
 		for (int i = 0; i < vpc.length; i++)
 		{
-			if (vpc[i] != null)
+			if (vpc[i] == null)
 			{
 				vpc[i] = trip;
 				numTrips++;
