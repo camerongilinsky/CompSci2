@@ -26,16 +26,24 @@ public class VacationPackageCollection
 	/**
 	 * The maximum number of VacationPackage that can be stored in a single collection.
 	 */
-	public static final int MAX_PACKAGES = 25;
+	private static final int MAX_PACKAGES = 25;
 
-	List<VacationPackage> vacationPackageCollection;
+	private int numTrips;
+	
+	private VacationPackage[] vpc;
+
+	//private List<VacationPackage> vacationPackageCollection;
+	
+	
 	
 	/**
 	 * Creates a new empty VacationPackageCollection.
 	 */
 	public VacationPackageCollection()
 	{
-		vacationPackageCollection = new ArrayList<>();
+		vpc = new VacationPackage[MAX_PACKAGES];
+		numTrips = 0;
+		//vacationPackageCollection = new ArrayList<>();
 	}
 	
 	/**
@@ -45,7 +53,8 @@ public class VacationPackageCollection
 	 */
 	public int getNumTrips()
 	{
-		return vacationPackageCollection.size();
+		return numTrips;
+		//return vacationPackageCollection.size();
 	}
 	
 	/**
@@ -59,9 +68,10 @@ public class VacationPackageCollection
 	 */
 	public triptypes.VacationPackage[] getAllVacations()
 	{
-		VacationPackage[] toArray = new VacationPackage[vacationPackageCollection.size()];
-		toArray = vacationPackageCollection.toArray(toArray);
-		return toArray;
+		return vpc;
+		//VacationPackage[] toArray = new VacationPackage[vacationPackageCollection.size()];
+		//toArray = vacationPackageCollection.toArray(toArray);
+		//return toArray;
 	}
 	
 	/**
@@ -72,10 +82,21 @@ public class VacationPackageCollection
 	 */
 	public void addVacation(triptypes.VacationPackage trip)
 	{
-		if (vacationPackageCollection.size() < 25)
+		for (int i = 0; i < vpc.length; i++)
 		{
-			//TODO code to add VacationPackage to List
+			if (vpc[i] != null)
+			{
+				vpc[i] = trip;
+				numTrips++;
+				break;
+			}
 		}
+		
+		
+	//	if (vacationPackageCollection.size() < MAX_PACKAGES)
+	//	{
+	//		vacationPackageCollection.add(trip);
+	//	}
 	}
 	
 	/**
@@ -87,22 +108,35 @@ public class VacationPackageCollection
 	 * @return An integer signaling what type of packages to extract. 1 represents RoadTrips,
 	 * 2 represents Cruises, and 3 represents All-Inclusive Resort packages.
 	 */
-	public VacationPackageCollection filterVacationsFor(int selection)
+	public VacationPackage[] filterVacationsFor(int selection)
 	{
-		//IGNORE THIS FOR NOW
+		VacationPackage[] temp = new VacationPackage[MAX_PACKAGES];
 		
-		VacationPackage[] filteredPackages = new VacationPackage[MAX_PACKAGES]; // = new VacationPackageCollection();
 		int count = 0;
 		
-		for (int i = 0; i < vp.length; i++)
+		for (int i = 0; i < vpc.length; i++)
 		{
-			if (vp[i] instanceof triptypes.RoadTrip)
+			if (vpc[i] instanceof triptypes.RoadTrip)
 			{
-				filteredPackages[count] =  vp[i];
-				count++;
+				temp[count] = vpc[i];
 			}
 		}
-		return vp;
+		
+		return temp;
+		
+		/*
+		List<VacationPackage> temp = new ArrayList<>();
+		
+		for (int i = 0; i < vacationPackageCollection.size(); i++)
+		{
+			if (vacationPackageCollection.get(i) instanceof triptypes.RoadTrip)
+			{
+				temp.add(vacationPackageCollection.get(i));
+			}
+		}
+		
+		return (VacationPackageCollection) temp;
+		*/
 	}
 	
 	/**

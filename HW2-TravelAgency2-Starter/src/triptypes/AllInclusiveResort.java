@@ -78,7 +78,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getPrice()
 	{
-		return getFlightCosts() + (numDays * pricePerNightOut);
+		return getFlightCosts() + (numDaysOut * pricePerNightOut);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getDepositAmount()
 	{
-		return 0.0;
+		return getFlightCosts() + 0.5 * (numDaysOut * pricePerNightOut);
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getLodgingCost()
 	{
-		return 0.0;
+		return (numDaysOut * pricePerNightOut);
 	}
 	
 	/**
@@ -110,11 +110,11 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 * specified price. The second line should be prefixed with 11 blank
 	 * spaces for alignment below the trip name. For example:
 	 * $  450.35  Punta Cana Fiesta! (Flight Included)
-	 * An all-inclusive stay at Flip Flops for 2 people!
+	 *            An all-inclusive stay at Flip Flops for 2 people!
 	 * @return The formatted string summary.
 	 */
 	public String toString()
 	{
-		return "";
+		return String.format("$  %f  %s (Flight Included)\r           An all-inclusive stay at %s for 2 people!", getPrice(), nameOut, nameOut);
 	}
 }

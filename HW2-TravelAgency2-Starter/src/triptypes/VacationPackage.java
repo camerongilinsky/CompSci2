@@ -14,9 +14,10 @@ package triptypes;
 public abstract class VacationPackage 
 {
 	
-	private String nameOut;
+	protected String nameOut;
 	
 	protected int numDaysOut;
+	
 	
 	/**
 	 * Initializes a VacationPackage with provided values.
@@ -39,7 +40,12 @@ public abstract class VacationPackage
 	 */
 	public void setName(String name)
 	{
+		nameOut = "PACKAGE NAME TBD";
 		
+		if (!name.equals(""))
+		{
+			nameOut = name;
+		}
 	}
 	
 	/**
@@ -49,7 +55,10 @@ public abstract class VacationPackage
 	 */
 	public void setLength(int numDays)
 	{
-		
+		if (numDays > 0)
+		{
+			numDaysOut = numDays;
+		}
 	}
 	
 	/**
@@ -58,7 +67,7 @@ public abstract class VacationPackage
 	 */
 	public String getName()
 	{
-		return "";
+		return nameOut;
 	}
 	
 	/**
@@ -67,7 +76,7 @@ public abstract class VacationPackage
 	 */
 	public int getNumDays()
 	{
-		return 0;
+		return numDaysOut;
 	}
 	
 	/**

@@ -14,6 +14,9 @@ package triptypes;
  */
 public abstract class FlightOptionalPackage extends VacationPackage
 {
+	private Flight[] flights;
+	
+
 	/**
 	 * Initializes details for a newly created FlightOptionalPackage. Upon
 	 * creation, this package will contain no flight booking. However, flight
@@ -46,7 +49,14 @@ public abstract class FlightOptionalPackage extends VacationPackage
 	 */
 	public boolean hasFlights()
 	{
-		return true;
+		if (flights == null)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 	
 	/**
