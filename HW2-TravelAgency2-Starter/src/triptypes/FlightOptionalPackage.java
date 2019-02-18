@@ -16,6 +16,7 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 {
 	private Flight[] flights;
 	
+	private static final int FLIGHTS_MAX = 12;
 
 	/**
 	 * Initializes details for a newly created FlightOptionalPackage. Upon
@@ -27,6 +28,7 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	public FlightOptionalPackage(String name, int numDays)
 	{
 		super(name, numDays);
+		flights = new Flight[FLIGHTS_MAX];
 	}
 	
 	/**
@@ -34,12 +36,19 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	 * calls to addFlightLeg with one call for each flight. Flights must be added in chronological
 	 * order, with the soonest flight added first. A maximum of up to 12 flights can be stored within
 	 * a FlightOptionalPackage.
-	 * @param details A valid flight object to append to this itinerary. Invalid values (ie. null) or 
-	 * flights in excess fo the 12 max will be ignored and will not impact this FlightOptionalPackage object.
+	 * @param details A valid flight object to append to this itinerary. Invalid values (i.e. null) or 
+	 * flights in excess of the 12 max will be ignored and will not impact this FlightOptionalPackage object.
 	 */
 	public void addFlightLeg(Flight details)
 	{
-		
+		for (int i = 0; i < flights.length; i++)
+		{
+			if (flights[i] != null)
+			{
+				flights[i] = details;
+				break;
+			}
+		}
 	}
 	
 	/**
@@ -67,8 +76,7 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	 */
 	public Flight[] getFlightItinerary()
 	{
-		Flight[] itinerary = null;
-		return itinerary;
+		return flights;
 	}
 	
 	/**
@@ -77,7 +85,13 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	 */
 	public double getFlightCosts()
 	{
-		return 0.0;
+		double total = 0.0;
+		for (int i = 0; i < flights.length; i++)
+		{
+			total += flights[i].getPrice();
+		}
+		
+		return total;
 	}
 	
 	/**
@@ -88,6 +102,19 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	 */
 	public String toString()
 	{
-		return "";
+		String result = super.toString();
+		
+		if (hasFlights())
+		{
+			for (int i = 0; i < flights.length; i++)
+			{
+				if (flights[i] != null)
+				{
+					result += "\r";
+					result += flights[i].toString();
+				}
+			}
+		}
+		return result;
 	}
 }

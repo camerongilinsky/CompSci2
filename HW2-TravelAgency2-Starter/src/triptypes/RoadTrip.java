@@ -14,6 +14,59 @@ package triptypes;
 public class RoadTrip extends VacationPackage
 {
 	/**
+	 * Amount due after deposit is paid. Always 0.
+	 */
+	private static final double AMOUNT_DUE = 0.0;
+	/**
+	 * The base rate of a hotel room.
+	 */
+	private static final double HOTEL_BASE = 32.50;
+	/**
+	 * The cost of the rental car.
+	 */
+	private double rentalCost;
+	/**
+	 * The total deposit paid. Includes lodging and cost of car.
+	 */
+	private double depositAmount;
+	/**
+	 * The expected cost of fuel for the trip.
+	 */
+	private double fuelCost;
+	/**
+	 * The price of fuel per gallon USD.
+	 */
+	private double fuelPPG;
+	/**
+	 * The rating of the hotel from a scale 1..5.
+	 */
+	private int stars;
+	/**
+	 * The cost of lodging.
+	 */
+	private double lodgingCost;
+	/**
+	 * The number of people going on the road trip.
+	 */
+	private int numPersons;
+	/**
+	 * The number of stops on the trip.
+	 */
+	private int numStops;
+	/**
+	 * The total Price of the road trip.
+	 */
+	private double totalPrice;
+	/**
+	 * An array of strings listing the stops along the road trip.
+	 */
+	private String[] stopsArr;
+	/**
+	 * The distance of the trip in miles.
+	 */
+	private int distance;
+	
+	/**
 	 * Creates a newly initialized RoadTrip object using the
 	 * parameter data.
 	 * @param name The promotional name to use for this RoadTrip in
@@ -35,6 +88,11 @@ public class RoadTrip extends VacationPackage
 					double fuelcost, int miles, int maxPersons, int hotelStars)
 	{
 		super(name, numDays);
+		setFuelPrice(fuelcost);
+		setPersons(maxPersons);
+		distance = miles;
+		stars = hotelStars;
+		stopsArr = stops;		
 	}
 	
 	/**
@@ -43,7 +101,7 @@ public class RoadTrip extends VacationPackage
 	 */
 	public int getHotelStars()
 	{
-		return 0;
+		return stars;
 	}
 	
 	/**
@@ -54,7 +112,8 @@ public class RoadTrip extends VacationPackage
 	 */
 	public double getPrice()
 	{
-		return 0.0;
+		totalPrice = getCarCost() + getLodgingCost() + getEstimatedFuelCost();
+		return totalPrice;
 	}
 	
 	/**
@@ -65,18 +124,19 @@ public class RoadTrip extends VacationPackage
 	 */
 	public double getDepositAmount()
 	{
-		return 0.0;
+		depositAmount = getCarCost() + getLodgingCost();
+		return depositAmount;
 	}
 	
 	/**
 	 * All RoadTrips must be fully paid in advance, with the exception
-	 * of fuel costs. Fuel costs are paid to the gas station, and no the
+	 * of fuel costs. Fuel costs are paid to the gas station, and not the
 	 * travel agent. Thus, the balance due on RoadTrips is always 0.
-	 * @return The remaining balance to pay the travel angency.
+	 * @return The remaining balance to pay the travel agency.
 	 */
 	public double getAmountDue()
 	{
-		return 0.0;
+		return AMOUNT_DUE;
 	}
 	
 	/**
@@ -89,7 +149,8 @@ public class RoadTrip extends VacationPackage
 	 */
 	public double getLodgingCost()
 	{
-		return 0.0;
+		lodgingCost = HOTEL_BASE * stars * super.getNumDays() * (numPersons / 2);
+		return lodgingCost;
 	}
 	
 	/**
@@ -102,7 +163,31 @@ public class RoadTrip extends VacationPackage
 	 */
 	public double getCarCost()
 	{
-		return 0.0;
+		//double rentalCost;
+		if (numPersons < 9)
+		{
+			if (numPersons >= 7)
+			{
+				rentalCost = 70.50;
+			}
+			else if (numPersons >= 5)
+			{
+				rentalCost = 60.25;
+			}
+			else if (numPersons >= 3)
+			{
+				rentalCost = 50.13;
+			}
+			else
+			{
+				rentalCost = 36.25;
+			}
+		}
+		else
+		{
+			rentalCost = 150.00;
+		}
+		return rentalCost;
 	}
 	
 	/**
@@ -111,7 +196,7 @@ public class RoadTrip extends VacationPackage
 	 */
 	public int getNumStops()
 	{
-		return 0;
+		return stopsArr.length;
 	}
 	
 	/**
@@ -121,17 +206,17 @@ public class RoadTrip extends VacationPackage
 	 */
 	public void setPersons(int maxPeople)
 	{
-		
+		numPersons = maxPeople;
 	}
 	
 	/**
-	 * Retrieves the number of people included for budget claculations
+	 * Retrieves the number of people included for budget calculations
 	 * by this RoadTrip.
 	 * @return The number of persons.
 	 */
 	public int getNumPersons()
 	{
-		return 0;
+		return numPersons;
 	}
 	
 	/**
@@ -143,7 +228,14 @@ public class RoadTrip extends VacationPackage
 	 */
 	public void setFuelPrice(double pricePerGallon)
 	{
-		
+		if (!(pricePerGallon < 0))
+		{
+			fuelPPG = pricePerGallon;
+		}
+		else
+		{
+			fuelPPG = 2.50;
+		}
 	}
 	
 	/**
@@ -156,7 +248,33 @@ public class RoadTrip extends VacationPackage
 	 */
 	public double getEstimatedFuelCost()
 	{
-		return 0.0;
+		int mpg;
+		if (numPersons < 9)
+		{
+			if (numPersons >= 7)
+			{
+				mpg = 22;
+			}
+			else if (numPersons >= 5)
+			{
+				mpg = 28;
+			}
+			else if (numPersons >= 3)
+			{
+				mpg = 32;
+			}
+			else
+			{
+				mpg = 45;
+			}
+		}
+		else
+		{
+			mpg = 15;
+		}
+		
+		fuelCost = (distance / mpg) * fuelPPG;
+		return fuelCost;
 	}
 	
 	/**
@@ -167,7 +285,20 @@ public class RoadTrip extends VacationPackage
 	 */
 	public String getStops()
 	{
-		return "";
+		String result = "";
+		for (int i = 0; i < stopsArr.length; i++)
+		{
+			if (i < stopsArr.length - 1)
+			{
+				result += stopsArr[i];
+				result += ", ";
+			}
+			else
+			{
+				result += stopsArr[i];
+			}
+		}
+		return result;
 	}
 	
 	/**
@@ -181,6 +312,11 @@ public class RoadTrip extends VacationPackage
 	 */
 	public String toString()
 	{
-		return "";
+		String result = "";
+		result += String.format("$9.2%f %s\n");
+		result += String.format("           ");
+		result += getStops();
+		
+		return result;
 	}
 }

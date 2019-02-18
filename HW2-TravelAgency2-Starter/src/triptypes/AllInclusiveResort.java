@@ -16,9 +16,24 @@ package triptypes;
  */
 public class AllInclusiveResort extends FlightOptionalPackage
 {
+	/**
+	 * Name of the resort.
+	 */
 	private String resortOut;
+	
+	/**
+	 * Number of guests per room.
+	 */
 	private int guestsPerRoomOut;
+	
+	/**
+	 * The price per night of the stay.
+	 */
 	private double pricePerNightOut;
+	
+	/**
+	 * The list of amenities for a given resort.
+	 */
 	private String[] amenitiesListOut;
 	
 	/**
@@ -42,6 +57,16 @@ public class AllInclusiveResort extends FlightOptionalPackage
 		guestsPerRoomOut = guestsPerRoom;
 		pricePerNightOut = pricePerNight;
 		amenitiesListOut = amenitiesList;
+	}
+	
+	public double getPricePerNight()
+	{
+		return pricePerNightOut;
+	}
+	
+	public String getResort()
+	{
+		return resortOut;
 	}
 	
 	/**
@@ -78,7 +103,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getPrice()
 	{
-		return getFlightCosts() + (numDaysOut * pricePerNightOut);
+		return getFlightCosts() + (getNumDays() * pricePerNightOut);
 	}
 	
 	/**
@@ -89,7 +114,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getDepositAmount()
 	{
-		return getFlightCosts() + 0.5 * (numDaysOut * pricePerNightOut);
+		return getFlightCosts() + 0.5 * (getNumDays() * pricePerNightOut);
 	}
 	
 	/**
@@ -100,7 +125,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getLodgingCost() //
 	{
-		return (numDaysOut * pricePerNightOut);
+		return getNumDays() * pricePerNightOut;
 	}
 	
 	/**
@@ -115,6 +140,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public String toString()
 	{
-		return String.format("$  %f  %s (Flight Included)\r           An all-inclusive stay at %s for 2 people!", getPrice(), nameOut, nameOut);
+		return String.format("$  %f  %s (Flight Included)\r           An all-inclusive stay at %s for 2 people!", getPrice(), getName(), resortOut);
 	}
+
 }

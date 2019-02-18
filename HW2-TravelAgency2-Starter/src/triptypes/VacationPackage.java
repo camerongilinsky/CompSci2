@@ -13,11 +13,8 @@ package triptypes;
  */
 public abstract class VacationPackage 
 {
-	
-	protected String nameOut;
-	
-	protected int numDaysOut;
-	
+	private int numberOfDays;
+	private String packageName;
 	
 	/**
 	 * Initializes a VacationPackage with provided values.
@@ -26,8 +23,8 @@ public abstract class VacationPackage
 	 */
 	public VacationPackage(String name, int numDays)
 	{
-		nameOut = name;
-		numDaysOut = numDays;
+		setName(name);
+		setLength(numDays);
 	}
 	
 	/**
@@ -40,11 +37,13 @@ public abstract class VacationPackage
 	 */
 	public void setName(String name)
 	{
-		nameOut = "PACKAGE NAME TBD";
-		
-		if (!name.equals(""))
+		if (name != null && !name.equals(""))
 		{
-			nameOut = name;
+			packageName = name;
+		}
+		else
+		{
+			packageName = "PACKAGE NAME TBD";
 		}
 	}
 	
@@ -57,7 +56,11 @@ public abstract class VacationPackage
 	{
 		if (numDays > 0)
 		{
-			numDaysOut = numDays;
+			numberOfDays = numDays;
+		}
+		else
+		{
+			numberOfDays = 1;
 		}
 	}
 	
@@ -67,7 +70,7 @@ public abstract class VacationPackage
 	 */
 	public String getName()
 	{
-		return nameOut;
+		return packageName;
 	}
 	
 	/**
@@ -76,7 +79,7 @@ public abstract class VacationPackage
 	 */
 	public int getNumDays()
 	{
-		return numDaysOut;
+		return numberOfDays;
 	}
 	
 	/**
@@ -122,7 +125,9 @@ public abstract class VacationPackage
 	 */
 	public String toString()
 	{
-		return ""; //
+		String result;
+		result = String.format("$%8.2f  %s", getPrice(), getName());
+		return result;
 	}
 	
 	/**
@@ -135,6 +140,13 @@ public abstract class VacationPackage
 	 */
 	public boolean equals(Object other)
 	{
-		return true;
+		if (packageName.equals(((VacationPackage) other).getName()))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

@@ -6,6 +6,7 @@
 
 package triptypes;
 import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 /**
  * This class represents a single flight within the travel agency system.
@@ -43,13 +44,43 @@ public class Flight
 		priceOut = price;
 	}
 	
+	public Calendar getArrives()
+	{
+		return arrivesOut;
+	}
+	
+	public Calendar getLeavesAt()
+	{
+		return leavesAtOut;
+	}
+	
+	public String getTo()
+	{
+		return toOut;
+	}
+	
+	public String getFrom()
+	{
+		return fromOut;
+	}
+	
+	public int getFlightNum()
+	{
+		return flightNumOut;
+	}
+	
+	public String getAirline()
+	{
+		return airlineOut;
+	}
+	
 	/**
 	 * Retrieves the price of this flight.
 	 * @return The price in US dollars.
 	 */
 	public double getPrice()
 	{
-		return 0.0;
+		return priceOut;
 	}
 	
 	/**
@@ -65,8 +96,14 @@ public class Flight
 	 * 
 	 * @return The formatted string summary for the flight.
 	 */
-	public String toString() //
+	public String toString()
 	{
-		return String.format("%s %d Departs: %s at %s; Arrives %s at %s", airlineOut, flightNumOut, fromOut, leavesAtOut, toOut, arrivesOut);
+		
+		SimpleDateFormat departing = new SimpleDateFormat("HH:mm MM-dd-YYYY");
+		SimpleDateFormat arriving = new SimpleDateFormat("HH:mm MM-dd-YYYY");
+		
+		return String.format("%s%4d Departs: %s at %s; Arrives %s at %s", airlineOut, flightNumOut, fromOut,
+				departing.format(leavesAtOut.getTime()), arriving.format(arrivesOut.getTime()),
+				toOut);
 	}
 }
