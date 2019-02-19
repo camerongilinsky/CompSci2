@@ -77,15 +77,40 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public String getAmenities()
 	{
-		String s1 = "";
-		StringBuilder s = new StringBuilder();
+		String result = "";
 		for (int i = 0; i < amenitiesListOut.length; i++)
 		{
-			s.append(amenitiesListOut[i] + ", ");
+			if (i < amenitiesListOut.length - 1)
+			{
+				result += amenitiesListOut[i];
+				result += ", ";
+			}
+			else
+			{
+				result += amenitiesListOut[i];
+			}
+		}
+		return result;
+		
+		
+		
+		/*
+		String s1 = "";
+		StringBuilder s = new StringBuilder();
+		for (int i = 0; i < amenitiesListOut.length - 1; i++)
+		{
+			if (i < amenitiesListOut.length - 1)
+			{
+				s.append(amenitiesListOut[i] + ", ");
+			}
+			else if (i == amenitiesListOut.length - 1 && amenitiesListOut[i] == null)
+			{
+				s.append(amenitiesListOut[i]);
+			}
 		}
 		
 		s1 = s.toString();
-		return s1;
+		return s1; */
 	}
 	
 	/**
@@ -103,7 +128,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getPrice()
 	{
-		return getFlightCosts() + (getNumDays() * pricePerNightOut);
+		return getFlightCosts() + ((getNumDays() - 1) * pricePerNightOut);
 	}
 	
 	/**
@@ -123,7 +148,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 * by specific package types.
 	 * @return The lodging subtotal in US dollars.
 	 */
-	public double getLodgingCost() //
+	public double getLodgingCost()
 	{
 		return getNumDays() * pricePerNightOut;
 	}

@@ -11,12 +11,6 @@ import triptypes.FlightOptionalPackage;
 import triptypes.RoadTrip;
 import triptypes.VacationPackage;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
 
 /**
  * This class serves as a collection to store, filter, and explore VacationPackages
@@ -248,64 +242,15 @@ public class VacationPackageCollection
 	 */
 	public void sortCollection(boolean byPrice)
 	{
-	/*	VacationPackage insert;
-		 
-		if (byPrice)
-		{
-			for (int next = 1; next < vpc.length; next++)
-			{
-				insert = vpc[next];
-				int moveItem = next;
-				
-				while (moveItem > 0 && vpc[moveItem - 1].getPrice() > insert.getPrice())
-				{
-					if (vpc[moveItem] != null && vpc[moveItem - 1] != null)
-					{
-						vpc[moveItem] = vpc[moveItem - 1];
-						moveItem--;
-					}
-				}
-				vpc[moveItem] = insert;
-			}
-		}*/
-		/*
-		if (byPrice)
-		{
-			int hold;
-			for (int i = 0; i < vpc.length - 1; i++)
-			{
-				hold = i;
-				
-				for (int index = i + 1; index < vpc.length - 1; index++)
-				{
-					String temp1 = vpc[index].getName();
-					String temp2 = vpc[hold].getName();
-					
-					if (temp1.compareTo(temp2) < 0)
-					{
-						hold = index;
-					}
-				}
-				
-				VacationPackage temp = vpc[i];
-				vpc[i] = vpc[i + 1];
-				vpc[i + 1] = temp;
-			}
-		}*/
-
-		
 		if (byPrice)
 		{
 			
-			for (int pass = 0; pass < MAX_PACKAGES; pass++)
+			for (int pass = 0; pass < MAX_PACKAGES - 1; pass++)
 			{
-				for (int comp = 0; comp < MAX_PACKAGES; comp++)
+				for (int comp = 0; comp < MAX_PACKAGES - 1; comp++)
 				{	
-
-					 
-					if (vpc[comp] != null
-						&& vpc[comp + 1] != null
-						&& vpc[comp].getPrice() > vpc[comp + 1].getPrice())
+					if (vpc[comp + 1] != null
+							&& vpc[comp].getPrice() > vpc[comp + 1].getPrice())
 					{
 						
 						VacationPackage temp = (VacationPackage) vpc[comp];
@@ -314,18 +259,14 @@ public class VacationPackageCollection
 					}
 				}
 			}
-
-			
 		}
 		else
 		{
-
 			for (int pass = 0; pass < MAX_PACKAGES - 1; pass++)
 			{
 				for (int comp = 0; comp < MAX_PACKAGES - 1; comp++)
 				{
-					if (vpc[comp] != null
-							&& vpc[comp + 1] != null
+					if (vpc[comp + 1] != null
 							&& (vpc[comp].getName()).compareTo(vpc[comp + 1].getName()) > 0)
 					{
 						VacationPackage temp = vpc[comp];
@@ -334,14 +275,6 @@ public class VacationPackageCollection
 					}
 				}
 			}
-			
 		}
-		/*if (byPrice)
-		{
-			
-			
-			System.out.println(vpc[0].getPrice());
-			System.out.println(vpc[1].getPrice());
-		}*/
 	}
 }

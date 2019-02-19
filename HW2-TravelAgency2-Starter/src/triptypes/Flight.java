@@ -98,6 +98,8 @@ public class Flight
 	 */
 	public String toString()
 	{
+		leavesAtOut.add(Calendar.MONTH, 1);
+		arrivesOut.add(Calendar.MONTH, 1);
 		
 		SimpleDateFormat departing = new SimpleDateFormat("HH:mm MM-dd-YYYY");
 		SimpleDateFormat arriving = new SimpleDateFormat("HH:mm MM-dd-YYYY");

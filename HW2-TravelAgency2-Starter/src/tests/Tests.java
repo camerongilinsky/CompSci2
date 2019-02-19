@@ -36,7 +36,7 @@ public class Tests
 		assertEquals("Sandals", a.getResort());
 		assertEquals(2, a.getGuestsPerRoom());
 		assertEquals(250, a.getPricePerNight(), DOUBLE_TOLERANCE);
-		assertEquals("Ocean View, Hot Tub, ", a.getAmenities());
+		assertEquals("Ocean View, Hot Tub", a.getAmenities());
 		
 		// When comparing double or float values, assertEquals takes a 
 		// third parameter that specifies how close the two values need to

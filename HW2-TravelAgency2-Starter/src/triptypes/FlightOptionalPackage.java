@@ -12,7 +12,7 @@ package triptypes;
  * as an additional charge to a base package price captured in a concrete subclass of FlightOptionalPackage.
  * @author ckgilinsky and ckennell
  */
-public abstract class FlightOptionalPackage extends VacationPackage //
+public abstract class FlightOptionalPackage extends VacationPackage
 {
 	private Flight[] flights;
 	

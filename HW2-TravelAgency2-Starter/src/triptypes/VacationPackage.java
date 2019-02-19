@@ -105,7 +105,7 @@ public abstract class VacationPackage
 	 */
 	public double getAmountDue()
 	{
-		return 0.0;
+		return getPrice() - getDepositAmount();
 	}
 	
 	/**
@@ -140,13 +140,6 @@ public abstract class VacationPackage
 	 */
 	public boolean equals(Object other)
 	{
-		if (packageName.equals(((VacationPackage) other).getName()))
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return packageName.equals(((VacationPackage) other).getName());
 	}
 }
