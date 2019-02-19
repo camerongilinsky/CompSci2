@@ -33,7 +33,7 @@ public class RoadTrip extends VacationPackage
 	/**
 	 * The expected cost of fuel for the trip.
 	 */
-	private double fuelCost;
+	private double fuelCostOut;
 	/**
 	 * The price of fuel per gallon USD.
 	 */
@@ -89,7 +89,7 @@ public class RoadTrip extends VacationPackage
 					double fuelcost, int miles, int maxPersons, int hotelStars)
 	{
 		super(name, numDays);
-		setFuelPrice(fuelcost);
+		fuelCostOut = fuelcost;
 		setPersons(maxPersons);
 		distance = miles;
 		stars = hotelStars;
@@ -274,8 +274,8 @@ public class RoadTrip extends VacationPackage
 			mpg = 15;
 		}
 		
-		fuelCost = (distance / mpg) * fuelPPG;
-		return fuelCost;
+		fuelCostOut = (distance / mpg) * fuelPPG;
+		return fuelCostOut;
 	}
 	
 	/**
@@ -314,7 +314,7 @@ public class RoadTrip extends VacationPackage
 	public String toString()
 	{
 		String result = "";
-		result += String.format("$%9.2f %s\n", getPrice(), getName());
+		result += String.format("$%8.2f  %s\n", getPrice(), getName());
 		result += String.format("           ");
 		result += getStops();
 		

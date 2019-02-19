@@ -171,7 +171,7 @@ public class Tests
 		Flight b = new Flight("DL", 777, "OMA", "PDX", departs, arrives, 1000);
 		a.addFlightLeg(b);
 		
-		assertEquals("$  1700.00  Getaway Vacation! (Flight Included)\n"
+		assertEquals("$ 1700.00  Getaway Vacation! (Flight Included)\n"
 				+ "           An all-inclusive stay at Sandals for 2 people!", a.toString());
 	}
 	
@@ -217,6 +217,120 @@ public class Tests
 		a.addVacation(b);
 		c[0] = b;
 		
-		assertEquals(c[0], a.getAllVacations());
+		assertEquals(c[0], a.getItemAt(0));
 	}
+	
+	
+	@Test
+	public void testVacationPackageCollectionPrint()
+	{
+		String[] amenities = new String[2];
+		amenities[0] = "Ocean View";
+		amenities[1] = "Hot Tub";
+		
+		VacationPackageCollection a = new VacationPackageCollection();
+		
+		VacationPackage b = new AllInclusiveResort("Getaway Vacation", 7, "Sandals", 2, 100, amenities);
+		
+		Calendar departs = Calendar.getInstance();
+		departs.set(2019, 3, 19, 15, 30);
+		Calendar arrives = Calendar.getInstance();
+		arrives.set(2019, 3, 19, 18, 30);
+		
+		Flight d = new Flight("DL", 777, "OMA", "PDX", departs, arrives, 1000);
+		((FlightOptionalPackage) b).addFlightLeg(d);
+		
+		VacationPackage[] c = new VacationPackage[25];
+		a.addVacation(b);
+		
+		assertEquals("DL 777 Departs: OMA at 15:30 04-19-2019; Arrives 18:30 04-19-2019 at PDX", a.getFlightDetails(0));
+
+
+	}
+	
+	/*
+	@Test
+	public void testFlightOptionalPackageFlightItinerary()
+	{
+		String[] amenities = new String[2];
+		amenities[0] = "Ocean View";
+		amenities[1] = "Hot Tub";
+		
+		FlightOptionalPackage a = new AllInclusiveResort("Getaway Vacation", 7, "Sandals", 2, 250, amenities);
+		
+		//Verify the post-state of the object
+
+		Calendar departs = Calendar.getInstance();
+		departs.set(2019, 3, 19, 15, 30);
+		Calendar arrives = Calendar.getInstance();
+		arrives.set(2019, 3, 19, 18, 30);
+		
+		Flight[] temp = new Flight[25];
+		Flight b = new Flight("DL", 777, "OMA", "PDX", departs, arrives, 1000);
+		Flight c = new Flight("DL", 888, "OMA", "ABQ", departs, arrives, 750);
+		temp[0] = b;
+		temp[1] = c;
+		
+		a.addFlightLeg(b);
+		a.addFlightLeg(c);
+		
+		assertEquals(temp, a.getFlightItinerary());
+	}
+	*/
+	/*
+	@Test
+	public void testvacationPackageFilter()
+	{
+		
+		String[] amenities = new String[2];
+		amenities[0] = "Ocean View";
+		amenities[1] = "Hot Tub";
+		
+		String[] stops = new String[2];
+		stops[0] = "Omaha";
+		stops[1] = "Lincoln";
+		
+		VacationPackageCollection a = new VacationPackageCollection();
+		
+		VacationPackage b = new AllInclusiveResort("Getaway Vacation", 7, "Sandals", 2, 100, amenities);
+		VacationPackage c = new RoadTrip("Hotel California", 7, stops, 60.50, 55, 5, 3);
+		a.addVacation(b);
+		a.addVacation(c);
+		
+		VacationPackage[] d = new VacationPackage[25];
+		
+		d = a.filterVacationsFor(1);
+		
+		//assertEquals(b, a.getItemAt(0));
+		//assertEquals(null, d.getItemAt(1));
+	}
+	*/
+	@Test
+	public void testVacationPackageSort()
+	{
+		
+		String[] amenities = new String[2];
+		amenities[0] = "Ocean View";
+		amenities[1] = "Hot Tub";
+		
+		String[] stops = new String[2];
+		stops[0] = "Omaha";
+		stops[1] = "Lincoln";
+		
+		VacationPackageCollection a = new VacationPackageCollection();
+		VacationPackage b = new AllInclusiveResort("Getaway Vacation", 7, "Sandals", 2, 10000, amenities);
+		VacationPackage c = new RoadTrip("Hotel California", 7, stops, 60, 55, 5, 3);
+		a.addVacation(b);
+		a.addVacation(c);
+		
+		//a.sortCollection(true);
+		
+		//assertEquals(70000, b.getPrice(), DOUBLE_TOLERANCE);
+		//assertEquals(420, c.getPrice(), DOUBLE_TOLERANCE);
+		
+		//assertEquals(c, a.getItemAt(0));
+		//assertEquals(b, a.getItemAt(1));
+		
+	}
+	
 }

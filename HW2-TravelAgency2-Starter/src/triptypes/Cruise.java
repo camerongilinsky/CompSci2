@@ -265,6 +265,6 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public String toString()
 	{
-		return String.format("$%9.2f %s (Flight Not Included)\n           Cruising from %s on %s (includes %d excursions) ", getPrice(), getName(), portCityOut, vesselNameOut, getNumExcursions());
+		return String.format("$%8.2f  %s (Flight Not Included)\n           Cruising from %s on the %s (includes %d excursions) ", getPrice(), getName(), portCityOut, vesselNameOut, getNumExcursions());
 	}
 }

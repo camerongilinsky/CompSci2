@@ -58,14 +58,15 @@ public abstract class FlightOptionalPackage extends VacationPackage //
 	 */
 	public boolean hasFlights()
 	{
-		if (flights == null)
+		for (int i = 0; i < 12; i++)
 		{
-			return false;
+			if (flights[i] != null)
+			{
+				return true;
+			}
 		}
-		else
-		{
-			return true;
-		}
+	
+		return false;
 	}
 	
 	/**
