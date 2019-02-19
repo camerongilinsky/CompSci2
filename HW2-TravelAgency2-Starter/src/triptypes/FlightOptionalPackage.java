@@ -14,9 +14,15 @@ package triptypes;
  */
 public abstract class FlightOptionalPackage extends VacationPackage
 {
-	private Flight[] flights;
-	
+	/**
+	 * Maximum number of flights that can be added to a FlightOptionalPackage.
+	 */
 	private static final int FLIGHTS_MAX = 12;
+	
+	/**
+	 * Array of Flight objects to carry Flight information.
+	 */
+	private Flight[] flights;
 
 	/**
 	 * Initializes details for a newly created FlightOptionalPackage. Upon
@@ -58,7 +64,7 @@ public abstract class FlightOptionalPackage extends VacationPackage
 	 */
 	public boolean hasFlights()
 	{
-		for (int i = 0; i < 12; i++)
+		for (int i = 0; i < FLIGHTS_MAX; i++)
 		{
 			if (flights[i] != null)
 			{

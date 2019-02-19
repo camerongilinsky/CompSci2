@@ -18,14 +18,70 @@ public class RoadTrip extends VacationPackage
 	 * Amount due after deposit is paid. Always 0.
 	 */
 	private static final double AMOUNT_DUE = 0.0;
+	
 	/**
 	 * The base rate of a hotel room.
 	 */
 	private static final double HOTEL_BASE = 35.20;
+	
+	/**
+	 * Default cost for fuel per gallon.
+	 */
+	private static final double FUEL_DEFAULT = 2.50;
+	
+	/**
+	 * Car cost for 1-2 passengers.
+	 */
+	private static final double TWO_OR_LESS = 36.75;
+	
+	/**
+	 * Car cost for 3-4 passengers.
+	 */
+	private static final double FOUR_OR_LESS = 50.13;
+	
+	/**
+	 * Car cost for 5-6 passengers.
+	 */
+	private static final double SIX_OR_LESS = 60.25;
+	
+	/**
+	 * Car cost for 7-8 passengers.
+	 */
+	private static final double EIGHT_OR_LESS = 70.50;
+	
+	/**
+	 * Car cost for 9+ passengers.
+	 */
+	private static final double MORE_THAN_NINE = 150.00;
+	
+	/**
+	 * MPG for 1-2 passengers.
+	 */
+	private static final int MPG_TWO_OR_LESS = 45;
+	
+	/**
+	 * MPG for 3-4 passengers.
+	 */
+	private static final int MPG_FOUR_OR_LESS = 32;
+	
+	/**
+	 * MPG for 5-6 passengers.
+	 */
+	private static final int MPG_SIX_OR_LESS = 28;
+	
+	/**
+	 * MPG for 7-8 passengers.
+	 */
+	private static final int MPG_EIGHT_OR_LESS = 22;
+	
+	/**
+	 * MPG for 9+ passengers.
+	 */
+	private static final int MPG_MORE_THAN_NINE = 15;
+	
 	/**
 	 * The cost of the rental car.
 	 */
-
 	private double fuelPPG;
 	/**
 	 * The rating of the hotel from a scale 1..5.
@@ -53,7 +109,7 @@ public class RoadTrip extends VacationPackage
 	 * @param numDays The number of days required for this RoadTrip.
 	 * @param stops A list of destinations that will be visited along
 	 * the way on this RoadTrip.
-	 * @param fuelcost The estimated cost of fuel in US dollars per gallon
+	 * @param fuelCost The estimated cost of fuel in US dollars per gallon
 	 * based on current rates.
 	 * @param miles The total number of miles for this RoadTrip, assuming
 	 * people follow the intended route.
@@ -64,14 +120,23 @@ public class RoadTrip extends VacationPackage
 	 * will be adjusted to the closest valid value.
 	 */
 	public RoadTrip(String name, int numDays, String[] stops,
-					double fuelcost, int miles, int maxPersons, int hotelStars)
+					double fuelCost, int miles, int maxPersons, int hotelStars)
 	{
 		super(name, numDays);
-		fuelPPG = fuelcost;
+		fuelPPG = fuelCost;
 		numPersonsOut = maxPersons;
 		distance = miles;
 		stars = hotelStars;
 		stopsArr = stops;		
+	}
+	
+	/**
+	 * Retrieves the current fuel price used for cost projections.
+	 * @return The fuel price in US dollars per gallon.
+	 */
+	public double getFuelPrice()
+	{
+		return fuelPPG;
 	}
 	
 	/**
@@ -160,25 +225,27 @@ public class RoadTrip extends VacationPackage
 	{
 		double carCost = 0.0;
 		
+
+		
 		if (numPersonsOut <= 2)
 		{
-			carCost = 36.75;
+			carCost = TWO_OR_LESS;
 		}
 		else if (numPersonsOut <= 4)
 		{
-			carCost = 50.13;
+			carCost = FOUR_OR_LESS;
 		}
 		else if (numPersonsOut <= 6)
 		{
-			carCost = 60.25;
+			carCost = SIX_OR_LESS;
 		}
 		else if (numPersonsOut <= 8)
 		{
-			carCost = 70.50;
+			carCost = EIGHT_OR_LESS;
 		}
 		else
 		{
-			carCost = 150.00;
+			carCost = MORE_THAN_NINE;
 		}
 		
 		return carCost * getNumDays();
@@ -190,7 +257,16 @@ public class RoadTrip extends VacationPackage
 	 */
 	public int getNumStops()
 	{
-		return stopsArr.length;
+		int count = 0;
+		
+		for (int i = 0; i < stopsArr.length; i++)
+		{
+			if (stopsArr[i] != null)
+			{
+				count++;
+			}
+		}
+		return count;
 	}
 	
 	/**
@@ -228,7 +304,7 @@ public class RoadTrip extends VacationPackage
 		}
 		else
 		{
-			fuelPPG = 2.50;
+			fuelPPG = FUEL_DEFAULT;
 		}
 	}
 	
@@ -250,23 +326,23 @@ public class RoadTrip extends VacationPackage
 		double mpg;
 		if (numPersonsOut <= 2)
 		{
-			mpg = 45;
+			mpg = MPG_TWO_OR_LESS;
 		}
 		else if (numPersonsOut <= 4)
 		{
-			mpg = 32;
+			mpg = MPG_FOUR_OR_LESS;
 		}
 		else if (numPersonsOut <= 6)
 		{
-			mpg = 28;
+			mpg = MPG_SIX_OR_LESS;
 		}
 		else if (numPersonsOut <= 8)
 		{
-			mpg = 22;
+			mpg = MPG_EIGHT_OR_LESS;
 		}
 		else
 		{
-			mpg = 15;
+			mpg = MPG_MORE_THAN_NINE;
 		}
 		
 		return (distance / mpg) * fuelPPG;

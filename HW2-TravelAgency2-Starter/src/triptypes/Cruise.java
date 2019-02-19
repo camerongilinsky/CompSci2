@@ -18,19 +18,79 @@ import java.util.Calendar;
 public class Cruise extends FlightOptionalPackage
 {
 
+	/**
+	 * Maximum number of excursions.
+	 */
 	private static final int MAX_EXCURSIONS = 10;
 	
+	/**
+	 * Amount to scale lodging cost for the deposit.
+	 */
+	private static final double DEPOSIT_SCALE = 0.5;
+	
+	/**
+	 * Amount to scale OCEAN_VIEW cabin by.
+	 */
+	private static final double OCEAN_VIEW_SCALE = 1.5;
+	
+	/**
+	 * Amount to scale BALCONY cabin by.
+	 */
+	private static final int BALCONY_SCALE = 3;
+	
+	/**
+	 * Amount to scale SUITE cabin by.
+	 */
+	private static final int SUITE_SCALE = 5;
+	
+	/**
+	 * Name of the vessel.
+	 */
 	private String vesselNameOut;
+	
+	/**
+	 * Name of the port city.
+	 */
 	private String portCityOut;
+	
+	/**
+	 * Date and time of departure.
+	 */
 	private Calendar departsOut;
+	
+	/**
+	 * Date and time of arrival.
+	 */
 	private Calendar returnsOut;
+	
+	/**
+	 * Base price of the Cruise.
+	 */
 	private double basePriceOut;
 	
+	/**
+	 * Collection of added excursions for this Cruise.
+	 */
 	private String[] excursions = new String[MAX_EXCURSIONS];
+	
+	/**
+	 * Name of the excursion.
+	 */
 	private String excursionName;
+	
+	/**
+	 * Cost of the excursion.
+	 */
 	private double excursionCost;
+	
+	/**
+	 * Cost of all excursions combined.
+	 */
 	private double totalExcursionCost = 0;
 	
+	/**
+	 * Type of cabin for Cruise.
+	 */
 	private CabinType cabinType;
 	
 	/**
@@ -213,7 +273,7 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public double getDepositAmount()
 	{
-		return (0.5 * getLodgingCost()) + getFlightCosts();
+		return (DEPOSIT_SCALE * getLodgingCost()) + getFlightCosts();
 	}
 	
 	/**
@@ -233,15 +293,15 @@ public class Cruise extends FlightOptionalPackage
 		
 		if (cabinType == CabinType.OCEAN_VIEW)
 		{
-			lodgingCost *= 1.5;
+			lodgingCost *= OCEAN_VIEW_SCALE;
 		}
 		else if (cabinType == CabinType.BALCONY)
 		{
-			lodgingCost *= 3;
+			lodgingCost *= BALCONY_SCALE;
 		}
 		else if (cabinType == CabinType.SUITE)
 		{
-			lodgingCost *= 5;
+			lodgingCost *= SUITE_SCALE;
 		}
 		
 		return lodgingCost;
@@ -265,6 +325,8 @@ public class Cruise extends FlightOptionalPackage
 	 */
 	public String toString()
 	{
-		return String.format("$%8.2f  %s (Flight Not Included)\n           Cruising from %s on the %s (includes %d excursions) ", getPrice(), getName(), portCityOut, vesselNameOut, getNumExcursions());
+		return String.format("$%8.2f  %s (Flight Not Included)\n"
+				+ "           Cruising from %s on the %s (includes %d excursions) ",
+				getPrice(), getName(), portCityOut, vesselNameOut, getNumExcursions());
 	}
 }

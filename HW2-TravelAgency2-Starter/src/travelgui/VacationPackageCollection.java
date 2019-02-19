@@ -24,14 +24,21 @@ public class VacationPackageCollection
 	 * The maximum number of VacationPackage that can be stored in a single collection.
 	 */
 	private static final int MAX_PACKAGES = 25;
+	
+	/**
+	 * Maximum number of Flights in VacationPackage.
+	 */
+	private static final int FLIGHTS_MAX = 12;
 
+	/**
+	 * Number of VacationPackages in a VacationPackageCollection.
+	 */
 	private int numTrips;
 	
-	private VacationPackage[] vpc; //
-
-	//private List<VacationPackage> vacationPackageCollection;
-	
-	
+	/**
+	 * Array to hold all VacationPackage objects.
+	 */
+	private VacationPackage[] vpc;
 	
 	/**
 	 * Creates a new empty VacationPackageCollection.
@@ -40,7 +47,6 @@ public class VacationPackageCollection
 	{
 		vpc = new VacationPackage[MAX_PACKAGES];
 		numTrips = 0;
-		//vacationPackageCollection = new ArrayList<>();
 	}
 	
 	/**
@@ -51,7 +57,6 @@ public class VacationPackageCollection
 	public int getNumTrips()
 	{
 		return numTrips;
-		//return vacationPackageCollection.size();
 	}
 	
 	/**
@@ -66,9 +71,6 @@ public class VacationPackageCollection
 	public triptypes.VacationPackage[] getAllVacations()
 	{
 		return vpc;
-		//VacationPackage[] toArray = new VacationPackage[vacationPackageCollection.size()];
-		//toArray = vacationPackageCollection.toArray(toArray);
-		//return toArray;
 	}
 	
 	/**
@@ -88,12 +90,6 @@ public class VacationPackageCollection
 				break;
 			}
 		}
-		
-		
-	//	if (vacationPackageCollection.size() < MAX_PACKAGES)
-	//	{
-	//		vacationPackageCollection.add(trip);
-	//	}
 	}
 	
 	/**
@@ -108,14 +104,12 @@ public class VacationPackageCollection
 	public VacationPackageCollection filterVacationsFor(int selection)
 	{
 		VacationPackageCollection temp = new VacationPackageCollection();
-		
-		int count = 0;
 
 		if (selection == 1)
 		{
 			for (int i = 0; i < vpc.length; i++)
 			{
-				if ( vpc[i] instanceof triptypes.RoadTrip)
+				if (vpc[i] instanceof triptypes.RoadTrip)
 				{
 					temp.addVacation(vpc[i]);
 				}
@@ -143,20 +137,6 @@ public class VacationPackageCollection
 		}
 		
 		return temp;
-		
-		/*
-		List<VacationPackage> temp = new ArrayList<>();
-		
-		for (int i = 0; i < vacationPackageCollection.size(); i++)
-		{
-			if (vacationPackageCollection.get(i) instanceof triptypes.RoadTrip)
-			{
-				temp.add(vacationPackageCollection.get(i));
-			}
-		}
-		
-		return (VacationPackageCollection) temp;
-		*/
 	}
 	
 	/**
@@ -178,22 +158,25 @@ public class VacationPackageCollection
 	 */
 	public String getFlightDetails(int index)
 	{
-		if (index < 0 || index > 12)
+		
+		String output = "";
+		
+		if (index < 0 || index > FLIGHTS_MAX)
 		{
-			return String.format("ERROR: Index is out of range!");
+			output = String.format("ERROR: Index is out of range!");
 		}
 		else if (vpc[index] instanceof RoadTrip)
 		{
-			return String.format("ERROR: No flights are allowed for this type of trip!");
+			output = String.format("ERROR: No flights are allowed for this type of trip!");
 		}
 		else if (((FlightOptionalPackage) vpc[index]).hasFlights())
 		{
-			Flight[] temp = new Flight[12];
+			Flight[] temp = new Flight[FLIGHTS_MAX];
 			temp = ((FlightOptionalPackage) vpc[index]).getFlightItinerary();
-			String[] allFlights = new String[12];
-			String output = "";
+			String[] allFlights = new String[FLIGHTS_MAX];
 			
-			for (int i = 0; i < 12; i++)
+			
+			for (int i = 0; i < FLIGHTS_MAX; i++)
 			{
 				if (temp[i] != null)
 				{
@@ -201,7 +184,7 @@ public class VacationPackageCollection
 				}
 			}
 			
-			for (int j = 0; j < 12; j++)
+			for (int j = 0; j < FLIGHTS_MAX; j++)
 			{
 				if (allFlights[j] != null && allFlights[j + 1] != null)
 				{
@@ -213,12 +196,14 @@ public class VacationPackageCollection
 				}
 			}
 			
-			return output;
+			
 		}
 		else
 		{
-			return String.format("ERROR: The selected trip has no flight information.");
+			output = String.format("ERROR: The selected trip has no flight information.");
 		}
+		
+		return output;
 	}
 	
 	/**

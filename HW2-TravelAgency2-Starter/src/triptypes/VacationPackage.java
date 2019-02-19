@@ -13,7 +13,14 @@ package triptypes;
  */
 public abstract class VacationPackage 
 {
+	/**
+	 * Number of days of the VacationPackage.
+	 */
 	private int numberOfDays;
+	
+	/**
+	 * Name of the VacationPackage.
+	 */
 	private String packageName;
 	
 	/**

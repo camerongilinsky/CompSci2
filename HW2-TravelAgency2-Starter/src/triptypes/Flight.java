@@ -14,12 +14,39 @@ import java.text.SimpleDateFormat;
  */
 public class Flight 
 {
+	/**
+	 * Code of airline.
+	 */
 	private String airlineOut;
+	
+	/**
+	 * Flight number for Flight.
+	 */
 	private int flightNumOut;
+	
+	/**
+	 * Airport code of departure city.
+	 */
 	private String fromOut;
+	
+	/**
+	 * Airport code of the arrival city.
+	 */
 	private String toOut;
+	
+	/**
+	 * Day and time of departure.
+	 */
 	private Calendar leavesAtOut;
+	
+	/**
+	 * Day and time of arrival.
+	 */
 	private Calendar arrivesOut;
+	
+	/**
+	 * Price of the Flight.
+	 */
 	private double priceOut;
 	
 	/**
@@ -44,31 +71,55 @@ public class Flight
 		priceOut = price;
 	}
 	
+	/**
+	 * Getter method for arrival day and time.
+	 * @return Arrival day and time.
+	 */
 	public Calendar getArrives()
 	{
 		return arrivesOut;
 	}
 	
+	/**
+	 * Getter method for departure day and time.
+	 * @return Departure day and time.
+	 */
 	public Calendar getLeavesAt()
 	{
 		return leavesAtOut;
 	}
 	
+	/**
+	 * Getter method for arrival airport code.
+	 * @return Arrival airport code.
+	 */
 	public String getTo()
 	{
 		return toOut;
 	}
 	
+	/**
+	 * Getter method for departure airport code.
+	 * @return Departure airport code.
+	 */
 	public String getFrom()
 	{
 		return fromOut;
 	}
 	
+	/**
+	 * Getter method for flight number.
+	 * @return Flight number.
+	 */
 	public int getFlightNum()
 	{
 		return flightNumOut;
 	}
 	
+	/**
+	 * Getter method for airline code.
+	 * @return Airline code.
+	 */
 	public String getAirline()
 	{
 		return airlineOut;
