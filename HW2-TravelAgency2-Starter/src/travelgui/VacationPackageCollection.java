@@ -297,9 +297,9 @@ public class VacationPackageCollection
 		if (byPrice)
 		{
 			
-			for (int pass = 0; pass < 10; pass++)
+			for (int pass = 0; pass < MAX_PACKAGES; pass++)
 			{
-				for (int comp = 0; comp < 10; comp++)
+				for (int comp = 0; comp < MAX_PACKAGES; comp++)
 				{	
 
 					 
@@ -317,16 +317,16 @@ public class VacationPackageCollection
 
 			
 		}
-
-		/*
-		if (!byPrice)
+		else
 		{
 
 			for (int pass = 0; pass < MAX_PACKAGES - 1; pass++)
 			{
 				for (int comp = 0; comp < MAX_PACKAGES - 1; comp++)
 				{
-					if ((vpc[comp].getName()).compareTo(vpc[comp + 1].getName()) > 0 && vpc[comp] != null && vpc[comp + 1] != null)
+					if (vpc[comp] != null
+							&& vpc[comp + 1] != null
+							&& (vpc[comp].getName()).compareTo(vpc[comp + 1].getName()) > 0)
 					{
 						VacationPackage temp = vpc[comp];
 						vpc[comp] = vpc[comp + 1];
@@ -335,7 +335,7 @@ public class VacationPackageCollection
 				}
 			}
 			
-		}*/
+		}
 		/*if (byPrice)
 		{
 			
