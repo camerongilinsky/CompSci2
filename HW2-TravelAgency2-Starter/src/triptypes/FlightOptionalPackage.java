@@ -83,7 +83,14 @@ public abstract class FlightOptionalPackage extends VacationPackage
 	 */
 	public Flight[] getFlightItinerary()
 	{
-		return flights;
+		if (flights[0] == null)
+		{
+			return null;
+		}
+		else
+		{
+			return flights;
+		}
 	}
 	
 	/**
