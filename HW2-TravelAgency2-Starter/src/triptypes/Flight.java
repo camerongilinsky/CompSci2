@@ -149,14 +149,14 @@ public class Flight
 	 */
 	public String toString()
 	{
-		leavesAtOut.add(Calendar.MONTH, 1);
-		arrivesOut.add(Calendar.MONTH, 1);
+		//leavesAtOut.add(Calendar.MONTH, 1);
+		//arrivesOut.add(Calendar.MONTH, 1);
 		
-		SimpleDateFormat departing = new SimpleDateFormat("HH:mm MM-dd-YYYY");
-		SimpleDateFormat arriving = new SimpleDateFormat("HH:mm MM-dd-YYYY");
+		SimpleDateFormat date = new SimpleDateFormat("HH:mm MM-dd-YYYY");
+		//SimpleDateFormat arriving = new SimpleDateFormat("HH:mm MM-dd-YYYY");
 		
 		return String.format("%s%4d Departs: %s at %s; Arrives %s at %s", airlineOut, flightNumOut, fromOut,
-				departing.format(leavesAtOut.getTime()), arriving.format(arrivesOut.getTime()),
-				toOut);
+				date.format(leavesAtOut.getTime()), 
+				toOut, date.format(arrivesOut.getTime()));
 	}
 }

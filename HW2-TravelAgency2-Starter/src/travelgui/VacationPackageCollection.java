@@ -18,7 +18,7 @@ import triptypes.VacationPackage;
  * stored in a single collection.
  * @author ckgilinsky and ckennell
  */
-public class VacationPackageCollection 
+public class VacationPackageCollection
 {
 	/**
 	 * The maximum number of VacationPackage that can be stored in a single collection.
@@ -171,36 +171,50 @@ public class VacationPackageCollection
 		}
 		else if (((FlightOptionalPackage) vpc[index]).hasFlights())
 		{
-			Flight[] temp = new Flight[FLIGHTS_MAX];
-			temp = ((FlightOptionalPackage) vpc[index]).getFlightItinerary();
-			String[] allFlights = new String[FLIGHTS_MAX];
 			
-			
-			for (int i = 0; i < FLIGHTS_MAX; i++)
-			{
-				if (temp[i] != null)
-				{
-					allFlights[i] = temp[i].toString();
-				}
-			}
-			
-			for (int j = 0; j < FLIGHTS_MAX; j++)
-			{
-				if (allFlights[j] != null && allFlights[j + 1] != null)
-				{
-					output += String.format(allFlights[j] + "\n");
-				}
-				else if (allFlights[j] != null && allFlights[j + 1] == null)
-				{
-					output += String.format(allFlights[j]);
-				}
-			}
-			
+			output = appendFlight(output, index);
 			
 		}
 		else
 		{
 			output = String.format("ERROR: The selected trip has no flight information.");
+		}
+		
+		return output;
+	}
+	
+	/**
+	 * Helper method for getFlightDetails.
+	 * @param input The String "output" from getFlightDetails.
+	 * @param index The int "index" from getFlightDetails.
+	 * @return The appended String result.
+	 */
+	private String appendFlight(String input, int index)
+	{
+		String output = input;
+		Flight[] temp = new Flight[FLIGHTS_MAX];
+		temp = ((FlightOptionalPackage) vpc[index]).getFlightItinerary();
+		String[] allFlights = new String[FLIGHTS_MAX];
+		
+		
+		for (int i = 0; i < FLIGHTS_MAX; i++)
+		{
+			if (temp[i] != null)
+			{
+				allFlights[i] = temp[i].toString();
+			}
+		}
+		
+		for (int j = 0; j < FLIGHTS_MAX; j++)
+		{
+			if (allFlights[j] != null && allFlights[j + 1] != null)
+			{
+				output += String.format(allFlights[j] + "\n");
+			}
+			else if (allFlights[j] != null && allFlights[j + 1] == null)
+			{
+				output += String.format(allFlights[j]);
+			}
 		}
 		
 		return output;

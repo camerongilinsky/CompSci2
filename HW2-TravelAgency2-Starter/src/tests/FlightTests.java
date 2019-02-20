@@ -42,7 +42,7 @@ public class FlightTests
 	}
 	
 	@Test
-	public void testFlightToString()
+	public void testFlightToStringThree()
 	{
 		Calendar departs = Calendar.getInstance();
 		departs.set(2019, 3, 19, 15, 30);
@@ -51,9 +51,24 @@ public class FlightTests
 		arrives.set(2019, 3, 19, 18, 30);
 
 		Flight a = new Flight("DL", 777, "OMA", "PDX", departs, arrives, 750.99);
-			
+		System.out.println(a);	
 		//Verify the post-state of the object
-		assertEquals("DL 777 Departs: OMA at 15:30 05-19-2019; Arrives 18:30 05-19-2019 at PDX", a.toString());
-		System.out.println(a.toString());
+		assertEquals("DL 777 Departs: OMA at 15:30 04-19-2019; Arrives PDX at 18:30 04-19-2019", a.toString());
+	}
+	
+	@Test
+	public void testFlightToStringFour()
+	{
+		Calendar departs = Calendar.getInstance();
+		departs.set(2019, 1, 19, 15, 30);
+			
+		Calendar arrives = Calendar.getInstance();
+		arrives.set(2019, 1, 19, 18, 30);
+
+		Flight a = new Flight("DL", 7777, "OMA", "PDX", departs, arrives, 750.99);
+		System.out.println(a);
+		//Verify the post-state of the object
+		assertEquals("DL7777 Departs: OMA at 15:30 02-19-2019; Arrives PDX at 18:30 02-19-2019", a.toString());
+		
 	}
 }
