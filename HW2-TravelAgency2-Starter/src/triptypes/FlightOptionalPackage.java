@@ -116,15 +116,13 @@ public abstract class FlightOptionalPackage extends VacationPackage
 		
 		if (hasFlights())
 		{
-			for (int i = 0; i < flights.length; i++)
-			{
-				if (flights[i] != null)
-				{
-					result += "\r";
-					result += flights[i].toString();
-				}
-			}
+			result += " (Flight Included)";
 		}
+		else
+		{
+			result += " (Flight Not Included)";
+		}
+		
 		return result;
 	}
 }

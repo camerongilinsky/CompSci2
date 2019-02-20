@@ -126,14 +126,14 @@ public abstract class VacationPackage
 	/**
 	 * Produces a String summary of a VacationPackage. Strings will be prefixed
 	 * with the $ symbol, followed by trip total price rounded to two decimal
-	 * places in an 8 character wide field. Price details should be followed
+	 * placed in an 8 character wide field. Price details should be followed
 	 * by two spaces and the promotional name of this trip.
 	 * @return The formatted string summary.
 	 */
 	public String toString()
 	{
 		String result;
-		result = String.format("$%9.2f  %s", getPrice(), getName());
+		result = String.format("$%8.2f  %s", getPrice(), getName());
 		return result;
 	}
 	

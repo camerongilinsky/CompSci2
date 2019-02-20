@@ -142,7 +142,7 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public double getLodgingCost()
 	{
-		return getNumDays() * pricePerNightOut;
+		return (getNumDays() - 1) * pricePerNightOut;
 	}
 	
 	/**
@@ -157,8 +157,8 @@ public class AllInclusiveResort extends FlightOptionalPackage
 	 */
 	public String toString()
 	{
-		return String.format("$%8.2f  %s! (Flight Included)\n           "
-				+ "An all-inclusive stay at %s for 2 people!", getPrice(), getName(), resortOut);
+		return String.format("%s\n           "
+				+ "An all-inclusive stay at %s for 2 people!", super.toString(), resortOut);
 	}
 
 }
