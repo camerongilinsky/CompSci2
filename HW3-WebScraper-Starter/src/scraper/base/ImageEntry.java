@@ -5,7 +5,6 @@
 // RESOURCES: Piazza discussion board posts by the
 //				students and instructors for this class.
 
-
 package scraper.base;
 
 /**
@@ -30,6 +29,8 @@ public class ImageEntry
 	/**
 	 * Creates a new ImageEntry storing an image URL alongside 
 	 * the source page URL.
+	 * @param pageAddress the URL for the page where the image was found.
+	 * @param imgAddress the full URL of the image itself
 	 */
 	public ImageEntry(String pageAddress, String imgAddress)
 	{
@@ -67,15 +68,8 @@ public class ImageEntry
 	 */
 	public boolean equals(Object other)
 	{
-		if (other instanceof ImageEntry
-				&& getImgLocation().equals( ((ImageEntry) other).getImgLocation()))
-		{
-			return true;
-		} 
-		else
-		{
-			return false;
-		}
+		return other instanceof ImageEntry
+				&& getImgLocation().equals(((ImageEntry) other).getImgLocation());
 	}
 	
 	/**

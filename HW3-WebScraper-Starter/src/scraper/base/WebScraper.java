@@ -5,10 +5,12 @@
 // RESOURCES: Piazza discussion board posts by the
 //				students and instructors for this class.
 
-
 package scraper.base;
 
-import scraper.utils.*;
+import scraper.utils.Document;
+import scraper.utils.Elements;
+import scraper.utils.PageHistory;
+import scraper.utils.ResultSet;
 
 /**
  * This class provides a simple mechanism to crawl a series of web pages 
@@ -34,6 +36,9 @@ public class WebScraper
 	 */
 	private String baseURL;
 	
+	/**
+	 * Page history for the current scrape.
+	 */
 	private PageHistory history = new PageHistory();
 	
 	/**
@@ -142,7 +147,7 @@ public class WebScraper
 	}
 	
 	/**
-	 * Helper method for getImages()
+	 * Helper method for getImages().
 	 * @param urlIn The URL to be scraped.
 	 * @return A ResultSet of ImageEntry objects for the given URL.
 	 */
@@ -181,7 +186,7 @@ public class WebScraper
 	 *  ResultSet.
 	 *  
 	 *  Links on a page will be explored in the sequential order in which their 
-	 *  corresponding <a> tags appear in the HTML file. The same URL should never 
+	 *  corresponding &lt;a&gt; tags appear in the HTML file. The same URL should never 
 	 *  be crawled more than once, even if it is linked from itself or 
 	 *  another later page.
 	 * @return The set of ImageEntry objects resulting from this recursive crawl.
@@ -193,6 +198,12 @@ public class WebScraper
 		return a;
 	}
 	
+	/**
+	 * Helper method for crawlPage().
+	 * @param index The current depth.
+	 * @param urlIn The URL to be explored.
+	 * @return Result set for the URL specified.
+	 */
 	private ResultSet crawlPageHelper(int index, String urlIn)
 	{
 		ResultSet a = new ResultSet();
