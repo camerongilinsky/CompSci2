@@ -96,11 +96,13 @@ public class WebScraperTests {
 		//ImageEntry IE = new ImageEntry("Dog", "Cat");
 		//ResultSet r = new ResultSet();
 		//Document page = new Document();
-		//ResultSet s = a.crawlPage();
+		ResultSet s = a.crawlPage();
 		//PageHistory tester = new PageHistory();
 		
 		
 		assertFalse(a.getPageHistory().wereDuplicatesVisited());
+		assertTrue(a.getPageHistory().visited("http://loki.ist.unomaha.edu/~bdorn/csci1620/hw3testpage/page0.html"));
+		assertFalse(a.getPageHistory().visited("http://loki.ist.unomaha.edu/~bdorn/csci1620/hw3testpage/page3.html"));
 	}
 
 	@Test
@@ -142,5 +144,21 @@ public class WebScraperTests {
 		//Document page = new Document();
 		
 		assertEquals(15, s.getNumEntries());
+	}
+	
+	@Test
+	public void WebScraperGetPageHistoryTest3()
+	{
+		WebScraper a = new WebScraper("http://loki.ist.unomaha.edu/~bdorn/csci1620/hw3testpage/page1.html", 1);
+		//ImageEntry IE = new ImageEntry("Dog", "Cat");
+		//ResultSet r = new ResultSet();
+		//Document page = new Document();
+		ResultSet s = a.crawlPage();
+		//PageHistory tester = new PageHistory();
+		
+		
+		assertFalse(a.getPageHistory().wereDuplicatesVisited());
+		assertTrue(a.getPageHistory().visited("http://loki.ist.unomaha.edu/~bdorn/csci1620/hw3testpage/page1.html"));
+		assertFalse(a.getPageHistory().visited("http://loki.ist.unomaha.edu/~bdorn/csci1620/hw3testpage/page7.html"));
 	}
 }

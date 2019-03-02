@@ -210,7 +210,11 @@ public class WebScraper
 		Document page = new Document();
 		page.loadPageFromURL(urlIn);
 		Elements c = page.getElementsByTag("a");
-		history.markVisited(urlIn);
+		
+		if (!history.visited(urlIn))
+		{
+			history.markVisited(urlIn);
+		}
 		
 		
 		if (index == 0)
