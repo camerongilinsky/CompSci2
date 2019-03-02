@@ -2,7 +2,7 @@
 // TERM: Spring 2019
 //
 // NAME: Cameron Gilinsky and Carter Kennell
-// RESOURCES: Piazza discussion board posts by the
+// RESOURCES: Devin from the CSLC and Piazza discussion board posts by the
 //				students and instructors for this class.
 
 package scraper.base;

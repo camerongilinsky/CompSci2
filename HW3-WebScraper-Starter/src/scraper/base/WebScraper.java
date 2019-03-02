@@ -2,7 +2,7 @@
 // TERM: Spring 2019
 //
 // NAME: Cameron Gilinsky and Carter Kennell
-// RESOURCES: Piazza discussion board posts by the
+// RESOURCES: Devin from the CSLC and Piazza discussion board posts by the
 //				students and instructors for this class.
 
 package scraper.base;
@@ -51,7 +51,7 @@ public class WebScraper
 	public WebScraper(String urlIn)
 	{
 		depth = DEPTH_DEFAULT;
-		baseURL = urlIn;
+		setURL(urlIn);
 	}
 	
 	/**
@@ -63,8 +63,8 @@ public class WebScraper
 	 */
 	public WebScraper(String urlIn, int depthIn)
 	{
-		depth = depthIn;
-		baseURL = urlIn;
+		setDepth(depthIn);
+		setURL(urlIn);
 	}
 	
 	/**
