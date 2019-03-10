@@ -14,7 +14,7 @@ public class SortingDriver
 {
 	public static void main(String[] args)
 	{
-		/*
+		
 		// STEP 1 Check Correctness of Generics
 		 
 		System.out.println("\nSTEP 1");
@@ -39,10 +39,10 @@ public class SortingDriver
 		printArray(words);	
 		
 		// END STEP 1 CHECKS
-		*/
 		
 		
-		/*
+		
+		
 		// STEP 2 Use to help check insertionSortRange
 		 
 		System.out.println("\nSTEP 2");
@@ -52,9 +52,9 @@ public class SortingDriver
 		printArray(data);
 		
 		// END STEP 2 CHECKS
-		*/
 		
-		/*
+		
+		
 		// STEP 3 Use to help check TimSort
 		 
 		System.out.println("\nSTEP 3");
@@ -69,10 +69,10 @@ public class SortingDriver
 		printArray(words);
 		
 		// END STEP 3 
-		*/ 
+		 
 		
-		/*
-		//STEP 4 Conduct Timing Experiments, use this code to compare and constrast their performance
+		
+		//STEP 4 Conduct Timing Experiments, use this code to compare and contrast their performance
 		//       In what situations do they do relatively better/worse/same as each other?
 		  
 		//IMPORTANT: DON'T FORGET TO UNCOMMENT THE RUNEXPERIMENT METHOD BODY TOO!!!
@@ -89,7 +89,7 @@ public class SortingDriver
 		runExperiment("Tiny Array (n=20), Reversed Values", generateIntegerArray(20, 2));
 		runExperiment("Small Array (n=1000), Reversed Values", generateIntegerArray(1000, 2));
 		runExperiment("Large Array (n=100K), Reversed Values", generateIntegerArray(100000, 2));
-		*/
+		
 	}
 	
 	
@@ -100,7 +100,7 @@ public class SortingDriver
 	 * 			  with timing results.
 	 * @param array The values to use for this experiment.
 	 */
-	/*
+	
 	private static <E extends Comparable<E>> void runExperiment(String msg, Integer[] array)
 	{
 		System.out.println("  EXPERIMENT: " + msg);
@@ -129,7 +129,7 @@ public class SortingDriver
 		end = System.nanoTime();
 		System.out.println("          TIM SORT: " + (end - start) + " nanoseconds\n");
 	}
-	*/
+	
 	
 	/**
 	 * Generates an array of values for testing purposes.
