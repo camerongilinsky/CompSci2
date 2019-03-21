@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 public class UPGMA
 {
 	public static void main(String[] args)
@@ -13,6 +11,9 @@ public class UPGMA
 			{0, 0, 0, 0, 0}
 		};
 
+		
+		
+		
 		for (int i = 0; i < 5; i++)
 		{
 			for (int j = 0; j < 5; j++)
@@ -21,7 +22,71 @@ public class UPGMA
 			}
 			System.out.print("\n");
 		}
+		
+		double firstMinimum = getMinimumValue(mat);
+		
 
+		System.out.println(getMinimumValue(mat));
+		System.out.printf("%d,%d", getMinValRow(mat), getMinValColumn(mat));
+		//String.format("(" + rowIndex + 1, args)
+		
 	}
+	
+    public static double getMinimumValue(double[][] input)
+    {
+        double minimumValue = input[0][1];
+        for (int j = 0; j < input.length; j++)
+        {
+            for (int i = 0; i < input[j].length; i++)
+            {
+                if (input[j][i] < minimumValue && input[j][i] != 0)
+                {
+                    minimumValue = input[j][i];
+                }
+            }
+        }
+        return minimumValue;
+    }
+    
+	//find row index of minimum value
+    public static int getMinValRow(double[][] input)
+    {
 
+		int rowIndex = 0;
+		
+		for (int i = 0; i < input.length; i++)
+		{
+			for (int j = 0; j < input.length; j++)
+			{
+				if (input[i][j] == getMinimumValue(input))
+				{
+					rowIndex = i;
+					break;
+				}
+			}
+		}
+		
+		return rowIndex;
+    }
+    
+	//find row column of minimum value
+    public static int getMinValColumn(double[][] input)
+    {
+
+		int columnIndex = 0;
+		
+		for (int i = 0; i < input.length; i++)
+		{
+			for (int j = 0; j < input.length; j++)
+			{
+				if (input[i][j] == getMinimumValue(input))
+				{
+					columnIndex = j;
+					break;
+				}
+			}
+		}
+		
+		return columnIndex;
+    }
 }
