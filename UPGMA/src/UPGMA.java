@@ -27,9 +27,18 @@ public class UPGMA
 		
 
 		System.out.println(getMinimumValue(mat));
-		System.out.printf("%d,%d", getMinValRow(mat), getMinValColumn(mat));
+		System.out.printf("%d,%d\n", getMinValRow(mat), getMinValColumn(mat));
 		//String.format("(" + rowIndex + 1, args)
+		mat = deleteRowAndColumn(mat,getMinValRow(mat), getMinValColumn(mat));
 		
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				System.out.printf("%6.2f ", mat[i][j]);
+			}
+			System.out.print("\n");
+		}
 	}
 	
     public static double getMinimumValue(double[][] input)
@@ -51,7 +60,6 @@ public class UPGMA
 	//find row index of minimum value
     public static int getMinValRow(double[][] input)
     {
-
 		int rowIndex = 0;
 		
 		for (int i = 0; i < input.length; i++)
@@ -72,7 +80,6 @@ public class UPGMA
 	//find row column of minimum value
     public static int getMinValColumn(double[][] input)
     {
-
 		int columnIndex = 0;
 		
 		for (int i = 0; i < input.length; i++)
@@ -88,5 +95,29 @@ public class UPGMA
 		}
 		
 		return columnIndex;
+    }
+    
+    public static double[][] deleteRowAndColumn(double[][] input, int rowToDelete, int columnToDelete)
+    {
+    	double[][] newArray = new double[input.length - 1][input.length - 1];
+    	
+    	
+    	int newRows = 0;
+    	int newColumns = 0;
+    	
+    	for (int i = 0; i < input.length - 1; i++)
+    	{
+    		for (int j = 0; j < input.length - 1; j++)
+    		{
+    			if (i != rowToDelete && j != columnToDelete)
+    			{
+    				newArray[newRows][newColumns] = input[i][j];
+    				
+    			}
+    			newColumns++;
+    		}
+    	}
+    	
+    	return newArray;
     }
 }
