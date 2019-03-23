@@ -116,8 +116,16 @@ public class MorseEncoder
 	 */
 	public String encodeWord(String plainWord)
 	{
-		//TODO: Replace this stub with your code
-		return "";
+		plainWord.toUpperCase();
+		char[] temp = plainWord.toCharArray();
+		String result = "";
+		
+		for (int i = 0; i < temp.length; i++)
+		{
+			result += encodeChar(temp[i]);
+		}
+		
+		return result;
 	}
 	
 	/**
