@@ -14,6 +14,10 @@ package schedules;
  */
 public class Date implements Comparable<Date>
 {
+	private int month;
+	private int day;
+	private int year;
+	
 	/**
 	 * Constructor.
 	 * @param dateIn a mm/dd/yyyy formed String representing a date
@@ -22,7 +26,10 @@ public class Date implements Comparable<Date>
 	 */
 	public Date(String dateIn)
 	{
-		
+		String[] monthDayYear = dateIn.split("/");
+		month = Integer.parseInt(monthDayYear[0]);
+		day = Integer.parseInt(monthDayYear[1]);
+		year = Integer.parseInt(monthDayYear[2]);
 	}
 	
 	/**
@@ -79,6 +86,9 @@ public class Date implements Comparable<Date>
 	 */
 	public int compareTo(Date other)
 	{
+		if ()
+		
+		
 		return 0;
 	}
 }

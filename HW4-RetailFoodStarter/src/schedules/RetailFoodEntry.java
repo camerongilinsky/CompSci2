@@ -13,6 +13,14 @@ package schedules;
  */
 public class RetailFoodEntry
 {
+	private String name;
+	private String address;
+	private String rating;
+	private String date;
+	private String risk;
+	
+	
+	
 	/**
 	 * Constructor that takes all elements of the RetailFoodEntry.
 	 * @param nameIn Name of the food establishment
@@ -29,7 +37,11 @@ public class RetailFoodEntry
 			String dateIn,
 			String riskIn)
 	{
-		
+		name = nameIn;
+		address = addressIn;
+		rating = ratingIn;
+		date = dateIn;
+		risk = riskIn;
 	}
 	
 	/**
@@ -38,7 +50,7 @@ public class RetailFoodEntry
 	 */
 	public String getName()
 	{
-		return "";
+		return name;
 	}
 	
 	/**
@@ -47,7 +59,7 @@ public class RetailFoodEntry
 	 */
 	public String getAddress()
 	{
-		return "";
+		return address;
 	}
 	
 	/**

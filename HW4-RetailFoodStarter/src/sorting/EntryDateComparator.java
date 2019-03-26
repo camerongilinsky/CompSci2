@@ -1,9 +1,20 @@
+// COURSE: CSCI1620
+// TERM: Spring 2019
+//
+// NAME: Cameron Gilinsky and Carter Kennell
+// RESOURCES: Piazza discussion board posts by the
+//				students and instructors for this class.
+
 package sorting;
 
 import java.util.Comparator;
 
 import schedules.RetailFoodEntry;
 
+/**
+ * Compares two RetailFoodEntry dates.
+ * @author ckgilinsky and ckennell
+ */
 public class EntryDateComparator implements Comparator<RetailFoodEntry>
 {
 	/**
