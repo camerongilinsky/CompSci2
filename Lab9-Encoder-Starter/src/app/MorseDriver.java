@@ -54,7 +54,8 @@ public class MorseDriver
 			}
 			catch (InvalidCharacterException ice)
 			{
-				System.out.println("<<ERROR>> The input file contains a character that could not be encoded.");
+				System.out.println("<<ERROR>> The input file contains a character"
+						+ "that could not be encoded.");
 				System.out.println("<<BAD CHAR = " + ice.getCharacter() + ">>");
 				flag = false;
 			}
