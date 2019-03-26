@@ -13,13 +13,30 @@ package schedules;
  */
 public class RetailFoodEntry
 {
+	/**
+	 * Name of the local RetailFoodEntry object.
+	 */
 	private String name;
+	
+	/**
+	 * Address of the local RetailFoodEntry object.
+	 */
 	private String address;
-	private String rating;
-	private String date;
-	private String risk;
 	
+	/**
+	 * Rating of the local RetailFoodEntry object.
+	 */
+	private Rating rating;
 	
+	/**
+	 * Date of the local RetailFoodEntry object.
+	 */
+	private Date date;
+	
+	/**
+	 * Risk of the local RetailFoodEntry object.
+	 */
+	private Risk risk;
 	
 	/**
 	 * Constructor that takes all elements of the RetailFoodEntry.
@@ -39,9 +56,9 @@ public class RetailFoodEntry
 	{
 		name = nameIn;
 		address = addressIn;
-		rating = ratingIn;
-		date = dateIn;
-		risk = riskIn;
+		rating = Rating.valueOf(ratingIn.toUpperCase());
+		date = new Date(dateIn);
+		risk = Risk.valueOf(riskIn.toUpperCase());
 	}
 	
 	/**
@@ -68,8 +85,7 @@ public class RetailFoodEntry
 	 */
 	public Date getDate()
 	{
-		Date temp = null;
-		return temp;
+		return date;
 	}
 	
 	/**
@@ -78,8 +94,7 @@ public class RetailFoodEntry
 	 */
 	public Rating getRating()
 	{
-		Rating temp = null;
-		return temp;
+		return rating;
 	}
 	
 	/**
@@ -88,8 +103,7 @@ public class RetailFoodEntry
 	 */
 	public Risk getRisk()
 	{
-		Risk temp = null;
-		return temp;
+		return risk;
 	}
 	
 	/**
@@ -99,7 +113,7 @@ public class RetailFoodEntry
 	 */
 	public int compareTo(RetailFoodEntry other)
 	{
-		return 0;
+		return name.compareTo(other.getName());
 	}
 	
 	/**
@@ -108,7 +122,7 @@ public class RetailFoodEntry
 	 */
 	public String toString()
 	{
-		return "";
+		return String.format("%s,%s,%s,%s,%s", name, address,
+				rating.toString(), date.toString(), risk.toString());
 	}
-	
 }
