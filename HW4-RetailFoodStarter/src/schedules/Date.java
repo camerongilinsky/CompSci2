@@ -14,8 +14,19 @@ package schedules;
  */
 public class Date implements Comparable<Date>
 {
+	/**
+	 * Month for the local Date object.
+	 */
 	private int month;
+	
+	/**
+	 * Day for the local Date object.
+	 */
 	private int day;
+	
+	/**
+	 * Year for the local Date object.
+	 */
 	private int year;
 	
 	/**
@@ -26,10 +37,7 @@ public class Date implements Comparable<Date>
 	 */
 	public Date(String dateIn)
 	{
-		String[] monthDayYear = dateIn.split("/");
-		month = Integer.parseInt(monthDayYear[0]);
-		day = Integer.parseInt(monthDayYear[1]);
-		year = Integer.parseInt(monthDayYear[2]);
+		setDate(dateIn);
 	}
 	
 	/**
@@ -40,7 +48,10 @@ public class Date implements Comparable<Date>
 	 */
 	public void setDate(String dateIn) throws InvalidDateException
 	{
-		
+		String[] monthDayYear = dateIn.split("/");
+		month = Integer.parseInt(monthDayYear[0]);
+		day = Integer.parseInt(monthDayYear[1]);
+		year = Integer.parseInt(monthDayYear[2]);
 	}
 	
 	/**
@@ -49,7 +60,7 @@ public class Date implements Comparable<Date>
 	 */
 	public int getMonth()
 	{
-		return 0;
+		return month;
 	}
 	
 	/**
@@ -58,7 +69,7 @@ public class Date implements Comparable<Date>
 	 */
 	public int getDay()
 	{
-		return 0;
+		return day;
 	}
 	
 	/**
@@ -67,7 +78,7 @@ public class Date implements Comparable<Date>
 	 */
 	public int getYear()
 	{
-		return 0;
+		return year;
 	}
 	
 	/**
@@ -76,7 +87,7 @@ public class Date implements Comparable<Date>
 	 */
 	public String toString()
 	{
-		return "";
+		return String.format("%d/%d/%d", month, day, year);
 	}
 	
 	/**
@@ -86,9 +97,43 @@ public class Date implements Comparable<Date>
 	 */
 	public int compareTo(Date other)
 	{
-		if ()
+		int ret = 0;
 		
+		if (year == other.getYear())
+		{
+			if (month == other.getMonth())
+			{
+				if (day == other.getDay())
+				{
+					ret = 0;
+				}
+				else if (day > other.getDay())
+				{
+					ret = 1;
+				}
+				else
+				{
+					return -1;
+				}
+			}
+			else if (month > other.getMonth())
+			{
+				ret = 1;
+			}
+			else
+			{
+				ret = -1;
+			}
+		}
+		else if (year > other.getYear())
+		{
+			ret = 1;
+		}
+		else
+		{
+			ret = -1;
+		}
 		
-		return 0;
+		return ret;
 	}
 }
