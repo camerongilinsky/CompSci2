@@ -7,7 +7,11 @@
 
 package schedules;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  * A class to read and write RetailFoodEntry values to a file.
@@ -16,12 +20,17 @@ import java.io.FileNotFoundException;
 public class FileIO
 {
 	/**
+	 * The file name to be read or be written.
+	 */
+	private String file;
+	
+	/**
 	 * Constructor takes the file name of a file to read or write to.
 	 * @param fileIn file Input file name.
 	 */
 	public FileIO(String fileIn)
 	{
-		
+		file = fileIn;
 	}
 	
 	/**
@@ -45,8 +54,40 @@ public class FileIO
 	 */
 	public RetailFoodEntry[] readFile() throws FileNotFoundException
 	{
-		RetailFoodEntry[] temp = null;
-		return temp;
+		RetailFoodEntry[] items = null;
+		
+		try
+		{	
+			Scanner in = new Scanner(new File(file));
+			int i = 0;
+
+			while (in.hasNextLine())
+			{
+				String record = in.nextLine();
+				
+				Scanner lineParser = new Scanner(record);
+				lineParser.useDelimiter(",");
+				
+				String name = lineParser.next();
+				String address = lineParser.next();
+				String rating = lineParser.next();
+				String date = lineParser.next();
+				String risk = lineParser.next();
+				
+				items[i] = new RetailFoodEntry(name, address, rating, date, risk);
+				
+				lineParser.close();
+				i++;
+			}
+		
+			in.close();
+		}
+		catch (FileNotFoundException fnfe)
+		{
+			throw new FileNotFoundException();
+		}
+		
+		return items;
 	}
 	
 	/**
@@ -57,6 +98,29 @@ public class FileIO
 	 */
 	public void writeFile(RetailFoodEntry[] entries) throws FileNotFoundException
 	{
-		
+		try
+		{
+			if (file == null || file.equals(""))
+			{
+				throw new FileNotFoundException();
+			}
+			
+			FileOutputStream fileOut = new FileOutputStream(file, false);
+			PrintWriter writer = new PrintWriter(fileOut);
+			
+			for (int i = 0; i < entries.length; i++)
+			{
+				writer.println(entries[i].toString());
+			}
+			
+			writer.print("\b");
+			
+			writer.close();
+		}
+		catch (FileNotFoundException fnfe)
+		{
+			throw new FileNotFoundException();
+		}
+
 	}
 }

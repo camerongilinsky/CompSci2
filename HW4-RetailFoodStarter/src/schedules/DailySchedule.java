@@ -7,6 +7,12 @@
 
 package schedules;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 /**
  * Class to create a daily schedule starting at a given date.
  * Priority will be given to the date, rating, and risk in that order.
@@ -34,6 +40,33 @@ public class DailySchedule implements Schedule
 	 */
 	public boolean writeSchedule(String fileName)
 	{
+		try
+		{
+			if (fileName == null || fileName.equals(""))
+			{
+				throw new FileNotFoundException();
+			}
+			Scanner in = new Scanner(new File(inputFile));
+			FileOutputStream fileOut = new FileOutputStream(outputFile, false);
+			PrintWriter writer = new PrintWriter(fileOut);
+			
+			while (in.hasNextLine())
+			{
+				String record = in.nextLine();
+				
+				writer.println(encodeWord(record));
+			}
+			
+			writer.print("\b");
+			
+			in.close();
+			writer.close();
+		}
+		catch (FileNotFoundException fnfe)
+		{
+			throw new FileNotFoundException();
+		}
+		
 		return true;
 	}
 	
