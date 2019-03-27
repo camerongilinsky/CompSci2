@@ -18,7 +18,7 @@ public class EntryRatingComparator
 	/**
 	 * Comparison method will take in two RetailFoodEntry objects and compare the
 	 * Rating of each of them. Dates are ordered as follows:
-	 * SUPERIOR > EXCELLENT > STANDARD > POOR
+	 * SUPERIOR > EXCELLENT > STANDARD > FAIR
 	 * @param a The first RetailFoodEntry
 	 * @param b The second RetailFoodEntry
 	 * @return a negative integer, zero, or a positive integer as the first argument is less
@@ -26,6 +26,32 @@ public class EntryRatingComparator
 	 */
 	public int compare(RetailFoodEntry a, RetailFoodEntry b)
 	{
-		return a.getRating().compareTo(b.getRating());
+		int ret = 0;
+		
+		if (a.getRating().toString().equals(b.getRating().toString()))
+		{
+			ret = 0;
+		}
+		else if (a.getRating().toString().equals("SUPERIOR"))
+		{
+			ret = 1;
+		}
+		else if (a.getRating().toString().equals("EXCELLENT")
+				&& b.getRating().toString().equals("STANDARD")
+				|| b.getRating().toString().equals("FAIR"))
+		{
+			ret = 1;
+		}
+		else if (a.getRating().toString().equals("STANDARD")
+				&& b.getRating().toString().equals("FAIR"))
+		{
+			ret = 1;
+		}
+		else
+		{
+			ret = -1;
+		}
+		
+		return ret;
 	}
 }
