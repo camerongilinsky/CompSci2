@@ -110,7 +110,10 @@ public class FileIO
 			
 			for (int i = 0; i < entries.length; i++)
 			{
-				writer.println(entries[i].toString());
+				if (entries[i] != null)
+				{
+					writer.println(entries[i].toString());
+				}
 			}
 			
 			writer.print("\b");

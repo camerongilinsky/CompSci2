@@ -7,13 +7,15 @@
 
 package sorting;
 
+import java.util.Comparator;
+
 import schedules.RetailFoodEntry;
 
 /**
  * Class to compare RetailFoodEntry objects based on risk.
  * @author ckgilinsky and ckennell
  */
-public class EntryRiskComparator
+public class EntryRiskComparator implements Comparator<RetailFoodEntry>
 {
 	/**
 	 * Comparison method will take in two RetailFoodEntry objects and compare the

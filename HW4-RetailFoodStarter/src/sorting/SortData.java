@@ -25,6 +25,29 @@ public class SortData
 	 */
 	public static <E, T extends Comparator<E>> void sort(E[] list, T comparator)
 	{
+		//insertion sort algorithm below; this needs to somehow sort based on the T input
 		
+		/*
+		public void insertionSortRange(RetailFoodEntry[] data)
+		{
+			RetailFoodEntry insert; // temporary variable to hold element to insert
+			
+			// loop over data.length - 1 elements
+			for (int next = 0; next <= data.length - 1; next++)
+			{ 
+				insert = data[ next ]; // store value in current element
+				int moveItem = next; // initialize location to place element
+			   
+				// shift items in the sorted part of the array to make room for next element
+				// making sure we don't step off the front of the array
+				while (moveItem > 0 && insert.compare(insert.getName(), data[ moveItem - 1 ]) > 0)
+				{           
+					data[ moveItem ] = data[ moveItem - 1 ]; // shift element right one slot
+					moveItem--;
+				} 
+			   
+				data[ moveItem ] = insert; // place inserted element
+			}
+		}*/
 	}
 }

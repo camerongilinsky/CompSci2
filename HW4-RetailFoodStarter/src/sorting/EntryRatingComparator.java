@@ -7,13 +7,15 @@
 
 package sorting;
 
+import java.util.Comparator;
+
 import schedules.RetailFoodEntry;
 
 /**
  * Comparator class for RetailFoodEntry ratings.
  * @author ckgilinsky and ckennell
  */
-public class EntryRatingComparator
+public class EntryRatingComparator implements Comparator<RetailFoodEntry>
 {
 	/**
 	 * Comparison method will take in two RetailFoodEntry objects and compare the

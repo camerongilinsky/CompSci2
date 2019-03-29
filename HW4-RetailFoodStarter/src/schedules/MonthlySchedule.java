@@ -7,6 +7,14 @@
 
 package schedules;
 
+import java.io.FileNotFoundException;
+
+import sorting.EntryDateComparator;
+import sorting.EntryNameComparator;
+import sorting.EntryRatingComparator;
+import sorting.EntryRiskComparator;
+import sorting.SortData;
+
 /**
  * Class to process and report on a schedule for the upcoming Month.
  * Starting with the current date, the schedule will be the consist of the
@@ -17,13 +25,32 @@ package schedules;
 public class MonthlySchedule
 {
 	/**
+	 * Maximum number of entries.
+	 */
+	public static final int MAX_ENTRIES = 10000;
+	
+	/**
+	 * Instance array for output.
+	 */
+	private RetailFoodEntry[] masterList = new RetailFoodEntry[MAX_ENTRIES];
+	
+	/**
 	 * Method takes in all of the RetailFoodEntry objects and a given date.
 	 * All inspections for the month will be stored.
 	 * @param data Array of all RetailFoodEntry objects
 	 */
-	public void processData(RetailFoodEntry[] data)
+	public void processData(RetailFoodEntry[] data, Date dateIn)
 	{
+		int count = 0;
 		
+		for (int i = 0; i < data.length; i++)
+		{
+			if (dateIn.getMonth().compareTo(data[i].getDate()) != 1) //this line is currently wrong, needs to be fixed
+			{
+				masterList[count] = data[i];
+				count++;
+			}
+		}
 	}
 	
 	/**
@@ -33,7 +60,18 @@ public class MonthlySchedule
 	 */
 	public boolean writeSchedule(String fileName)
 	{
-		return false;
+		FileIO writer = new FileIO(fileName);
+		try
+		{
+			writer.writeFile(masterList);
+		}
+		catch (FileNotFoundException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -43,6 +81,21 @@ public class MonthlySchedule
 	 */
 	public void sortBy(String value)
 	{
-		
+		if (value.equals("Name"))
+		{
+			SortData.sort(masterList, new EntryNameComparator());
+		}
+		else if (value.equals("Date"))
+		{
+			SortData.sort(masterList, new EntryDateComparator());
+		}
+		else if (value.equals("Rating"))
+		{
+			SortData.sort(masterList, new EntryRatingComparator());
+		}
+		else if (value.equals("Risk"))
+		{
+			SortData.sort(masterList, new EntryRiskComparator());
+		}
 	}
 }

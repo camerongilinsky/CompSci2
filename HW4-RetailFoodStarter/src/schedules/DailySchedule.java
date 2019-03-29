@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import sorting.*;
+
 /**
  * Class to create a daily schedule starting at a given date.
  * Priority will be given to the date, rating, and risk in that order.
@@ -20,6 +22,16 @@ import java.util.Scanner;
  */
 public class DailySchedule implements Schedule
 {
+	/**
+	 * Maximum number of entries.
+	 */
+	public static final int MAX_ENTRIES = 10000;
+	
+	/**
+	 * Instance array for output.
+	 */
+	private RetailFoodEntry[] masterList = new RetailFoodEntry[MAX_ENTRIES];
+	
 	/**
 	 * Method to take all RetailFoodEntries in loaded list and pull out
 	 * the entries that match the given date. Schedule will continue in sequential dates
@@ -30,7 +42,16 @@ public class DailySchedule implements Schedule
 	 */
 	public void processData(RetailFoodEntry[] data, Date dateIn)
 	{
+		int count = 0;
 		
+		for (int i = 0; i < data.length; i++)
+		{
+			if (dateIn.compareTo(data[i].getDate()) != 1) //this line is currently wrong, needs to be fixed
+			{
+				masterList[count] = data[i];
+				count++;
+			}
+		}
 	}
 	
 	/**
@@ -40,34 +61,48 @@ public class DailySchedule implements Schedule
 	 */
 	public boolean writeSchedule(String fileName)
 	{
+		//try
+		//{
+			
+		FileIO writer = new FileIO(fileName);
 		try
 		{
-			if (fileName == null || fileName.equals(""))
-			{
-				throw new FileNotFoundException();
-			}
-			Scanner in = new Scanner(new File(inputFile));
-			FileOutputStream fileOut = new FileOutputStream(outputFile, false);
-			PrintWriter writer = new PrintWriter(fileOut);
-			
-			while (in.hasNextLine())
-			{
-				String record = in.nextLine();
-				
-				writer.println(encodeWord(record));
-			}
-			
-			writer.print("\b");
-			
-			in.close();
-			writer.close();
+			writer.writeFile(masterList);
 		}
-		catch (FileNotFoundException fnfe)
+		catch (FileNotFoundException e)
 		{
-			throw new FileNotFoundException();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return true;
+		
+		//junk below
+			//Scanner in = new Scanner(new File(fileName));
+			//FileOutputStream fileOut = new FileOutputStream(fileName, false);
+			//PrintWriter writer = new PrintWriter(fileOut);
+			
+			//while (in.hasNextLine())
+			//{
+				//String record = in.nextLine();
+				
+				//writer.println(encodeWord(record));
+			
+			
+			//writer.print(s);
+			//}
+			
+			//writer.print("\b");
+			
+			//in.close();
+			//writer.close();
+		//}
+		//catch (FileNotFoundException fnfe)
+		//{
+		//	throw new FileNotFoundException();
+		//}
+		
+		
 	}
 	
 	/**
@@ -77,7 +112,21 @@ public class DailySchedule implements Schedule
 	 */
 	public void sortBy(String value)
 	{
-		
+		if (value.equals("Name"))
+		{
+			SortData.sort(masterList, new EntryNameComparator());
+		}
+		else if (value.equals("Date"))
+		{
+			SortData.sort(masterList, new EntryDateComparator());
+		}
+		else if (value.equals("Rating"))
+		{
+			SortData.sort(masterList, new EntryRatingComparator());
+		}
+		else if (value.equals("Risk"))
+		{
+			SortData.sort(masterList, new EntryRiskComparator());
+		}
 	}
-	
 }
