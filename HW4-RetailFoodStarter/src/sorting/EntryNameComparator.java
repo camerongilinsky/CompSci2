@@ -30,6 +30,13 @@ public class EntryNameComparator implements Comparator<RetailFoodEntry>
 	 */
 	public int compare(RetailFoodEntry a, RetailFoodEntry b)
 	{
-		return a.getName().compareTo(b.getName());
+		if (a != null && b != null)
+		{
+			return a.getName().compareTo(b.getName());
+		}
+		else
+		{
+			return 0; //uhhhhhhhhh not sure
+		}
 	}
 }

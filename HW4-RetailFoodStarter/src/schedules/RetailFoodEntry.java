@@ -9,7 +9,7 @@ package schedules;
 
 /**
  * Class to hold an entry of a retail food rating.
- * @author ckgilinsky and ckenell
+ * @author ckgilinsky and ckennell
  */
 public class RetailFoodEntry
 {
@@ -47,18 +47,51 @@ public class RetailFoodEntry
 	 * @param riskIn Risk level of the entry
 	 * @throws IllegalArgumentException if the provided ratingIn or riskIn values do not
 	 * correspond to one of the acceptable values.
+	 * @throws InvalidDateException if the provided date is not acceptable.
 	 */
 	public RetailFoodEntry(String nameIn,
 			String addressIn,
 			String ratingIn,
 			String dateIn,
-			String riskIn)
+			String riskIn) throws IllegalArgumentException, InvalidDateException
 	{
-		name = nameIn;
-		address = addressIn;
-		rating = Rating.valueOf(ratingIn.toUpperCase());
-		date = new Date(dateIn);
-		risk = Risk.valueOf(riskIn.toUpperCase());
+			
+		if (nameIn != null)
+		{
+			name = nameIn;
+		}
+		
+		if (addressIn != null)
+		{
+			address = addressIn;
+		}
+
+	
+		try
+		{
+			if (dateIn != null && !dateIn.equals(""))
+			{
+				date = new Date(dateIn);
+			}
+				
+			if (ratingIn != null && !ratingIn.equals(""))
+			{
+				rating = Rating.valueOf(ratingIn.toUpperCase());
+			}
+			if (riskIn != null && !riskIn.equals(""))
+			{
+				risk = Risk.valueOf(riskIn.toUpperCase());				
+			}
+		}
+		catch (InvalidDateException ice)
+		{
+			throw new InvalidDateException("Invalid Date");
+		}
+		catch (IllegalArgumentException ice)
+		{
+			throw new IllegalArgumentException("Invalid Rating");
+		}
+		//throw new IllegalArgumentException("Invalid Rating");
 	}
 	
 	/**
@@ -123,6 +156,8 @@ public class RetailFoodEntry
 	public String toString()
 	{
 		return String.format("%s,%s,%s,%s,%s", name, address,
-				rating.toString(), date.toString(), risk.toString());
+				name, //needs to be replaced with a working rating.toString
+				name, //needs to be replaced with a working date.toString
+				name); //needs to be replaced with a working risk.toString
 	}
 }

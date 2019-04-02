@@ -48,10 +48,22 @@ public class Date implements Comparable<Date>
 	 */
 	public void setDate(String dateIn) throws InvalidDateException
 	{
-		String[] monthDayYear = dateIn.split("/");
-		month = Integer.parseInt(monthDayYear[0]);
-		day = Integer.parseInt(monthDayYear[1]);
-		year = Integer.parseInt(monthDayYear[2]);
+		if (dateIn != null && !dateIn.equals(""))
+			{
+			String[] monthDayYear = dateIn.split("/", 3);
+			//System.out.printf(monthDayYear[0],monthDayYear[1], monthDayYear[2]);
+			
+			month = Integer.parseInt(monthDayYear[0]);
+			day = Integer.parseInt(monthDayYear[1]);
+			if (monthDayYear[2].matches("[0-9]+"))
+			{
+				year = Integer.parseInt(monthDayYear[2]);
+			}
+			else
+			{
+				year = 2018;
+			}
+		}
 	}
 	
 	/**
@@ -97,26 +109,37 @@ public class Date implements Comparable<Date>
 	 */
 	public int compareTo(Date other)
 	{
-		int ret = 0;
+		int ret = 2;
 		
-		if (year == other.getYear())
+		if (other != null)
 		{
-			if (month == other.getMonth())
+			if (year == other.getYear())
 			{
-				if (day == other.getDay())
+				if (month == other.getMonth())
 				{
-					ret = 0;
+					if (day == other.getDay())
+					{
+						ret = 0;
+					}
+					else if (day > other.getDay())
+					{
+						ret = 1;
+					}
+					else
+					{
+						return -1;
+					}
 				}
-				else if (day > other.getDay())
+				else if (month > other.getMonth())
 				{
 					ret = 1;
 				}
 				else
 				{
-					return -1;
+					ret = -1;
 				}
 			}
-			else if (month > other.getMonth())
+			else if (year > other.getYear())
 			{
 				ret = 1;
 			}
@@ -124,16 +147,8 @@ public class Date implements Comparable<Date>
 			{
 				ret = -1;
 			}
+			
 		}
-		else if (year > other.getYear())
-		{
-			ret = 1;
-		}
-		else
-		{
-			ret = -1;
-		}
-		
 		return ret;
 	}
 }

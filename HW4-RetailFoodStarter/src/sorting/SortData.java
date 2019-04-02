@@ -7,7 +7,12 @@
 
 package sorting;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
+
+import schedules.RetailFoodEntry;
 
 /**
  * This utility class provides a basic sorting method that enables
@@ -25,10 +30,39 @@ public class SortData
 	 */
 	public static <E, T extends Comparator<E>> void sort(E[] list, T comparator)
 	{
-		//insertion sort algorithm below; this needs to somehow sort based on the T input
+		 //insertion sort algorithm below; this needs to somehow sort based on the T input
+		 //The comparator does the comparison between the two objects and returns 
+		 //a value related to order.
 		
-		/*
-		public void insertionSortRange(RetailFoodEntry[] data)
+		RetailFoodEntry temp;
+		RetailFoodEntry insert; // temporary variable to hold element to insert
+		
+		// loop over data.length - 1 elements
+		for (int next = 1; next < list.length; next++) 
+		{ 
+			insert = (RetailFoodEntry) list[ next ]; // store value in current element
+			int moveItem = next; // initialize location to place element
+		   
+			// shift items in the sorted part of the array to make room for next element
+			// making sure we don't step off the front of the array
+			while (moveItem > 0 && comparator.compare(list[moveItem - 1], (E)insert) < 0)
+				//((RetailFoodEntry) list[ moveItem - 1 ]).compareTo(insert) < 0) 
+			{           
+				//SWAP pasted here to avoid method invocation overhead in timing data
+				//swap(data, moveItem, moveItem - 1); // shift element right one slot
+				temp = (RetailFoodEntry) list[moveItem];
+				list[moveItem] = list[moveItem - 1];
+				list[moveItem - 1] = (E)temp;		
+				
+				moveItem--;
+			} 
+		   
+			list[ moveItem ] = (E)insert; // place inserted element
+		}
+		
+		
+		
+		/*public void insertionSortRange(RetailFoodEntry[] data)
 		{
 			RetailFoodEntry insert; // temporary variable to hold element to insert
 			
@@ -47,7 +81,8 @@ public class SortData
 				} 
 			   
 				data[ moveItem ] = insert; // place inserted element
-			}
-		}*/
-	}
+			}*/
+		}
+
+	
 }

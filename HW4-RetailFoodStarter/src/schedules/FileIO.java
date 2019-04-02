@@ -50,11 +50,11 @@ public class FileIO
 	 * values will be skipped.
 	 * A maximum of 10,000 entries can be assumed.
 	 * @return Array of all valid RetailFoodEntry objects in the read file.
-	 * @throws FileNotFoundException if the file specified in the constructordoes not exist.
+	 * @throws FileNotFoundException if the file specified in the constructor does not exist.
 	 */
 	public RetailFoodEntry[] readFile() throws FileNotFoundException
 	{
-		RetailFoodEntry[] items = null;
+		RetailFoodEntry[] items = new RetailFoodEntry[10000];
 		
 		try
 		{	
@@ -63,6 +63,7 @@ public class FileIO
 
 			while (in.hasNextLine())
 			{
+				in.nextLine();
 				String record = in.nextLine();
 				
 				Scanner lineParser = new Scanner(record);

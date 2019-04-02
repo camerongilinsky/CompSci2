@@ -45,7 +45,7 @@ public class MonthlySchedule
 		
 		for (int i = 0; i < data.length; i++)
 		{
-			if (dateIn.getMonth().compareTo(data[i].getDate()) != 1) //this line is currently wrong, needs to be fixed
+			if (dateIn.compareTo(data[i].getDate()) != 1) //this line is currently wrong, needs to be fixed
 			{
 				masterList[count] = data[i];
 				count++;
