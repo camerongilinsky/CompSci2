@@ -29,8 +29,11 @@ public class Date implements Comparable<Date>
 	 */
 	private int year;
 	
-	
+	/**
+	 * String representation of the Date.
+	 */
 	private String dateString;
+	
 	/**
 	 * Constructor.
 	 * @param dateIn a mm/dd/yyyy formed String representing a date
@@ -51,7 +54,7 @@ public class Date implements Comparable<Date>
 	public void setDate(String dateIn) throws InvalidDateException
 	{
 		if (dateIn != null && !dateIn.equals(""))
-			{
+		{
 			dateString = dateIn;
 			String[] monthDayYear = dateIn.split("/", 3);
 			//System.out.printf(monthDayYear[0],monthDayYear[1], monthDayYear[2]);
@@ -64,7 +67,7 @@ public class Date implements Comparable<Date>
 			}
 			else
 			{
-				year = 2018;
+				year = 0;  //year = 2018;
 			}
 		}
 		else
@@ -118,35 +121,24 @@ public class Date implements Comparable<Date>
 	{
 		int ret = 0;
 		
-		//if (other != null)
-		//{
-			if (year == other.getYear())
+		if (year == other.getYear())
+		{
+			if (month == other.getMonth())
 			{
-				if (month == other.getMonth())
+				if (day == other.getDay())
 				{
-					if (day == other.getDay())
-					{
-						ret = 0;
-					}
-					else if (day > other.getDay())
-					{
-						ret = 1;
-					}
-					else
-					{
-						return -1;
-					}
+					ret = 0;
 				}
-				else if (month > other.getMonth())
+				else if (day > other.getDay())
 				{
 					ret = 1;
 				}
 				else
 				{
-					ret = -1;
+					return -1;
 				}
 			}
-			else if (year > other.getYear())
+			else if (month > other.getMonth())
 			{
 				ret = 1;
 			}
@@ -154,8 +146,16 @@ public class Date implements Comparable<Date>
 			{
 				ret = -1;
 			}
+		}
+		else if (year > other.getYear())
+		{
+			ret = 1;
+		}
+		else
+		{
+			ret = -1;
+		}
 			
-		//}
 		return ret;
 	}
 }

@@ -20,6 +20,11 @@ import java.util.Scanner;
 public class FileIO
 {
 	/**
+	 * The largest list size to expect.
+	 */
+	private static final int MAX_LIST_SIZE = 10000;
+	
+	/**
 	 * The file name to be read or be written.
 	 */
 	private String file;
@@ -54,7 +59,7 @@ public class FileIO
 	 */
 	public RetailFoodEntry[] readFile() throws FileNotFoundException
 	{
-		RetailFoodEntry[] items = new RetailFoodEntry[10000];
+		RetailFoodEntry[] items = new RetailFoodEntry[MAX_LIST_SIZE];
 		
 			
 		Scanner in = new Scanner(new File(file));

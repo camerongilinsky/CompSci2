@@ -31,9 +31,6 @@ public class EntryDateComparator implements Comparator<RetailFoodEntry>
 	{
 		int ret = 0;
 		
-		//System.out.println(a);
-		//System.out.println(b);
-		
 		if (a != null && b != null)
 		{
 		
@@ -51,7 +48,7 @@ public class EntryDateComparator implements Comparator<RetailFoodEntry>
 					}
 					else
 					{
-						return -1;
+						ret = -1;
 					}
 				}
 				else if (a.getDate().getMonth() > b.getDate().getMonth())
@@ -75,7 +72,7 @@ public class EntryDateComparator implements Comparator<RetailFoodEntry>
 		}
 		else
 		{
-			return -1;
+			ret = -1;
 		}
 		return ret;
 	}

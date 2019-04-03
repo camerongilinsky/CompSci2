@@ -63,7 +63,6 @@ public class RetailFoodEntry
 		else if (dateIn == null)
 		{
 			throw new IllegalArgumentException();
-			//throw new InvalidDateException("Invalid Date");
 		}
 		else
 		{
@@ -137,8 +136,8 @@ public class RetailFoodEntry
 	public String toString()
 	{
 		return String.format("%s,%s,%s,%s,%s", name, address,
-				rating, //needs to be replaced with a working rating.toString
-				date, //needs to be replaced with a working date.toString
-				risk); //needs to be replaced with a working risk.toString
+				rating,
+				date,
+				risk);
 	}
 }

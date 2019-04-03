@@ -7,13 +7,13 @@
 
 package schedules;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.util.Scanner;
 
-import sorting.*;
+import sorting.EntryDateComparator;
+import sorting.EntryNameComparator;
+import sorting.EntryRatingComparator;
+import sorting.EntryRiskComparator;
+import sorting.SortData;
 
 /**
  * Class to create a daily schedule starting at a given date.
@@ -44,12 +44,8 @@ public class DailySchedule implements Schedule
 	{
 		int count = 0;
 		
-		SortData.sort(data, (new EntryDateComparator()).thenComparing(new EntryRatingComparator()).thenComparing(new EntryRiskComparator()));
-		//SortData.sort(data, (new EntryDateComparator()));
-		//SortData.sort(data, (new EntryRiskComparator()));
-		
-		//System.out.println(data[0]);
-		//System.out.println(data[data.length - 1]);
+		SortData.sort(data, (new EntryDateComparator())
+				.thenComparing(new EntryRatingComparator()).thenComparing(new EntryRiskComparator()));
 		
 		for (int i = 0; count < MAX_DAILY_INSPECTIONS; i++)
 		{
@@ -59,8 +55,6 @@ public class DailySchedule implements Schedule
 				count++;
 			}
 		}
-		
-		
 	}
 	
 	/**
@@ -70,9 +64,6 @@ public class DailySchedule implements Schedule
 	 */
 	public boolean writeSchedule(String fileName)
 	{
-		//try
-		//{
-			
 		FileIO writer = new FileIO(fileName);
 		try
 		{
@@ -80,38 +71,10 @@ public class DailySchedule implements Schedule
 		}
 		catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return true;
-		
-		//junk below
-			//Scanner in = new Scanner(new File(fileName));
-			//FileOutputStream fileOut = new FileOutputStream(fileName, false);
-			//PrintWriter writer = new PrintWriter(fileOut);
-			
-			//while (in.hasNextLine())
-			//{
-				//String record = in.nextLine();
-				
-				//writer.println(encodeWord(record));
-			
-			
-			//writer.print(s);
-			//}
-			
-			//writer.print("\b");
-			
-			//in.close();
-			//writer.close();
-		//}
-		//catch (FileNotFoundException fnfe)
-		//{
-		//	throw new FileNotFoundException();
-		//}
-		
-		
 	}
 	
 	/**

@@ -10,6 +10,7 @@ package schedules;
  * An Exception to be thrown if an entry does not have a valid date.
  * @author ckgilinsky and ckennell
  */
+@SuppressWarnings("serial")
 public class InvalidDateException extends RuntimeException 
 {
 	/**

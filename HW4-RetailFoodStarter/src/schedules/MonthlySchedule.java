@@ -25,42 +25,23 @@ import sorting.SortData;
 public class MonthlySchedule implements Schedule
 {
 	/**
-	 * Maximum number of entries.
-	 */
-	//public static final int MAX_ENTRIES = 10000;
-	
-	/**
 	 * Instance array for output.
 	 */
 	private RetailFoodEntry[] masterList = new RetailFoodEntry[MAX_MONTHLY_INSPECTIONS];
-	private RetailFoodEntry[] newMasterList = new RetailFoodEntry[MAX_MONTHLY_INSPECTIONS];
 	
 	/**
 	 * Method takes in all of the RetailFoodEntry objects and a given date.
 	 * All inspections for the month will be stored.
 	 * @param data Array of all RetailFoodEntry objects
+	 * @param dateIn Date object to start planning the month of inspections.
 	 */
 	public void processData(RetailFoodEntry[] data, Date dateIn)
 	{
 		int count = 0;
-		//data[data.length - 1] = data[data.length - 2];
-		SortData.sort(data, (new EntryDateComparator()).thenComparing(new EntryRatingComparator()).thenComparing(new EntryRiskComparator()));
-		//SortData.sort(data, new EntryDateComparator());
-		//SortData.sort(data, (new EntryRiskComparator()));
-		
-		//int removeNullsCount = 0;
-		//for (int i = 0; i < data.length; i++)
-		//{
-		//	if 
-		//}
-		
-		//for (int i = 0; i < data.length; i++)
-		//{
-		//	System.out.println(data[i]);
-		//}
-		//System.out.println(data[0]);
-		//System.out.println(data[data.length - 1]);
-		
+
+		SortData.sort(data, (new EntryDateComparator()).thenComparing(new EntryRatingComparator())
+				.thenComparing(new EntryRiskComparator()));
+
 		for (int i = 0; count < MAX_MONTHLY_INSPECTIONS; i++)
 		{
 			if (data[i] != null && dateIn.compareTo(data[i].getDate()) < 1)
@@ -69,8 +50,6 @@ public class MonthlySchedule implements Schedule
 				count++;
 			}
 		}
-		
-		
 	}
 	
 	/**
@@ -87,7 +66,6 @@ public class MonthlySchedule implements Schedule
 		}
 		catch (FileNotFoundException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

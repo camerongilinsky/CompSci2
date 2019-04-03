@@ -10,7 +10,6 @@ package sorting;
 import java.util.Comparator;
 
 import schedules.RetailFoodEntry;
-import schedules.Risk;
 
 /**
  * A Comparator for the Name element of a RetailFoodEntry.
@@ -36,7 +35,7 @@ public class EntryNameComparator implements Comparator<RetailFoodEntry>
 		}
 		else
 		{
-			return 0; //uhhhhhhhhh not sure
+			return 0;
 		}
 	}
 }

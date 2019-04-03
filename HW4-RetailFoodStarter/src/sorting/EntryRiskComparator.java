@@ -51,7 +51,7 @@ public class EntryRiskComparator implements Comparator<RetailFoodEntry>
 		}
 		else
 		{
-			return -1;
+			ret = -1;
 		}
 		return ret;
 	}
