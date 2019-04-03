@@ -38,23 +38,27 @@ public class EntryRatingComparator implements Comparator<RetailFoodEntry>
 			}
 			else if (a.getRating().toString().equals("SUPERIOR"))
 			{
-				ret = 1;
+				ret = -1;
 			}
 			else if (a.getRating().toString().equals("EXCELLENT")
 					&& (b.getRating().toString().equals("STANDARD")
 					|| b.getRating().toString().equals("FAIR")))
 			{
-				ret = 1;
+				ret = -1;
 			}
 			else if (a.getRating().toString().equals("STANDARD")
 					&& b.getRating().toString().equals("FAIR"))
 			{
-				ret = 1;
+				ret = -1;
 			}
 			else
 			{
-				ret = -1;
+				ret = 1;
 			}
+		}
+		else
+		{
+			ret = 0;
 		}
 		
 		return ret;
