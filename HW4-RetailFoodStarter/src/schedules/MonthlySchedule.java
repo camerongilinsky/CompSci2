@@ -22,17 +22,18 @@ import sorting.SortData;
  * Ranking for order should be Date, then rating, then risk.
  * @author ckgilinsky and ckennell
  */
-public class MonthlySchedule
+public class MonthlySchedule implements Schedule
 {
 	/**
 	 * Maximum number of entries.
 	 */
-	public static final int MAX_ENTRIES = 10000;
+	//public static final int MAX_ENTRIES = 10000;
 	
 	/**
 	 * Instance array for output.
 	 */
-	private RetailFoodEntry[] masterList = new RetailFoodEntry[MAX_ENTRIES];
+	private RetailFoodEntry[] masterList = new RetailFoodEntry[MAX_MONTHLY_INSPECTIONS];
+	private RetailFoodEntry[] newMasterList = new RetailFoodEntry[MAX_MONTHLY_INSPECTIONS];
 	
 	/**
 	 * Method takes in all of the RetailFoodEntry objects and a given date.
@@ -42,15 +43,34 @@ public class MonthlySchedule
 	public void processData(RetailFoodEntry[] data, Date dateIn)
 	{
 		int count = 0;
+		//data[data.length - 1] = data[data.length - 2];
+		SortData.sort(data, (new EntryDateComparator()).thenComparing(new EntryRatingComparator()).thenComparing(new EntryRiskComparator()));
+		//SortData.sort(data, new EntryDateComparator());
+		//SortData.sort(data, (new EntryRiskComparator()));
 		
-		for (int i = 0; i < data.length; i++)
+		//int removeNullsCount = 0;
+		//for (int i = 0; i < data.length; i++)
+		//{
+		//	if 
+		//}
+		
+		//for (int i = 0; i < data.length; i++)
+		//{
+		//	System.out.println(data[i]);
+		//}
+		//System.out.println(data[0]);
+		//System.out.println(data[data.length - 1]);
+		
+		for (int i = 0; count < MAX_MONTHLY_INSPECTIONS; i++)
 		{
-			if (dateIn.compareTo(data[i].getDate()) != 1) //this line is currently wrong, needs to be fixed
+			if (data[i] != null && dateIn.compareTo(data[i].getDate()) < 1)
 			{
 				masterList[count] = data[i];
 				count++;
 			}
 		}
+		
+		
 	}
 	
 	/**

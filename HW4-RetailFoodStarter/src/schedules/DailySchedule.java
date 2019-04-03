@@ -44,14 +44,23 @@ public class DailySchedule implements Schedule
 	{
 		int count = 0;
 		
-		for (int i = 0; i < data.length; i++)
+		SortData.sort(data, (new EntryDateComparator()).thenComparing(new EntryRatingComparator()).thenComparing(new EntryRiskComparator()));
+		//SortData.sort(data, (new EntryDateComparator()));
+		//SortData.sort(data, (new EntryRiskComparator()));
+		
+		//System.out.println(data[0]);
+		//System.out.println(data[data.length - 1]);
+		
+		for (int i = 0; count < MAX_DAILY_INSPECTIONS; i++)
 		{
-			if (dateIn != null && data[i] != null && dateIn.compareTo(data[i].getDate()) != 1) //this line is currently wrong, needs to be fixed
+			if (dateIn.compareTo(data[i].getDate()) < 1) //this line is currently wrong, needs to be fixed
 			{
 				masterList[count] = data[i];
 				count++;
 			}
 		}
+		
+		
 	}
 	
 	/**

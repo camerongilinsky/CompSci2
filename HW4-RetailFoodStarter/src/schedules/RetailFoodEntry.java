@@ -56,41 +56,23 @@ public class RetailFoodEntry
 			String riskIn) throws IllegalArgumentException, InvalidDateException
 	{
 			
-		if (nameIn != null)
+		if (nameIn == null || addressIn == null || ratingIn == null || riskIn == null)
+		{
+			throw new IllegalArgumentException();
+		}
+		else if (dateIn == null)
+		{
+			throw new IllegalArgumentException();
+			//throw new InvalidDateException("Invalid Date");
+		}
+		else
 		{
 			name = nameIn;
-		}
-		
-		if (addressIn != null)
-		{
 			address = addressIn;
-		}
-
-	
-		try
-		{
-			
 			date = new Date(dateIn);
-			
-				
-			if (ratingIn != null && !ratingIn.equals(""))
-			{
-				rating = Rating.valueOf(ratingIn.toUpperCase());
-			}
-			if (riskIn != null && !riskIn.equals(""))
-			{
-				risk = Risk.valueOf(riskIn.toUpperCase());				
-			}
+			rating = Rating.valueOf(ratingIn.toUpperCase());
+			risk = Risk.valueOf(riskIn.toUpperCase());
 		}
-		catch (InvalidDateException ice)
-		{
-			throw new InvalidDateException("Invalid Date");
-		}
-		catch (IllegalArgumentException ice)
-		{
-			throw new IllegalArgumentException("Invalid Rating");
-		}
-		//throw new IllegalArgumentException("Invalid Rating");
 	}
 	
 	/**

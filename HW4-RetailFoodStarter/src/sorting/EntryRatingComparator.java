@@ -29,7 +29,8 @@ public class EntryRatingComparator implements Comparator<RetailFoodEntry>
 	public int compare(RetailFoodEntry a, RetailFoodEntry b)
 	{
 		int ret = 0;
-		
+		//System.out.println(a);
+		//System.out.println(b);
 		if (a != null && b != null)
 		{
 			if (a.getRating().toString().equals(b.getRating().toString()))
@@ -58,7 +59,7 @@ public class EntryRatingComparator implements Comparator<RetailFoodEntry>
 		}
 		else
 		{
-			ret = 0;
+			ret = -1;
 		}
 		
 		return ret;

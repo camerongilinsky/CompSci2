@@ -29,15 +29,54 @@ public class EntryDateComparator implements Comparator<RetailFoodEntry>
 	 */
 	public int compare(RetailFoodEntry a, RetailFoodEntry b)
 	{
+		int ret = 0;
+		
+		//System.out.println(a);
+		//System.out.println(b);
+		
+		if (a != null && b != null)
 		{
-			if (a != null && b != null)
+		
+			if (a.getDate().getYear() == b.getDate().getYear())
 			{
-				return a.getDate().compareTo(b.getDate());
+				if (a.getDate().getMonth() == b.getDate().getMonth())
+				{
+					if (a.getDate().getDay() == b.getDate().getDay())
+					{
+						ret = 0;
+					}
+					else if (a.getDate().getDay() > b.getDate().getDay())
+					{
+						ret = 1;
+					}
+					else
+					{
+						return -1;
+					}
+				}
+				else if (a.getDate().getMonth() > b.getDate().getMonth())
+				{
+					ret = 1;
+				}
+				else
+				{
+					ret = -1;
+				}
+			}
+			else if (a.getDate().getYear() > b.getDate().getYear())
+			{
+				ret = 1;
 			}
 			else
 			{
-				return 0; //uhhhhhhhhh not sure
+				ret = -1;
 			}
+			
 		}
+		else
+		{
+			return -1;
+		}
+		return ret;
 	}
 }

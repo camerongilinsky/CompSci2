@@ -116,10 +116,10 @@ public class Date implements Comparable<Date>
 	 */
 	public int compareTo(Date other)
 	{
-		int ret = 2;
+		int ret = 0;
 		
-		if (other != null)
-		{
+		//if (other != null)
+		//{
 			if (year == other.getYear())
 			{
 				if (month == other.getMonth())
@@ -155,7 +155,7 @@ public class Date implements Comparable<Date>
 				ret = -1;
 			}
 			
-		}
+		//}
 		return ret;
 	}
 }

@@ -56,38 +56,46 @@ public class FileIO
 	{
 		RetailFoodEntry[] items = new RetailFoodEntry[10000];
 		
-		try
-		{	
-			Scanner in = new Scanner(new File(file));
-			int i = 0;
-
-			while (in.hasNextLine())
-			{
-				in.nextLine();
-				String record = in.nextLine();
+			
+		Scanner in = new Scanner(new File(file));
+		int i = 0;
+		in.nextLine();
+		
 				
+		while (in.hasNextLine())
+		{
+			try				
+			{
+				
+				String record = in.nextLine();
+					
 				Scanner lineParser = new Scanner(record);
 				lineParser.useDelimiter(",");
-				
+					
 				String name = lineParser.next();
 				String address = lineParser.next();
 				String rating = lineParser.next();
 				String date = lineParser.next();
 				String risk = lineParser.next();
-				
+					
 				items[i] = new RetailFoodEntry(name, address, rating, date, risk);
-				
+					
 				lineParser.close();
 				i++;
 			}
-		
-			in.close();
+			catch (IllegalArgumentException iae)
+			{
+				System.out.println("Invalid Rating or Risk");
+			}
+			catch (InvalidDateException ide)
+			{
+				System.out.println("Invalid date");
+			}
+			
+			
 		}
-		catch (FileNotFoundException fnfe)
-		{
-			throw new FileNotFoundException();
-		}
-		
+
+		in.close();
 		return items;
 	}
 	
