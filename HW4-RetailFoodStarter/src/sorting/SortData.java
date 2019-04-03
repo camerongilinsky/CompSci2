@@ -34,23 +34,23 @@ public class SortData
 		 //The comparator does the comparison between the two objects and returns 
 		 //a value related to order.
 		
-		RetailFoodEntry temp;
-		RetailFoodEntry insert; // temporary variable to hold element to insert
+		E temp;
+		E insert; // temporary variable to hold element to insert
 		
 		// loop over data.length - 1 elements
 		for (int next = 1; next < list.length; next++) 
 		{ 
-			insert = (RetailFoodEntry) list[ next ]; // store value in current element
+			insert = list[ next ]; // store value in current element
 			int moveItem = next; // initialize location to place element
 		   
 			// shift items in the sorted part of the array to make room for next element
 			// making sure we don't step off the front of the array
-			while (moveItem > 0 && comparator.compare(list[moveItem - 1], (E)insert) < 0)
+			while (moveItem > 0 && comparator.compare(list[moveItem - 1], insert) > 0)
 				//((RetailFoodEntry) list[ moveItem - 1 ]).compareTo(insert) < 0) 
 			{           
 				//SWAP pasted here to avoid method invocation overhead in timing data
 				//swap(data, moveItem, moveItem - 1); // shift element right one slot
-				temp = (RetailFoodEntry) list[moveItem];
+				temp = list[moveItem];
 				list[moveItem] = list[moveItem - 1];
 				list[moveItem - 1] = (E)temp;		
 				

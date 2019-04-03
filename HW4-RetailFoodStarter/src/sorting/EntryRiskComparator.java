@@ -29,25 +29,26 @@ public class EntryRiskComparator implements Comparator<RetailFoodEntry>
 	public int compare(RetailFoodEntry a, RetailFoodEntry b)
 	{
 		int ret = 0;
-		
-		if (a.getRisk().toString().equals(b.getRisk().toString()))
+		if (a != null && b != null)
 		{
-			ret = 0;
+			if (a.getRisk().toString().equals(b.getRisk().toString()))
+			{
+				ret = 0;
+			}
+			else if (a.getRisk().toString().equals("HIGH"))
+			{
+				ret = -1;
+			}
+			else if (a.getRisk().toString().equals("MEDIUM")
+					&& b.getRisk().toString().equals("LOW"))
+			{
+				ret = -1;
+			}
+			else
+			{
+				ret = 1;
+			}
 		}
-		else if (a.getRisk().toString().equals("HIGH"))
-		{
-			ret = 1;
-		}
-		else if (a.getRisk().toString().equals("MEDIUM")
-				&& b.getRisk().toString().equals("LOW"))
-		{
-			ret = 1;
-		}
-		else
-		{
-			ret = -1;
-		}
-		
 		return ret;
 	}
 }

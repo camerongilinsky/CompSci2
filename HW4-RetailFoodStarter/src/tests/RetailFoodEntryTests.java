@@ -17,6 +17,7 @@ import org.junit.rules.ExpectedException;
 import schedules.InvalidDateException;
 import schedules.Rating;
 import schedules.RetailFoodEntry;
+import sorting.EntryNameComparator;
 
 public class RetailFoodEntryTests {
 
@@ -24,7 +25,7 @@ public class RetailFoodEntryTests {
 	public void RetailFoodEntryConstructorTest() 
 	{
 		//Set up the prior State/Call the constructor to make an object
-		RetailFoodEntry a = new RetailFoodEntry("1912", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		RetailFoodEntry a = new RetailFoodEntry("1912", "6201 MAPLE ST", "EXCELLENT", "07/20/2018", "HIGH");
 		//Rating x;
 		assertEquals("1912", a.getName());
 		assertEquals("6201 MAPLE ST", a.getAddress());
@@ -47,6 +48,51 @@ public class RetailFoodEntryTests {
 		assertEquals(0, x);
 	}
 	
+	@Test 
+	public void RetailFoodEntryCompareToTestNegative()
+	{
+		//Set up the prior state
+		RetailFoodEntry a = new RetailFoodEntry("Ding", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		RetailFoodEntry b = new RetailFoodEntry("Dong", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		
+		//Call the method in question
+		int x = a.compareTo(b);
+		
+		//Verify the return value
+		assertTrue(x < 0);
+	}
+	
+	@Test 
+	public void RetailFoodEntryCompareToTestPositive()
+	{
+		//Set up the prior state
+		RetailFoodEntry a = new RetailFoodEntry("Dong", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		RetailFoodEntry b = new RetailFoodEntry("Ding", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		
+		//Call the method in question
+		int x = a.compareTo(b);
+		
+		//Verify the return value
+		assertTrue(x > 0);
+	}
+	
+	@Test 
+	public void RetailFoodEntryCompareTest()
+	{
+		//Set up the prior state
+		RetailFoodEntry a = new RetailFoodEntry("Dong", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		RetailFoodEntry b = new RetailFoodEntry("Ding", "6201 MAPLE ST", "EXCELLENT", "7/20/2018", "HIGH");
+		
+		EntryNameComparator temp = new EntryNameComparator();
+		//Call the method in question
+		int x = temp.compare(a, b);
+		int y = temp.compare(b, a);
+		
+		//Verify the return value
+		assertTrue(x > 0);
+		assertTrue(y < 0);
+	}
+	
 	@Test
 	public void RetailFoodEntryToStringTest()
 	{
@@ -62,7 +108,7 @@ public class RetailFoodEntryTests {
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-	
+	/*
 	@Test
 	public void RetailFoodEntryConstructorExceptionTest() throws IllegalArgumentException, InvalidDateException
 	{
@@ -72,10 +118,10 @@ public class RetailFoodEntryTests {
 		//Throws the exception
 		RetailFoodEntry a = new RetailFoodEntry("1912", "6201 MAPLE ST", "Bad", "7/20/2018", "HIGH");
 	}
-	
+	*/
 	@Rule
 	public ExpectedException tossed = ExpectedException.none();
-	
+	/*
 	@Test
 	public void RetailFoodEntryConstructorExceptionTest2() throws InvalidDateException
 	{
@@ -84,5 +130,5 @@ public class RetailFoodEntryTests {
 		//Throws the exceptions
 		RetailFoodEntry a = new RetailFoodEntry("1912", "6201 MAPLE ST", "EXCELLENT", null, "HIGH");
 	}
-
+*/
 }

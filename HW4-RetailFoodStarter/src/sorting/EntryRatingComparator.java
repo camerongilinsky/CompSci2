@@ -30,28 +30,31 @@ public class EntryRatingComparator implements Comparator<RetailFoodEntry>
 	{
 		int ret = 0;
 		
-		if (a.getRating().toString().equals(b.getRating().toString()))
+		if (a != null && b != null)
 		{
-			ret = 0;
-		}
-		else if (a.getRating().toString().equals("SUPERIOR"))
-		{
-			ret = 1;
-		}
-		else if (a.getRating().toString().equals("EXCELLENT")
-				&& b.getRating().toString().equals("STANDARD")
-				|| b.getRating().toString().equals("FAIR"))
-		{
-			ret = 1;
-		}
-		else if (a.getRating().toString().equals("STANDARD")
-				&& b.getRating().toString().equals("FAIR"))
-		{
-			ret = 1;
-		}
-		else
-		{
-			ret = -1;
+			if (a.getRating().toString().equals(b.getRating().toString()))
+			{
+				ret = 0;
+			}
+			else if (a.getRating().toString().equals("SUPERIOR"))
+			{
+				ret = 1;
+			}
+			else if (a.getRating().toString().equals("EXCELLENT")
+					&& (b.getRating().toString().equals("STANDARD")
+					|| b.getRating().toString().equals("FAIR")))
+			{
+				ret = 1;
+			}
+			else if (a.getRating().toString().equals("STANDARD")
+					&& b.getRating().toString().equals("FAIR"))
+			{
+				ret = 1;
+			}
+			else
+			{
+				ret = -1;
+			}
 		}
 		
 		return ret;

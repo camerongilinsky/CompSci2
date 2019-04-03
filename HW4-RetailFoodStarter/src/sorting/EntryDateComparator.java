@@ -29,6 +29,15 @@ public class EntryDateComparator implements Comparator<RetailFoodEntry>
 	 */
 	public int compare(RetailFoodEntry a, RetailFoodEntry b)
 	{
-		return a.getDate().compareTo(b.getDate());
+		{
+			if (a != null && b != null)
+			{
+				return a.getDate().compareTo(b.getDate());
+			}
+			else
+			{
+				return 0; //uhhhhhhhhh not sure
+			}
+		}
 	}
 }

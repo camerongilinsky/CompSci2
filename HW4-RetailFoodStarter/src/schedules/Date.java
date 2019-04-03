@@ -29,6 +29,8 @@ public class Date implements Comparable<Date>
 	 */
 	private int year;
 	
+	
+	private String dateString;
 	/**
 	 * Constructor.
 	 * @param dateIn a mm/dd/yyyy formed String representing a date
@@ -50,6 +52,7 @@ public class Date implements Comparable<Date>
 	{
 		if (dateIn != null && !dateIn.equals(""))
 			{
+			dateString = dateIn;
 			String[] monthDayYear = dateIn.split("/", 3);
 			//System.out.printf(monthDayYear[0],monthDayYear[1], monthDayYear[2]);
 			
@@ -63,6 +66,10 @@ public class Date implements Comparable<Date>
 			{
 				year = 2018;
 			}
+		}
+		else
+		{
+			dateString = "";
 		}
 	}
 	
@@ -99,7 +106,7 @@ public class Date implements Comparable<Date>
 	 */
 	public String toString()
 	{
-		return String.format("%d/%d/%d", month, day, year);
+		return String.format(dateString);
 	}
 	
 	/**

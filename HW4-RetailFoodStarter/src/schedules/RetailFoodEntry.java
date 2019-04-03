@@ -69,10 +69,9 @@ public class RetailFoodEntry
 	
 		try
 		{
-			if (dateIn != null && !dateIn.equals(""))
-			{
-				date = new Date(dateIn);
-			}
+			
+			date = new Date(dateIn);
+			
 				
 			if (ratingIn != null && !ratingIn.equals(""))
 			{
@@ -156,8 +155,8 @@ public class RetailFoodEntry
 	public String toString()
 	{
 		return String.format("%s,%s,%s,%s,%s", name, address,
-				name, //needs to be replaced with a working rating.toString
-				name, //needs to be replaced with a working date.toString
-				name); //needs to be replaced with a working risk.toString
+				rating, //needs to be replaced with a working rating.toString
+				date, //needs to be replaced with a working date.toString
+				risk); //needs to be replaced with a working risk.toString
 	}
 }
