@@ -4,7 +4,7 @@
 // NAME: Cameron Gilinsky and Carter Kennell
 // RESOURCES: Piazza discussion board posts by the
 //				students and instructors for this class.
-//             Insertion sort algorithm referenced from Lab 8 code by Dr. Dorn.
+//              Insertion sort algorithm referenced from Lab 8 code by Dr. Dorn.
 
 package sorting;
 

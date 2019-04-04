@@ -82,7 +82,9 @@ public class FileIO
 				String rating = lineParser.next();
 				String date = lineParser.next();
 				String risk = lineParser.next();
-					
+				
+				
+				
 				items[i] = new RetailFoodEntry(name, address, rating, date, risk);
 					
 				lineParser.close();
@@ -96,8 +98,6 @@ public class FileIO
 			{
 				System.out.println("Invalid date");
 			}
-			
-			
 		}
 
 		in.close();
@@ -131,8 +131,6 @@ public class FileIO
 					writer.println(entries[i].toString());
 				}
 			}
-			
-			//writer.print("\b");
 			
 			writer.close();
 		}

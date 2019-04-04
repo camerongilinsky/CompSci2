@@ -33,7 +33,6 @@ public class EntryDateComparator implements Comparator<RetailFoodEntry>
 		
 		if (a != null && b != null)
 		{
-		
 			if (a.getDate().getYear() == b.getDate().getYear())
 			{
 				if (a.getDate().getMonth() == b.getDate().getMonth())

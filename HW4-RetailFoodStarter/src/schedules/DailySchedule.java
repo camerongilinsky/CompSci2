@@ -49,7 +49,7 @@ public class DailySchedule implements Schedule
 		
 		for (int i = 0; count < MAX_DAILY_INSPECTIONS; i++)
 		{
-			if (dateIn.compareTo(data[i].getDate()) < 1) //this line is currently wrong, needs to be fixed
+			if (dateIn.compareTo(data[i].getDate()) < 1)
 			{
 				masterList[count] = data[i];
 				count++;
