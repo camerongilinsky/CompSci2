@@ -122,6 +122,8 @@ public class FileIO
 			FileOutputStream fileOut = new FileOutputStream(file, false);
 			PrintWriter writer = new PrintWriter(fileOut);
 			
+			writer.println("Name,Address,RATING,CURRENT,RISK");
+			
 			for (int i = 0; i < entries.length; i++)
 			{
 				if (entries[i] != null)
