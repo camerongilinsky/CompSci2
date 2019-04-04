@@ -10,11 +10,16 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
+
 //import java.util.Date;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import schedules.Date;
+import schedules.InvalidDateException;
+import schedules.RetailFoodEntry;
 
 public class DateTests {
 
@@ -22,21 +27,51 @@ public class DateTests {
 	public void setDateTest() 
 	{
 		//Prior State
-		Date a = new Date("11/20/1992");
-		//Date b = new Date(null);
+		Date a = new Date("1/03/1992");
+		
 		//Date c = new Date("");
 		
 		//Call method
 		//a.setDate("11/21/1992");
 		
 		//Check the post state
-		assertEquals(11, a.getMonth());
-		assertEquals(20, a.getDay());
+		assertEquals(1, a.getMonth());
+		assertEquals(3, a.getDay());
 		assertEquals(1992, a.getYear());
+		//assertEquals("", b.toString());
+		//assertEquals("", c.toString());
+		assertEquals("01/03/1992", a.toString());
 		
 	}
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
+	
+	@Test
+	public void RetailFoodEntryConstructorExceptionTest() throws InvalidDateException
+	{
+		thrown.expect(InvalidDateException.class);
+		//tossed.expect(InvalidDateException.class);
+		
+		//Throws the exception
+		Date b = new Date(null);
+	}
+	
+	@Rule
+	public ExpectedException thrown1 = ExpectedException.none();
+
+	
+	@Test
+	public void RetailFoodEntryConstructorExceptionTest2() throws InvalidDateException
+	{
+		thrown.expect(InvalidDateException.class);
+		//tossed.expect(InvalidDateException.class);
+		
+		//Throws the exception
+		Date c = new Date("");
+	}
+	
 	@Test
 	public void dateToStringTest()
 	{
@@ -49,7 +84,7 @@ public class DateTests {
 		//Check return
 		assertEquals("11/20/1992", x);
 	}
-	/*
+	
 	@Test
 	public void dateCompareToTest()
 	{
@@ -77,5 +112,6 @@ public class DateTests {
 		assertEquals(1, day1);
 		assertEquals(-1, day2);
 	}
-	*/
+	
+	
 }

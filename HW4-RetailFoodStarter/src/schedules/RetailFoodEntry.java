@@ -55,8 +55,7 @@ public class RetailFoodEntry
 			String dateIn,
 			String riskIn) throws IllegalArgumentException, InvalidDateException
 	{
-			
-		if (nameIn == null || addressIn == null || ratingIn == null || riskIn == null)
+		if (ratingIn == null || riskIn == null)
 		{
 			throw new IllegalArgumentException();
 		}

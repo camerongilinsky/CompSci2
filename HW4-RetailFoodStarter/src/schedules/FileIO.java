@@ -130,7 +130,7 @@ public class FileIO
 				}
 			}
 			
-			writer.print("\b");
+			//writer.print("\b");
 			
 			writer.close();
 		}

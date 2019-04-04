@@ -37,21 +37,21 @@ public class EntryRiskComparator implements Comparator<RetailFoodEntry>
 			}
 			else if (a.getRisk().toString().equals("HIGH"))
 			{
-				ret = -1;
+				ret = 1;
 			}
 			else if (a.getRisk().toString().equals("MEDIUM")
 					&& b.getRisk().toString().equals("LOW"))
 			{
-				ret = -1;
+				ret = 1;
 			}
 			else
 			{
-				ret = 1;
+				ret = -1;
 			}
 		}
 		else
 		{
-			ret = -1;
+			ret = 1;
 		}
 		return ret;
 	}

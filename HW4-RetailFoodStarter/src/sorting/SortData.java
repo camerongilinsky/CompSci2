@@ -17,6 +17,14 @@ import java.util.Comparator;
  */
 public class SortData
 {
+	/**
+	 * Blank constructor.
+	 */
+	public SortData()
+	{
+		//Blank constructor for testing purposes.
+	}
+	
 	/**Generic method to sort a list of objects based on a comparator.
 	 * The ordering for the sorted list will be determined by comparator.
 	 * @param list the type of a single item in the list

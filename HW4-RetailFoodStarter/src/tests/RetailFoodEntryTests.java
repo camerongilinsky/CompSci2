@@ -30,7 +30,7 @@ public class RetailFoodEntryTests {
 		assertEquals("1912", a.getName());
 		assertEquals("6201 MAPLE ST", a.getAddress());
 		assertEquals("EXCELLENT", a.getRating().toString());
-		assertEquals("7/20/2018", a.getDate().toString());
+		assertEquals("07/20/2018", a.getDate().toString());
 		assertEquals("HIGH", a.getRisk().toString());
 	}
 	
@@ -105,23 +105,24 @@ public class RetailFoodEntryTests {
 		//Check the return
 		assertEquals("1912,6201 MAPLE ST,EXCELLENT,7/20/2018,HIGH", x);
 	}
-	
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-	/*
+
+	
 	@Test
-	public void RetailFoodEntryConstructorExceptionTest() throws IllegalArgumentException, InvalidDateException
+	public void RetailFoodEntryConstructorExceptionTest() throws IllegalArgumentException
 	{
 		thrown.expect(IllegalArgumentException.class);
-		tossed.expect(InvalidDateException.class);
+		//tossed.expect(InvalidDateException.class);
 		
 		//Throws the exception
-		RetailFoodEntry a = new RetailFoodEntry("1912", "6201 MAPLE ST", "Bad", "7/20/2018", "HIGH");
+		RetailFoodEntry a = new RetailFoodEntry("1912", "6201 MAPLE ST", null, "01/02/2018", "HIGH");
 	}
-	*/
+	/*
 	@Rule
 	public ExpectedException tossed = ExpectedException.none();
-	/*
+	
 	@Test
 	public void RetailFoodEntryConstructorExceptionTest2() throws InvalidDateException
 	{

@@ -32,7 +32,7 @@ public class Date implements Comparable<Date>
 	/**
 	 * String representation of the Date.
 	 */
-	private String dateString;
+	//private String dateString;
 	
 	/**
 	 * Constructor.
@@ -55,24 +55,25 @@ public class Date implements Comparable<Date>
 	{
 		if (dateIn != null && !dateIn.equals(""))
 		{
-			dateString = dateIn;
+			//dateString = dateIn;
 			String[] monthDayYear = dateIn.split("/", 3);
 			//System.out.printf(monthDayYear[0],monthDayYear[1], monthDayYear[2]);
-			
+			if (monthDayYear.length != 3 || dateIn.equals("") || !monthDayYear[2].matches("[0-9]+"))
+			{
+				throw new InvalidDateException(dateIn);
+			}
 			month = Integer.parseInt(monthDayYear[0]);
 			day = Integer.parseInt(monthDayYear[1]);
-			if (monthDayYear[2].matches("[0-9]+"))
-			{
-				year = Integer.parseInt(monthDayYear[2]);
-			}
-			else
-			{
-				year = 0;  //year = 2018;
-			}
+			year = Integer.parseInt(monthDayYear[2]);
+			//else
+			//{
+			//	year = 0;  //year = 2018;
+			//}
 		}
 		else
 		{
-			dateString = "";
+			//dateString = "";
+			throw new InvalidDateException(dateIn);
 		}
 	}
 	
@@ -109,7 +110,8 @@ public class Date implements Comparable<Date>
 	 */
 	public String toString()
 	{
-		return String.format(dateString);
+		//return String.format(dateString);
+		return String.format("%02d/%02d/%d", month, day, year);
 	}
 	
 	/**
