@@ -121,7 +121,8 @@ public class Patient implements Comparable<Patient>, Serializable
 	@Override
 	public String toString()
 	{
-		return "";
+		return String.format("Patient: %-25s Condition: %-25s Priority: %-3d Waiting Since: %d",
+				name, condition, priority, time);
 	}
 	
 	/**
@@ -136,6 +137,32 @@ public class Patient implements Comparable<Patient>, Serializable
 	@Override
 	public int compareTo(Patient other)
 	{
-		return 0;
+		int ret;
+		
+		if (priority == other.getPriority())
+		{
+			if (time == other.getTimeArrived())
+			{
+				ret = 0;
+			}
+			else if (time > other.getTimeArrived())
+			{
+				ret = -1;
+			}
+			else
+			{
+				ret = 1;
+			}
+		}
+		else if (priority < other.getPriority())
+		{
+			ret = -1;
+		}
+		else
+		{
+			ret = 1;
+		}
+		
+		return ret;
 	}
 }
