@@ -66,7 +66,5 @@ public class EmergencyConditions
 	public int lookup(String conditionName)
 	{
 		return 0;
-	}
-	
-	
+	}	
 }

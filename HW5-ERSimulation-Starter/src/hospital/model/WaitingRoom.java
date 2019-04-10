@@ -8,6 +8,7 @@
 package hospital.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import hospital.exceptions.EmptyWaitingRoomException;
 
@@ -21,11 +22,18 @@ import hospital.exceptions.EmptyWaitingRoomException;
 public class WaitingRoom implements Serializable
 {
 	/**
+	 * The ArrayList to be used to store Patient objects.
+	 */
+	private ArrayList<Patient> patients;
+	
+	/**
 	 * Builds a new empty waiting room with no Patients.
 	 */
 	public WaitingRoom()
 	{
-		//numPatients = 0 OR initialize empty array
+		patients = new ArrayList<Patient>();
+		
+		//numPatients = 0 OR initialize empty array or ArrayList?
 	}
 	
 	/**
@@ -34,8 +42,19 @@ public class WaitingRoom implements Serializable
 	 * @param sickPerson The newly arrived Patient to place in this WaitingRoom.
 	 */
 	public void addPatient(Patient sickPerson)
-	{
-		
+	{	
+		for (int i = 0; i < patients.size(); i++)
+		{
+			if (sickPerson.compareTo(patients.get(i)) == -1
+					|| sickPerson.compareTo(patients.get(i)) == 1)
+			{
+				patients.add(i, sickPerson);
+			}
+			else
+			{
+				patients.add(sickPerson);
+			}
+		}
 	}
 	
 	/**
@@ -46,8 +65,14 @@ public class WaitingRoom implements Serializable
 	 */
 	public Patient getNextPatient() throws EmptyWaitingRoomException
 	{
-		Patient temp = null;
-		return temp;
+		if (patients.size() == 0)
+		{
+			throw new EmptyWaitingRoomException();
+		}
+		else
+		{
+			return patients.get(0);
+		}
 	}
 	
 	/**
@@ -56,7 +81,7 @@ public class WaitingRoom implements Serializable
 	 */
 	public int getNumWaiting()
 	{
-		return 0;
+		return patients.size();
 	}
 	
 	/**
@@ -78,10 +103,10 @@ public class WaitingRoom implements Serializable
 	 * per the toString format described in the Patient class. For example:
 	 * 
 	 * Waiting Room Status: 
-	 * 1) Patient: Levy, Thomasine           Condition: Asthma                    Priority: 3   Waiting Since: 5
-	 * 2) Patient: Figueroa, Francesco       Condition: High Fever                Priority: 3   Waiting Since: 8
-	 * 3) Patient: Rakes, Raye               Condition: Minor Allergic Reaction   Priority: 3   Waiting Since: 9
-	 * 4) Patient: Noles, Oliver             Condition: Low-grade Fever           Priority: 4   Waiting Since: 4
+	 *     1) Patient: Levy, Thomasine           Condition: Asthma                    Priority: 3   Waiting Since: 5
+	 *     2) Patient: Figueroa, Francesco       Condition: High Fever                Priority: 3   Waiting Since: 8
+	 *     3) Patient: Rakes, Raye               Condition: Minor Allergic Reaction   Priority: 3   Waiting Since: 9
+	 *     4) Patient: Noles, Oliver             Condition: Low-grade Fever           Priority: 4   Waiting Since: 4
 	 * 
 	 * When one or more patients are shown in the status, the patient listed
 	 * as #1 corresponds to thePatient that would be served next (assuming
@@ -90,6 +115,20 @@ public class WaitingRoom implements Serializable
 	@Override
 	public String toString()
 	{
-		return "";
+		if (patients.size() == 0)
+		{
+			return "Waiting Room Status: EMPTY!";
+		}
+		else
+		{
+			String output = "";
+			
+			for (int i = 0; i < patients.size(); i++)
+			{
+				output += String.format("%5d) %s\n", i, patients.get(i).toString());
+			}
+			
+			return output;
+		}
 	}
 }
