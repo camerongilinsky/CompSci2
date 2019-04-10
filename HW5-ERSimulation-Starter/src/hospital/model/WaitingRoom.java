@@ -43,23 +43,30 @@ public class WaitingRoom implements Serializable
 	 */
 	public void addPatient(Patient sickPerson)
 	{	
-		for (int i = 0; i < patients.size(); i++)
+		if (patients.size() == 0)
 		{
-			if (sickPerson.compareTo(patients.get(i)) == 1
-					|| sickPerson.compareTo(patients.get(i)) == 0)
+			patients.add(sickPerson);
+		}
+		else
+		{
+			for (int i = 0; i < patients.size(); i++)
 			{
-				continue;
-			}
-			
-			if (sickPerson.compareTo(patients.get(i)) == -1)
-			{
-				patients.add(i, sickPerson);
-				break;
-			}
-			else
-			{
-				patients.add(sickPerson);
-				break;
+				if (sickPerson.compareTo(patients.get(i)) == 1
+						|| sickPerson.compareTo(patients.get(i)) == 0)
+				{
+					continue;
+				}
+				
+				if (sickPerson.compareTo(patients.get(i)) == -1)
+				{
+					patients.add(i, sickPerson);
+					break;
+				}
+				else
+				{
+					patients.add(sickPerson);
+					break;
+				}
 			}
 		}
 	}
