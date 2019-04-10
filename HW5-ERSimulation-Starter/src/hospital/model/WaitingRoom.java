@@ -85,7 +85,9 @@ public class WaitingRoom implements Serializable
 		}
 		else
 		{
-			return patients.get(0);
+			Patient temp = patients.get(0);
+			patients.remove(0);
+			return temp;
 		}
 	}
 	
