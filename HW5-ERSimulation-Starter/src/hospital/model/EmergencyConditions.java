@@ -7,7 +7,15 @@
 
 package hospital.model;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import hospital.exceptions.InvalidConditionException;
+import hospital.exceptions.InvalidPriorityException;
+
+import java.util.ArrayList;
+
 
 /**
  * This class stores and provides information about various emergency conditions
@@ -17,6 +25,36 @@ import java.io.FileNotFoundException;
  */
 public class EmergencyConditions
 {
+	/**
+	 * Priority in minutes for immediate condition.
+	 */
+	private static final int PRIORITY_ONE = 0; 
+	/**
+	 * Priority in minutes for very urgent condition.
+	 */
+	private static final int PRIORITY_TWO = 10;
+	/**
+	 * Priority in minutes for urgent condition.
+	 */
+	private static final int PRIORITY_THREE = 60;
+	/**
+	 * Priority in minutes for standard condition.
+	 */
+	private static final int PRIORITY_FOUR = 120;
+	/**
+	 * Priority in minutes for not an emergency.
+	 */
+	private static final int PRIORITY_FIVE = 240;
+	/**
+	 * ArrayList for the Strings of the emergency conditions listed in the input file.
+	 */
+	private ArrayList<String> emergencyConditions;
+	
+	/**
+	 * ArrayList of the priorities for the emergency conditions listed in the input file. 
+	 */
+	private ArrayList<Integer> priorities;
+	
 	/**
 	 * Creates a new EmergencyConditions object based on comma separated data
 	 * provided in a specified configuration file. This method assumes that the
@@ -34,7 +72,29 @@ public class EmergencyConditions
 	 */
 	public EmergencyConditions(String fileName) throws FileNotFoundException
 	{
+		emergencyConditions = new ArrayList<>();
+		priorities = new ArrayList<>();
 		
+		Scanner in = new Scanner(new File(fileName));
+		
+		while (in.hasNextLine())
+		{
+				
+			String line = in.nextLine();
+					
+			Scanner lineParser = new Scanner(line);
+			lineParser.useDelimiter(",");
+					
+			String condition = lineParser.next();
+			emergencyConditions.add(condition);
+			
+			int priority = lineParser.nextInt();
+			priorities.add(priority);
+					
+			lineParser.close();	
+		}
+
+		in.close();
 	}
 	/**
 	 * This method retrieves triage compliance thresholds (in minutes) per fixed
@@ -51,7 +111,39 @@ public class EmergencyConditions
 	 */
 	public static int timeThreshold(int priority)
 	{
-		return 0;
+		int wait = 0;
+		
+		try
+		{
+			if (priority == 1)
+			{
+				wait = PRIORITY_ONE;
+			}
+			else if (priority == 2)
+			{
+				wait = PRIORITY_TWO;
+			}
+			else if (priority == 3)
+			{
+				wait = PRIORITY_THREE;
+			}
+			else if (priority == 4)
+			{
+				wait = PRIORITY_FOUR;
+			}
+			else
+			{
+				wait = PRIORITY_FIVE;
+			}
+			
+			return wait;
+		}
+		catch (InvalidPriorityException ipe)
+		{
+			throw new InvalidPriorityException();
+		}
+		
+		//return wait;
 	}
 	
 	/**
@@ -65,6 +157,25 @@ public class EmergencyConditions
 	 */
 	public int lookup(String conditionName)
 	{
-		return 0;
+		int count = 0;
+		try
+		{
+			for (int i = 0; i < emergencyConditions.size(); i++)
+			{
+				if ((emergencyConditions.get(i).compareTo(conditionName)) == 0)
+				{
+					count = i;
+					break;
+				}
+			}
+			
+			return priorities.get(count);
+		}
+		catch (InvalidConditionException ice)
+		{
+			throw new InvalidConditionException(conditionName);
+		}
+		
+		//return priorities.get(count);
 	}	
 }
