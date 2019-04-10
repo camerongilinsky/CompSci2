@@ -84,11 +84,18 @@ public class EmergencyRoomLog implements Serializable
 	{
 		int count = 0;
 		
-		for (int i = 0; i < physicians.size(); i++)
+		if (treatingPhysician == null || treatingPhysician.equals(""))
 		{
-			if (physicians.get(i).equals(treatingPhysician))
+			count = patients.size();
+		}
+		else
+		{
+			for (int i = 0; i < physicians.size(); i++)
 			{
-				count++;
+				if (physicians.get(i).equals(treatingPhysician))
+				{
+					count++;
+				}
 			}
 		}
 		
@@ -110,11 +117,18 @@ public class EmergencyRoomLog implements Serializable
 		{
 			int count = 0;
 			
-			for (int i = 0; i < physicians.size(); i++)
+			if (priority == 0)
 			{
-				if (patients.get(i).getPriority() == priority)
+				count = physicians.size();
+			}
+			else
+			{
+				for (int i = 0; i < physicians.size(); i++)
 				{
-					count++;
+					if (patients.get(i).getPriority() == priority)
+					{
+						count++;
+					}
 				}
 			}
 			
@@ -147,7 +161,7 @@ public class EmergencyRoomLog implements Serializable
 	{
 		try
 		{
-			double total = 0;
+			int total = 0;
 			int count = 0;
 			
 			for (int i = 0; i < patients.size(); i++)
@@ -159,7 +173,7 @@ public class EmergencyRoomLog implements Serializable
 				}
 			}
 			
-			return total / (double) count;
+			return (double) total / (double) count;
 		}
 		catch (EmptyLogException ele)
 		{
