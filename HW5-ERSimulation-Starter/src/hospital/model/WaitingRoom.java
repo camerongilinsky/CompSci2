@@ -51,22 +51,22 @@ public class WaitingRoom implements Serializable
 		{
 			for (int i = 0; i < patients.size(); i++)
 			{
-				if (sickPerson.compareTo(patients.get(i)) == 1
-						|| sickPerson.compareTo(patients.get(i)) == 0)
-				{
-					continue;
-				}
-				
 				if (sickPerson.compareTo(patients.get(i)) == -1)
 				{
 					patients.add(i, sickPerson);
 					break;
 				}
-				else
+				else if (i == patients.size() - 1)
 				{
 					patients.add(sickPerson);
 					break;
 				}
+				else //(sickPerson.compareTo(patients.get(i)) == 1
+						//|| sickPerson.compareTo(patients.get(i)) == 0)
+				{
+					continue;
+				}
+
 			}
 		}
 	}
