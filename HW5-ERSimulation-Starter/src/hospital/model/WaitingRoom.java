@@ -141,7 +141,7 @@ public class WaitingRoom implements Serializable
 			
 			for (int i = 0; i < patients.size(); i++)
 			{
-				output += String.format("%5d) %s\n", i, patients.get(i).toString());
+				output += String.format("%5d) %s\n", i + 1, patients.get(i).toString());
 			}
 			
 			return output;

@@ -48,7 +48,7 @@ public class EmergencyConditions
 	/**
 	 * ArrayList for the Strings of the emergency conditions listed in the input file.
 	 */
-	private ArrayList<String> emergencyConditions;
+	private ArrayList<String> conditions;
 	
 	/**
 	 * ArrayList of the priorities for the emergency conditions listed in the input file. 
@@ -72,7 +72,7 @@ public class EmergencyConditions
 	 */
 	public EmergencyConditions(String fileName) throws FileNotFoundException
 	{
-		emergencyConditions = new ArrayList<>();
+		conditions = new ArrayList<>();
 		priorities = new ArrayList<>();
 		
 		Scanner in = new Scanner(new File(fileName));
@@ -86,7 +86,7 @@ public class EmergencyConditions
 			lineParser.useDelimiter(",");
 					
 			String condition = lineParser.next();
-			emergencyConditions.add(condition);
+			conditions.add(condition);
 			
 			int priority = lineParser.nextInt();
 			priorities.add(priority);
@@ -160,9 +160,9 @@ public class EmergencyConditions
 		int count = 0;
 		try
 		{
-			for (int i = 0; i < emergencyConditions.size(); i++)
+			for (int i = 0; i < conditions.size(); i++)
 			{
-				if ((emergencyConditions.get(i).compareTo(conditionName)) == 0)
+				if ((conditions.get(i).compareTo(conditionName)) == 0)
 				{
 					count = i;
 					break;
