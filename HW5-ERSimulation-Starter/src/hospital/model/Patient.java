@@ -147,11 +147,11 @@ public class Patient implements Comparable<Patient>, Serializable
 			}
 			else if (time > other.getTimeArrived())
 			{
-				ret = -1;
+				ret = 1;
 			}
 			else
 			{
-				ret = 1;
+				ret = -1;
 			}
 		}
 		else if (priority < other.getPriority())
