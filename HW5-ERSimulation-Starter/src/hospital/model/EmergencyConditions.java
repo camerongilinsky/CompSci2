@@ -131,11 +131,14 @@ public class EmergencyConditions
 			{
 				wait = PRIORITY_FOUR;
 			}
-			else
+			else if (priority == 5)
 			{
 				wait = PRIORITY_FIVE;
 			}
-			
+			else
+			{
+				throw new InvalidPriorityException();
+			}
 			return wait;
 		}
 		catch (InvalidPriorityException ipe)
@@ -160,16 +163,25 @@ public class EmergencyConditions
 		int count = 0;
 		try
 		{
-			for (int i = 0; i < conditions.size(); i++)
+			if (!conditions.contains(conditionName))
 			{
-				if ((conditions.get(i).compareTo(conditionName)) == 0)
+				throw new InvalidConditionException(conditionName);
+			}
+			else
+			{
+				for (int i = 0; i < conditions.size(); i++)
 				{
-					count = i;
-					break;
+					if ((conditions.get(i).compareTo(conditionName)) == 0)
+					{
+						count = i;
+						break;
+					}
 				}
+				
+				return priorities.get(count);
 			}
 			
-			return priorities.get(count);
+			
 		}
 		catch (InvalidConditionException ice)
 		{
