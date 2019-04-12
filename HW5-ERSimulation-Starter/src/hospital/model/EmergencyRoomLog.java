@@ -23,9 +23,24 @@ import hospital.exceptions.InvalidPriorityException;
  */
 public class EmergencyRoomLog implements Serializable
 {
+	/**
+	 * The clock to keep track of patient wait times.
+	 */
 	private int clock;
+	
+	/**
+	 * The ArrayList to store patients in the log.
+	 */
 	private ArrayList<Patient> patients;
+	
+	/**
+	 * The ArrayList to store the corresponding physicians when patients are entered.
+	 */
 	private ArrayList<String> physicians;
+	
+	/**
+	 * The ArrayList to store the corresponding wait time when patients are entered.
+	 */
 	private ArrayList<Integer> waitTimes;
 	
 	/**
@@ -115,24 +130,36 @@ public class EmergencyRoomLog implements Serializable
 	{
 		try
 		{
-			int count = 0;
-			
-			if (priority == 0)
+			if (priority < 0 || priority > 5)
 			{
-				count = physicians.size();
+				throw new InvalidPriorityException();
+			}
+			else if (patients.size() == 0)
+			{
+				throw new EmptyLogException();
 			}
 			else
 			{
-				for (int i = 0; i < physicians.size(); i++)
+			
+				int count = 0;
+				
+				if (priority == 0)
 				{
-					if (patients.get(i).getPriority() == priority)
+					count = physicians.size();
+				}
+				else
+				{
+					for (int i = 0; i < physicians.size(); i++)
 					{
-						count++;
+						if (patients.get(i).getPriority() == priority)
+						{
+							count++;
+						}
 					}
 				}
+				
+				return count;
 			}
-			
-			return count;
 		}
 		catch (EmptyLogException ele)
 		{
@@ -161,19 +188,30 @@ public class EmergencyRoomLog implements Serializable
 	{
 		try
 		{
-			int total = 0;
-			int count = 0;
-			
-			for (int i = 0; i < patients.size(); i++)
+			if (priority < 0 || priority > 5)
 			{
-				if (patients.get(i).getPriority() == priority || priority == 0)
-				{
-					total += waitTimes.get(i);
-					count++;
-				}
+				throw new InvalidPriorityException();
 			}
-			
-			return (double) total / (double) count;
+			else if (patients.size() == 0)
+			{
+				throw new EmptyLogException();
+			}
+			else
+			{
+				int total = 0;
+				int count = 0;
+				
+				for (int i = 0; i < patients.size(); i++)
+				{
+					if (patients.get(i).getPriority() == priority || priority == 0)
+					{
+						total += waitTimes.get(i);
+						count++;
+					}
+				}
+				
+				return (double) total / (double) count;
+			}
 		}
 		catch (EmptyLogException ele)
 		{
@@ -198,18 +236,29 @@ public class EmergencyRoomLog implements Serializable
 	{
 		try
 		{
-			int count = 0;
-			
-			for (int i = 0; i < patients.size(); i++)
+			if (priority < 1 || priority > 5)
 			{
-				if (priority == patients.get(i).getPriority()
-						&& waitTimes.get(i) > EmergencyConditions.timeThreshold(priority))
-				{
-					count++;
-				}
+				throw new InvalidPriorityException();
 			}
-			
-			return count;
+			else if (patients.size() == 0)
+			{
+				throw new EmptyLogException();
+			}
+			else
+			{
+				int count = 0;
+				
+				for (int i = 0; i < patients.size(); i++)
+				{
+					if (priority == patients.get(i).getPriority()
+						&& waitTimes.get(i) > EmergencyConditions.timeThreshold(priority))
+					{
+						count++;
+					}
+				}
+				
+				return count;
+			}
 		}
 		catch (EmptyLogException ele)
 		{
