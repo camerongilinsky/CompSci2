@@ -7,6 +7,9 @@
 
 package molecule;
 
+import java.util.Arrays;
+import java.util.Stack;
+
 import molecule.exceptions.InvalidAtomException;
 
 //public class Molecule<E extends java.lang.Comparable<E>> implements Cloneable
@@ -18,6 +21,12 @@ import molecule.exceptions.InvalidAtomException;
  */
 public class Molecule implements Comparable<Molecule>, Cloneable
 {
+	Stack stack = new Stack<Integer>();
+	
+	String sequence;
+	
+	private int weight;
+	
 	/**
 	 * Creates a new Molecule made up of the H, C, and O atoms in the configuration
 	 * specified by sequenceIn.
@@ -26,9 +35,96 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	 * @throws InvalidSequenceException if unmatched parentheses exist in sequenceIn or
 	 * 		   incoming sequence is null or empty String.
 	 */
+	@SuppressWarnings("unchecked")
 	public Molecule(String sequenceIn)
 	{
-		//somehow split into how many C, how many H, how many O
+		sequence = String.format("(" + sequenceIn + ")");
+		String number = "";
+		int result = 0;
+		int num = 0;
+		
+		
+		for (int i = 0; i < sequence.length(); i++)
+		{
+			
+			char currentChar = sequence.charAt(i);
+			char nextChar;
+			
+			
+			if (i == sequence.length() - 1)
+			{
+				nextChar = 'X';
+			}
+			else
+			{
+				nextChar = sequence.charAt(i + 1);
+			}
+			
+			if (Character.isDigit(currentChar))
+			{
+				number += Character.toString(currentChar);
+				
+				if (Character.isDigit(nextChar))
+				{
+					continue;
+				}
+				else
+				{
+					num = Integer.parseInt(number);
+					number = "";
+					num *= (int) stack.pop();
+					stack.push(num);
+					num = 0;
+					
+				}
+			}	
+			else if (Character.isLetter(currentChar))
+			{
+				if (currentChar == 'h' || currentChar == 'H')
+				{
+					stack.push(1);
+				}
+				else if (currentChar == 'c' || currentChar == 'C')
+				{
+					stack.push(12);
+				}
+				else if (currentChar == 'o' || currentChar == 'O')
+				{
+					stack.push(16);
+				}
+			}
+			else if (currentChar == '(')
+			{
+				stack.push(-1);
+			}
+			else// if (currentChar == ')')
+			{
+				//System.out.println(result);
+			
+				result = 0;
+				
+				while ((int) stack.peek() >= 0)
+				{
+					System.out.println((int) stack.peek());
+					//System.out.println(Arrays.toString(stack.toArray()));
+					result += (int) stack.pop();
+					System.out.println((int) stack.peek());
+				}				
+				stack.push(result);
+			}	
+		}
+		
+		while (!stack.empty())
+		{
+			if ((int) stack.peek() >= 0)
+			{
+				weight += (int) stack.pop();
+			}
+			else
+			{
+				stack.pop();
+			}	
+		}
 	}
 	
 	/**
@@ -58,7 +154,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	 */
 	public int getWeight()
 	{
-		return 0;
+		return weight;
 	}
 	
 	/**
