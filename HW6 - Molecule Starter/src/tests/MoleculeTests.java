@@ -2,9 +2,12 @@ package tests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import molecule.Molecule;
+import molecule.exceptions.InvalidAtomException;
 
 public class MoleculeTests
 {
@@ -23,6 +26,7 @@ public class MoleculeTests
 		Molecule test8 = new Molecule("H((OH)2C3H)2");
 		
 		
+		
 		assertEquals(18, test.getWeight());
 		assertEquals(56, test1.getWeight());
 		assertEquals(44, test2.getWeight());
@@ -32,6 +36,17 @@ public class MoleculeTests
 		assertEquals(39, test6.getWeight());
 		assertEquals(39, test7.getWeight());
 		assertEquals(143, test8.getWeight());
+	}
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	@Test
+	public void testInvalidAtomException()
+	{
+		thrown.expect(InvalidAtomException.class);
+		Molecule test = new Molecule("HF2O");
+		
 	}
 
 }

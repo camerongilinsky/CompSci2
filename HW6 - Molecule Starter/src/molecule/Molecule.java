@@ -10,6 +10,7 @@ package molecule;
 import java.util.Stack;
 
 import molecule.exceptions.InvalidAtomException;
+import molecule.exceptions.InvalidSequenceException;
 
 //public class Molecule<E extends java.lang.Comparable<E>> implements Cloneable
 /**
@@ -52,6 +53,11 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	private int weight;
 	
 	/**
+	 * Stack to be used for parenthesis checking.
+	 */
+	Stack parenthesis = new Stack<Character>();
+	
+	/**
 	 * Creates a new Molecule made up of the H, C, and O atoms in the configuration
 	 * specified by sequenceIn.
 	 * @param sequenceIn The sequence of atoms for this Molecule.
@@ -59,92 +65,19 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	 * @throws InvalidSequenceException if unmatched parentheses exist in sequenceIn or
 	 * 		   incoming sequence is null or empty String.
 	 */
-	@SuppressWarnings("unchecked")
 	public Molecule(String sequenceIn)
 	{
-		sequence = String.format("(" + sequenceIn + ")");
-		String number = "";
-		int result = 0;
-		int num = 0;
-		
-		for (int i = 0; i < sequence.length(); i++)
+		try
 		{
-			char currentChar = sequence.charAt(i);
-			char nextChar;
-			
-			if (i == sequence.length() - 1)
-			{
-				nextChar = 'X';
-			}
-			else
-			{
-				nextChar = sequence.charAt(i + 1);
-			}
-			
-			if (Character.isDigit(currentChar))
-			{
-				number += Character.toString(currentChar);
-				
-				if (Character.isDigit(nextChar))
-				{
-					continue;
-				}
-				else
-				{
-					num = Integer.parseInt(number);
-					number = "";
-					num *= (int) stack.pop();
-					stack.push(num);
-					num = 0;
-					
-				}
-			}	
-			else if (Character.isLetter(currentChar))
-			{
-				if (currentChar == 'h' || currentChar == 'H')
-				{
-					stack.push(HYDROGEN);
-				}
-				else if (currentChar == 'c' || currentChar == 'C')
-				{
-					stack.push(CARBON);
-				}
-				else if (currentChar == 'o' || currentChar == 'O')
-				{
-					stack.push(OXYGEN);
-				}
-			}
-			else if (currentChar == '(')
-			{
-				stack.push(-1);
-			}
-			else // if (currentChar == ')')
-			{
-				//System.out.println(result);
-			
-				result = 0;
-				
-				while ((int) stack.peek() >= 0)
-				{
-					System.out.println((int) stack.peek());
-					//System.out.println(Arrays.toString(stack.toArray()));
-					result += (int) stack.pop();
-					System.out.println((int) stack.peek());
-				}				
-				stack.push(result);
-			}	
+			setSequence(sequenceIn);
 		}
-		
-		while (!stack.empty())
+		catch (InvalidAtomException iae)
 		{
-			if ((int) stack.peek() >= 0)
-			{
-				weight += (int) stack.pop();
-			}
-			else
-			{
-				stack.pop();
-			}	
+			throw new InvalidAtomException('c');
+		}
+		catch (InvalidSequenceException ise)
+		{
+			throw new InvalidSequenceException();
 		}
 	}
 	
@@ -154,9 +87,104 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	 * @throws InvalidAtomException if any non C, H, O atom exists in sequenceIn
 	 * @throws InvalidSequenceException if unmatched parentheses exist in sequenceIn
 	 */
+	@SuppressWarnings("unchecked")
 	public void setSequence(String sequenceIn)
 	{
-		
+		if (isValid(sequenceIn))
+		{
+			sequence = String.format("(" + sequenceIn + ")");
+			String number = "";
+			int result = 0;
+			int num = 0;
+			
+			for (int i = 0; i < sequence.length(); i++)
+			{
+				char currentChar = sequence.charAt(i);
+				char nextChar;
+				
+				if (i == sequence.length() - 1)
+				{
+					nextChar = 'X';
+				}
+				else
+				{
+					nextChar = sequence.charAt(i + 1);
+				}
+				
+				if (Character.isDigit(currentChar))
+				{
+					number += Character.toString(currentChar);
+					
+					if (Character.isDigit(nextChar))
+					{
+						continue;
+					}
+					else
+					{
+						num = Integer.parseInt(number);
+						number = "";
+						num *= (int) stack.pop();
+						stack.push(num);
+						num = 0;
+						
+					}
+				}	
+				else if (Character.isLetter(currentChar))
+				{
+					if (currentChar == 'h' || currentChar == 'H')
+					{
+						stack.push(HYDROGEN);
+					}
+					else if (currentChar == 'c' || currentChar == 'C')
+					{
+						stack.push(CARBON);
+					}
+					else if (currentChar == 'o' || currentChar == 'O')
+					{
+						stack.push(OXYGEN);
+					}
+				}
+				else if (currentChar == '(')
+				{
+					stack.push(-1);
+				}
+				else if (currentChar == ')')
+				{
+					//System.out.println(result);
+				
+					result = 0;
+					
+					while ((int) stack.peek() >= 0)
+					{
+						System.out.println((int) stack.peek());
+						//System.out.println(Arrays.toString(stack.toArray()));
+						result += (int) stack.pop();
+						System.out.println((int) stack.peek());
+					}				
+					stack.push(result);
+				}
+				else
+				{
+					throw new InvalidAtomException(currentChar);
+				}
+			}
+			
+			while (!stack.empty())
+			{
+				if ((int) stack.peek() >= 0)
+				{
+					weight += (int) stack.pop();
+				}
+				else
+				{
+					stack.pop();
+				}	
+			}
+		}
+		else
+		{
+			throw new InvalidSequenceException();
+		}
 	}
 	
 	/**
@@ -243,7 +271,37 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	@Override
 	public Object clone()
 	{
+		//super.clone();
 		return null;
 	}
 
+	/**
+	 * Helper method to check if sequence is valid.
+	 * @param moleculeIn The molecule to be checked.
+	 * @return Whether the sequence is valid.
+	 */
+	@SuppressWarnings("unchecked")
+	private boolean isValid(String moleculeIn)
+	{	
+		for (int i = 0; i < moleculeIn.length(); i++)
+		{
+			if (moleculeIn.charAt(i) == '(')
+			{
+				parenthesis.push(i);
+			}
+			else if (moleculeIn.charAt(i) == ')')
+			{
+				if (parenthesis.empty())
+				{
+					return false;
+				}
+				else
+				{
+					parenthesis.pop();
+				}
+			}
+		}
+		
+		return parenthesis.empty();
+	}
 }
