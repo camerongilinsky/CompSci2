@@ -97,7 +97,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 			{
 				stack.push(-1);
 			}
-			else// if (currentChar == ')')
+			else // if (currentChar == ')')
 			{
 				//System.out.println(result);
 			
