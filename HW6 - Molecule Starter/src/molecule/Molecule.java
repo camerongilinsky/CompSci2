@@ -7,7 +7,6 @@
 
 package molecule;
 
-import java.util.Arrays;
 import java.util.Stack;
 
 import molecule.exceptions.InvalidAtomException;
@@ -21,10 +20,35 @@ import molecule.exceptions.InvalidAtomException;
  */
 public class Molecule implements Comparable<Molecule>, Cloneable
 {
-	Stack stack = new Stack<Integer>();
+	/**
+	 * Molecular weight of hydrogen.
+	 */
+	private static final int HYDROGEN = 1;
 	
-	String sequence;
+	/**
+	 * Molecular weight of carbon.
+	 */
+	private static final int CARBON = 12;
 	
+	/**
+	 * Molecular weight of oxygen.
+	 */
+	private static final int OXYGEN = 16;
+	
+	/**
+	 * Stack to hold weight values and parentheses.
+	 */
+	@SuppressWarnings("rawtypes")
+	private Stack stack = new Stack<Integer>();
+	
+	/**
+	 * The molecule input sequence surrounded by parentheses.
+	 */
+	private String sequence;
+	
+	/**
+	 * The weight of the molecule.
+	 */
 	private int weight;
 	
 	/**
@@ -43,13 +67,10 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 		int result = 0;
 		int num = 0;
 		
-		
 		for (int i = 0; i < sequence.length(); i++)
 		{
-			
 			char currentChar = sequence.charAt(i);
 			char nextChar;
-			
 			
 			if (i == sequence.length() - 1)
 			{
@@ -82,15 +103,15 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 			{
 				if (currentChar == 'h' || currentChar == 'H')
 				{
-					stack.push(1);
+					stack.push(HYDROGEN);
 				}
 				else if (currentChar == 'c' || currentChar == 'C')
 				{
-					stack.push(12);
+					stack.push(CARBON);
 				}
 				else if (currentChar == 'o' || currentChar == 'O')
 				{
-					stack.push(16);
+					stack.push(OXYGEN);
 				}
 			}
 			else if (currentChar == '(')
