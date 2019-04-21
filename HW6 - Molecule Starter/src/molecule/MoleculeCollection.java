@@ -7,7 +7,10 @@
 
 package molecule;
 
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.LinkedList;
+
 
 import molecule.exceptions.InvalidAtomException;
 import molecule.exceptions.InvalidSequenceException;
@@ -21,16 +24,21 @@ import molecule.exceptions.InvalidSequenceException;
 public class MoleculeCollection
 {
 	/**
+	 * The LinkedList to be used to store Molecule objects.
+	 */
+	private LinkedList<Molecule> molecules;
+	
+	/**
 	 * Creates a new MoleculeCollection containing no Molecules yet.
 	 */
 	public MoleculeCollection()
 	{
-		//create new empty LinkedList?
+		molecules = new LinkedList<Molecule>();
 	}
 	
 	/**
 	 * Creates a new MoleculeCollection based upon an existing list of Molecules. The
-	 * newly created MoleculeCollection will store a deep copy of the data in moleculeListInto
+	 * newly created MoleculeCollection will store a deep copy of the data in moleculeListIn to
 	 * enforce encapsulation.
 	 * 
 	 * If the passed reference is null, the created MoleculeCollection will be empty.
@@ -39,6 +47,24 @@ public class MoleculeCollection
 	 */
 	public MoleculeCollection(LinkedList<Molecule> moleculeListIn)
 	{
+		if (moleculeListIn != null)	
+		{
+			LinkedList<Molecule> temp = new LinkedList<Molecule>();
+			Iterator<Molecule> itr = moleculeListIn.iterator();
+			//int x = 0;
+			
+			while (itr.hasNext())
+			{
+				temp.add((Molecule) itr.next().clone());
+				//x++;
+			}
+			
+			molecules = temp;
+		}
+		else
+		{
+			molecules = new LinkedList<Molecule>();
+		}
 		
 	}
 	
@@ -52,7 +78,7 @@ public class MoleculeCollection
 	 */
 	public void addMolecule(int index, Molecule add)
 	{
-		//use LinkedList add method?
+		molecules.add(index, (Molecule) add.clone());
 	}
 	
 	/**
@@ -63,6 +89,7 @@ public class MoleculeCollection
 	public void sort()
 	{
 		//use any stable sorting algorithm in conjunction with the compareTo?
+		molecules.sort(Comparator.comparing(Molecule::getWeight));
 	}
 	
 	/**
@@ -71,7 +98,14 @@ public class MoleculeCollection
 	 */
 	public int moleculeWeights()
 	{
-		return 0;
+		int totalWeight = 0;
+		
+		for (int i = 0; i < molecules.size(); i++)
+		{
+			totalWeight += molecules.get(i).getWeight();
+		}
+		
+		return totalWeight;
 	}
 	
 	/**
@@ -82,7 +116,17 @@ public class MoleculeCollection
 	 */
 	public LinkedList<Molecule> getMoleculeList()
 	{
-		return null;
+		LinkedList<Molecule> temp = new LinkedList<Molecule>();
+		Iterator<Molecule> itr = molecules.iterator();
+		//int x = 0;
+		
+		while (itr.hasNext())
+		{
+			temp.add((Molecule) itr.next().clone());
+			//x++;
+		}
+		
+		return temp;
 	}
 	
 	/**
@@ -99,6 +143,8 @@ public class MoleculeCollection
 	public void changeSequence(int index, String newSequence)
 			throws InvalidAtomException, InvalidSequenceException
 	{
+		Molecule input = new Molecule(newSequence);
 		
+		molecules.set(index, input);
 	}
 }

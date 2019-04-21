@@ -48,6 +48,11 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	private String sequence;
 	
 	/**
+	 * Molecule sequence without the parentheses.
+	 */
+	private String trimmedSequence;
+	
+	/**
 	 * The weight of the molecule.
 	 */
 	private int weight;
@@ -55,7 +60,8 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	/**
 	 * Stack to be used for parenthesis checking.
 	 */
-	Stack parenthesis = new Stack<Character>();
+	@SuppressWarnings("rawtypes")
+	private Stack parenthesis = new Stack<Character>();
 	
 	/**
 	 * Creates a new Molecule made up of the H, C, and O atoms in the configuration
@@ -69,6 +75,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	{
 		try
 		{
+			trimmedSequence = sequenceIn.toUpperCase();
 			setSequence(sequenceIn);
 		}
 		catch (InvalidAtomException iae)
@@ -90,12 +97,13 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	@SuppressWarnings("unchecked")
 	public void setSequence(String sequenceIn)
 	{
-		if (isValid(sequenceIn))
+		if (notNullOrEmpty(sequenceIn) && isValid(sequenceIn))
 		{
 			sequence = String.format("(" + sequenceIn + ")");
 			String number = "";
 			int result = 0;
 			int num = 0;
+			weight = 0;
 			
 			for (int i = 0; i < sequence.length(); i++)
 			{
@@ -131,18 +139,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 				}	
 				else if (Character.isLetter(currentChar))
 				{
-					if (currentChar == 'h' || currentChar == 'H')
-					{
-						stack.push(HYDROGEN);
-					}
-					else if (currentChar == 'c' || currentChar == 'C')
-					{
-						stack.push(CARBON);
-					}
-					else if (currentChar == 'o' || currentChar == 'O')
-					{
-						stack.push(OXYGEN);
-					}
+					stack.push(atomWeight(currentChar));
 				}
 				else if (currentChar == '(')
 				{
@@ -156,17 +153,17 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 					
 					while ((int) stack.peek() >= 0)
 					{
-						System.out.println((int) stack.peek());
+						//System.out.println((int) stack.peek());
 						//System.out.println(Arrays.toString(stack.toArray()));
 						result += (int) stack.pop();
-						System.out.println((int) stack.peek());
+						//System.out.println((int) stack.peek());
 					}				
 					stack.push(result);
 				}
-				else
-				{
-					throw new InvalidAtomException(currentChar);
-				}
+				//else
+				//{
+				//	throw new InvalidAtomException(currentChar);
+				//}
 			}
 			
 			while (!stack.empty())
@@ -193,7 +190,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	 */
 	public String getSequence()
 	{
-		return "";
+		return trimmedSequence;
 	}
 	
 	/**
@@ -220,7 +217,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	@Override
 	public String toString()
 	{
-		return "";
+		return String.format("%-25s: %d", trimmedSequence, weight);
 	}
 	
 	/**
@@ -240,7 +237,26 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	 */
 	public static int atomWeight(char atom) throws InvalidAtomException
 	{
-		return 0;
+		int ret = 0;
+		
+		if (atom == 'h' || atom == 'H')
+		{
+			ret = HYDROGEN;
+		}
+		else if (atom == 'c' || atom == 'C')
+		{
+			ret = CARBON;
+		}
+		else if (atom == 'o' || atom == 'O')
+		{
+			ret = OXYGEN;
+		}
+		else
+		{
+			throw new InvalidAtomException(atom);
+		}
+		
+		return ret;
 	}
 	
 	
@@ -256,7 +272,7 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	@Override
 	public int compareTo(Molecule other)
 	{
-		return 0;
+		return ((Integer) getWeight()).compareTo((Integer) other.getWeight());
 	}
 	
 	/**
@@ -271,8 +287,20 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 	@Override
 	public Object clone()
 	{
-		//super.clone();
-		return null;
+		Molecule temp = null;
+		
+		try
+		{
+			temp = (Molecule) super.clone();
+			temp.setSequence(getSequence());
+		}
+		catch (CloneNotSupportedException e)
+		{
+			throw new RuntimeException();
+		}
+		
+		//Molecule temp = new Molecule(getSequence());
+		return temp;
 	}
 
 	/**
@@ -301,7 +329,18 @@ public class Molecule implements Comparable<Molecule>, Cloneable
 				}
 			}
 		}
-		
+	
 		return parenthesis.empty();
 	}
+	
+	/**
+	 * Second helper method to check if sequence is valid.
+	 * @param moleculeIn The molecule to be checked.
+	 * @return Whether the sequence is null or empty.
+	 */
+	private boolean notNullOrEmpty(String moleculeIn)
+	{
+		return !(moleculeIn == null || moleculeIn.equals(""));
+	}
+	
 }
